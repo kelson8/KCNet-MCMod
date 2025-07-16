@@ -3,5 +3,8 @@
   "item.kcneoforgetest.raw_bismuth": "Raw Bismuth",
 
   "block.kcneoforgetest.bismuth_block": "Block of Bismuth",
-  "block.kcneoforgetest.bismuth_ore": "Bismuth Ore"
+  "block.kcneoforgetest.bismuth_ore": "Bismuth Ore",
+
+  "creativetab.kcneoforgetest.bismuth_items": "Bismuth Items",
+  "creativetab.kcneoforgetest.bismuth_blocks": "Bismuth Blocks"
 }

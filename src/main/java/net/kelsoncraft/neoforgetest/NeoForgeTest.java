@@ -1,6 +1,7 @@
 package net.kelsoncraft.neoforgetest;
 
 import net.kelsoncraft.neoforgetest.block.ModBlocks;
+import net.kelsoncraft.neoforgetest.item.ModCreativeModeTabs;
 import net.kelsoncraft.neoforgetest.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import org.slf4j.Logger;
@@ -39,6 +40,11 @@ public class NeoForgeTest {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         //---
         NeoForge.EVENT_BUS.register(this);
+
+        //---
+        // Register creative mode tabs
+        //---
+        ModCreativeModeTabs.register(modEventBus);
 
         //---
         // Register items
