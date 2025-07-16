@@ -1,4 +1,7 @@
 {
   "item.kcneoforgetest.bismuth": "Bismuth",
-  "item.kcneoforgetest.raw_bismuth": "Raw Bismuth"
+  "item.kcneoforgetest.raw_bismuth": "Raw Bismuth",
+
+  "block.kcneoforgetest.bismuth_block": "Block of Bismuth",
+  "block.kcneoforgetest.bismuth_ore": "Bismuth Ore"
 }

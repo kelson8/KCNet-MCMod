@@ -1,5 +1,6 @@
 package net.kelsoncraft.neoforgetest;
 
+import net.kelsoncraft.neoforgetest.block.ModBlocks;
 import net.kelsoncraft.neoforgetest.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import org.slf4j.Logger;
@@ -42,8 +43,12 @@ public class NeoForgeTest {
         //---
         // Register items
         //---
-
         ModItems.register(modEventBus);
+
+        //---
+        // Register blocks
+        ModBlocks.register(modEventBus);
+        //---
 
         //---
         // Register the item to a creative tab
@@ -66,6 +71,11 @@ public class NeoForgeTest {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.BISMUTH);
             event.accept(ModItems.RAW_BISMUTH);
+        }
+
+        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModBlocks.BISMUTH_BLOCK);
+            event.accept(ModBlocks.BISMUTH_ORE);
         }
     }
 
