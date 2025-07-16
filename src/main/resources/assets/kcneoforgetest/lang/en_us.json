@@ -5,6 +5,8 @@
   "block.kcneoforgetest.bismuth_block": "Block of Bismuth",
   "block.kcneoforgetest.bismuth_ore": "Bismuth Ore",
 
+  "block.kcneoforgetest.bismuth_deepslate_ore": "Bismuth Deepslate Ore",
+
   "creativetab.kcneoforgetest.bismuth_items": "Bismuth Items",
   "creativetab.kcneoforgetest.bismuth_blocks": "Bismuth Blocks"
 }
