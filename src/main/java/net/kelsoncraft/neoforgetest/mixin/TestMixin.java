@@ -29,35 +29,36 @@ import java.util.Random;
 @Mixin(Item.class)
 public class TestMixin {
 
-    @Unique
-    float flySpeedMin = 0.5f;
-    @Unique
-    float flySpeedMax = 1.0f;
-    Random r = new Random();
-    float randomFlyingSpeed = flySpeedMin + r.nextFloat() * (flySpeedMax - flySpeedMin);
+    // This is annoying so I disabled it.
+//    @Unique
+//    float flySpeedMin = 0.5f;
+//    @Unique
+//    float flySpeedMax = 1.0f;
+//    Random r = new Random();
+//    float randomFlyingSpeed = flySpeedMin + r.nextFloat() * (flySpeedMax - flySpeedMin);
 
     // Specify where to inject this method into the code with at
     // This works when most items are right clicked.
-    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    public void useTest(Level level, Player player, InteractionHand usedHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-//        player.kill();
-
-        if (player != null) {
-
-            player.getAbilities().setFlyingSpeed(randomFlyingSpeed);
-            float currentFlyingSpeed = player.getAbilities().getFlyingSpeed();
-//        player.getPosition(0.5f);
-
-            // TODO Figure out how to send a message to the player
-            // https://www.reddit.com/r/MinecraftMod/comments/17i6keo/send_chat_message_1202_forge/
-
-            // This works, but it displays the message like the player said it in chat for everyone, not just to the current player.
-            PlayerChatMessage chatMessage = PlayerChatMessage.unsigned(player.getUUID(), "Your flying speed is now " + currentFlyingSpeed);
-
-            player.createCommandSourceStack().sendChatMessage(
-                    new OutgoingChatMessage.Player(chatMessage), false, ChatType.bind(ChatType.CHAT, player));
-
-        }
-    }
+//    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
+//    public void useTest(Level level, Player player, InteractionHand usedHand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
+////        player.kill();
+//
+//        if (player != null) {
+//
+//            player.getAbilities().setFlyingSpeed(randomFlyingSpeed);
+//            float currentFlyingSpeed = player.getAbilities().getFlyingSpeed();
+////        player.getPosition(0.5f);
+//
+//            // TODO Figure out how to send a message to the player
+//            // https://www.reddit.com/r/MinecraftMod/comments/17i6keo/send_chat_message_1202_forge/
+//
+//            // This works, but it displays the message like the player said it in chat for everyone, not just to the current player.
+//            PlayerChatMessage chatMessage = PlayerChatMessage.unsigned(player.getUUID(), "Your flying speed is now " + currentFlyingSpeed);
+//
+//            player.createCommandSourceStack().sendChatMessage(
+//                    new OutgoingChatMessage.Player(chatMessage), false, ChatType.bind(ChatType.CHAT, player));
+//
+//        }
+//    }
 
 }

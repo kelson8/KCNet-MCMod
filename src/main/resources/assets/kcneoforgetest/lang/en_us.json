@@ -1,6 +1,11 @@
 {
+  "commands.kcneoforgetest.return_home.success": "Player returned home!",
+  "commands.kcneoforgetest.return_home.no_pos_found": "No home position has been set!",
+
   "item.kcneoforgetest.bismuth": "Bismuth",
   "item.kcneoforgetest.raw_bismuth": "Raw Bismuth",
+
+  "item.kcneoforgetest.chisel": "Chisel",
 
   "block.kcneoforgetest.bismuth_block": "Block of Bismuth",
   "block.kcneoforgetest.bismuth_ore": "Bismuth Ore",
