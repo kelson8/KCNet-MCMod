@@ -95,7 +95,9 @@ This is a shaped recipe, it requires a certain setup below, the 'B' in the patte
 
 These can be added to a pickaxe.json, axe.json, hoe.json, shovel.json and possibly others.
 
-pickaxe.json example (For mining blocks with pickaxes and getting drops)
+<details>
+<summary> Example for pickaxe.json (For mining blocks with pickaxes and getting drops) </summary>
+
 ```json
 {
   "replace": false,
@@ -107,13 +109,19 @@ pickaxe.json example (For mining blocks with pickaxes and getting drops)
 }
 ```
 
+</details>
+
+
+
 **To make a specific tool required for mineable items**
 
 In this folder `resources/data/minecraft/tags/block/`
 
 * Create the files named `needs_diamond_tool.json`, `needs_iron_tool.json`, and `needs_stone_tool.json` .
 
-needs_diamond_tool.json example
+<details>
+<summary> Example for needs_diamond_tool.json </summary>
+
 ```json
 {
   "replace": false,
@@ -123,6 +131,7 @@ needs_diamond_tool.json example
 }
 ```
 
+</details>
 
 All of these not placed in a needs_tool json above, should be mineable with a wooden pickaxe.
 
