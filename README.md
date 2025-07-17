@@ -37,6 +37,8 @@ for a lot of the info that I am using to learn more NeoForge coding.
 Every block needs a block states json file, a block model json file, and a block item json file.
 Also, it needs a block texture file.
 
+---
+
 **To add crafting recipes:**
 * Create a .json file in `resources/data/kcneoforgetest/recipe/`
 
@@ -89,6 +91,7 @@ This is a shaped recipe, it requires a certain setup below, the 'B' in the patte
 ```
 </details>
 
+---
 
 **To make a block mineable and be able to drop**
 * Add the block into the `resources/data/minecraft/tags/block/mineable/` folder
@@ -111,7 +114,7 @@ These can be added to a pickaxe.json, axe.json, hoe.json, shovel.json and possib
 
 </details>
 
-
+---
 
 **To make a specific tool required for mineable items**
 
@@ -135,7 +138,9 @@ In this folder `resources/data/minecraft/tags/block/`
 
 All of these not placed in a needs_tool json above, should be mineable with a wooden pickaxe.
 
+---
 **Adding blocks to loot tables for drops**
+
 Check out the examples in `data/kcneoforgetest/loot_table_blocks` 
 
 ---
