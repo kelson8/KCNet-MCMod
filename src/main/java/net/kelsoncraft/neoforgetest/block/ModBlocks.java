@@ -1,6 +1,7 @@
 package net.kelsoncraft.neoforgetest.block;
 
 import net.kelsoncraft.neoforgetest.NeoForgeTest;
+import net.kelsoncraft.neoforgetest.block.custom.MagicBlock;
 import net.kelsoncraft.neoforgetest.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -39,6 +40,12 @@ public class ModBlocks {
                     .strength(4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.DEEPSLATE)
+            ));
+
+    public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock("magic_block",
+            () -> new MagicBlock(BlockBehaviour.Properties.of()
+                    .strength(2f)
+                    .requiresCorrectToolForDrops()
             ));
 
     // Helper for creating and registering a block.

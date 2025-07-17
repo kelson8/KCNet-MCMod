@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "kcneoforgetest:bismuth_ore"
+    "kcneoforgetest:bismuth_ore",
+    "kcneoforgetest:magic_block"
   ]
 }

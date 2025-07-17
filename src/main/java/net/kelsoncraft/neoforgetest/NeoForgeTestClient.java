@@ -26,6 +26,6 @@ public class NeoForgeTestClient {
     static void onClientSetup(FMLClientSetupEvent event) {
         // Some client setup code
         NeoForgeTest.LOGGER.info("NeoForge Test Started");
-        NeoForgeTest.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+//        NeoForgeTest.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
     }
 }
