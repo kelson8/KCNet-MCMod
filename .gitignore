@@ -1,6 +1,9 @@
 # Extras
 original_mc_data/
 
+# Exclude the test folder for now, mostly just messing with APIs and other stuff in here.
+src/main/java/net/kelsoncraft/neoforgetest/test/
+
 # eclipse
 bin
 *.launch
