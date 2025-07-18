@@ -1,8 +1,32 @@
-# Extras
+# Extras, these are asset files from minecraft, they can be extracted from your copy of
+# this source code, I will not be providing these.
+# It isn't required for my mod to run, It's just there so I can easily find it.
 original_mc_data/
 
 # Exclude the test folder for now, mostly just messing with APIs and other stuff in here.
 src/main/java/net/kelsoncraft/neoforgetest/test/
+
+# Test commands
+src/main/java/net/kelsoncraft/neoforgetest/commands/MiscCommands.java
+src/main/java/net/kelsoncraft/neoforgetest/commands/CommandTest.java
+
+
+# Auto generated from build
+# I do depend on this in game so I'll leave it in the build.
+#src/main/resources/version.properties
+
+# New blocks, needs worked on
+src/main/java/net/kelsoncraft/neoforgetest/block/custom/NewTargetBlock.java
+
+# Extra mixins
+src/main/java/net/kelsoncraft/neoforgetest/mixin/GiveCommandMixin.java
+src/main/java/net/kelsoncraft/neoforgetest/mixin/AutoLoadLastWorld.java
+
+# Other extras, these are work in progress files.
+src/main/java/net/kelsoncraft/neoforgetest/util/CommandHandler.java
+src/main/java/net/kelsoncraft/neoforgetest/util/AutoLoad.java
+src/main/java/net/kelsoncraft/neoforgetest/util/YaclConfigTest.java
+
 
 # eclipse
 bin

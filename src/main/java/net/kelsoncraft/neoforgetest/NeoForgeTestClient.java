@@ -1,6 +1,5 @@
 package net.kelsoncraft.neoforgetest;
 
-import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -25,7 +24,6 @@ public class NeoForgeTestClient {
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
         // Some client setup code
-        NeoForgeTest.LOGGER.info("NeoForge Test Started");
-//        NeoForgeTest.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        NeoForgeTest.LOGGER.info("{} Client test started. Version: {}", NeoForgeTest.MOD_NAME, NeoForgeTest.MOD_VERSION);
     }
 }
