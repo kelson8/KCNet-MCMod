@@ -4,9 +4,11 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.neoforgetest.NeoForgeTest;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
@@ -49,13 +51,30 @@ public class KCCommands {
     private static int executeVersionCommand(CommandContext<CommandSourceStack> context) {
         CommandSourceStack source = context.getSource();
 
-        // Access the static properties from NeoForgeTest
-        source.sendSuccess(() -> Component.literal("--- " + NeoForgeTest.MOD_NAME + " Details ---"), false);
-        source.sendSuccess(() -> Component.literal("Name: " + NeoForgeTest.MOD_NAME), false);
-        source.sendSuccess(() -> Component.literal("Version: " + NeoForgeTest.MOD_VERSION), false);
-        source.sendSuccess(() -> Component.literal("Description: " + NeoForgeTest.MOD_DESCRIPTION), false);
-        source.sendSuccess(() -> Component.literal("-------------------"), false);
+        //---- Mod info
+        // Name: (e.g., Aqua for label, Gold for value)
+        MutableComponent nameComponent = Component.literal("Name: ").withStyle(ChatFormatting.AQUA)
+                .append(Component.literal(NeoForgeTest.MOD_NAME).withStyle(ChatFormatting.GOLD));
 
-        return Command.SINGLE_SUCCESS; // Indicate that the command executed successfully
+        // Version: (e.g., Aqua for label, Yellow for value)
+        MutableComponent versionComponent = Component.literal("Version: ").withStyle(ChatFormatting.AQUA)
+                .append(Component.literal(NeoForgeTest.MOD_VERSION).withStyle(ChatFormatting.YELLOW));
+
+        // Description: (e.g., Aqua for label, Light Purple for value)
+        MutableComponent descriptionComponent = Component.literal("Description: ").withStyle(ChatFormatting.AQUA)
+                .append(Component.literal(NeoForgeTest.MOD_DESCRIPTION).withStyle(ChatFormatting.LIGHT_PURPLE));
+
+        //---- Send messages
+
+        // --- Mod Details --- (e.g., Green)
+        source.sendSuccess(() -> Component.literal("--- Mod Details ---").withStyle(ChatFormatting.GREEN), false);
+
+        source.sendSuccess(() -> nameComponent, false);
+        source.sendSuccess(() -> versionComponent, false);
+        source.sendSuccess(() -> descriptionComponent, false);
+
+        source.sendSuccess(() -> Component.literal("-------------------").withStyle(ChatFormatting.GREEN), false);
+
+        return Command.SINGLE_SUCCESS;
     }
 }
