@@ -1,6 +1,7 @@
 package net.kelsoncraft.neoforgetest.block.custom;
 
 import net.kelsoncraft.neoforgetest.item.ModItems;
+import net.kelsoncraft.neoforgetest.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -63,8 +64,10 @@ public class MagicBlock extends Block {
 
         // Check if the entity is an item
         if(entity instanceof ItemEntity itemEntity) {
-            // If item dropped onto block is Raw Bismuth
-            if(itemEntity.getItem().getItem() == ModItems.RAW_BISMUTH.get()) {
+            // If the item stack thrown onto the block, is part of this transformable items tag.
+            if(isValidItem(itemEntity.getItem())) {
+//            if(itemEntity.getItem().getItem() == ModItems.RAW_BISMUTH.get()) {
+
                 // Change item to a Diamond
                 itemEntity.setItem(new ItemStack(Items.DIAMOND, itemEntity.getItem().getCount()));
             }
@@ -78,6 +81,12 @@ public class MagicBlock extends Block {
         }
 
         super.stepOn(level, pos, state, entity);
+    }
+
+    /// Check if item is valid for being dropped onto the magic block.
+    private boolean isValidItem(ItemStack item) {
+
+        return item.is(ModTags.Items.TRANSFORMABLE_ITEMS);
     }
 
     @Override
