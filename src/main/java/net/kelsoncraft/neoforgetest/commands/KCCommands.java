@@ -2,6 +2,7 @@ package net.kelsoncraft.neoforgetest.commands; // New package for commands
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.neoforgetest.NeoForgeTest;
 import net.minecraft.ChatFormatting;
@@ -36,6 +37,16 @@ public class KCCommands {
                         .then(Commands.literal("version") // Defines a subcommand: /kc version
                                 .executes(KCCommands::executeVersionCommand) // Specifies the method to execute when this subcommand is run
                         )
+                        .then(Commands.literal("pos") // Defines subcommand: /kc coords
+                                .then(Commands.argument("x", DoubleArgumentType.doubleArg()) // Defines double argument 'x'
+                                        .then(Commands.argument("y", DoubleArgumentType.doubleArg()) // Defines double argument 'y'
+                                                .then(Commands.argument("z", DoubleArgumentType.doubleArg()) // Defines double argument 'z'
+                                                        .executes(CustomTeleportCommand::command_kc_teleport) // Executes when /kc coords <x> <y> <z> is run
+                                                )
+                                        )
+                                )
+                        )
+
                 // You can add more subcommands here if needed
         );
         NeoForgeTest.LOGGER.info("Registered command: /kc version"); // Use the main mod's logger

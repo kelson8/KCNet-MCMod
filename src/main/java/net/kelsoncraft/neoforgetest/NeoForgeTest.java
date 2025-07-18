@@ -2,6 +2,7 @@ package net.kelsoncraft.neoforgetest;
 
 import net.kelsoncraft.neoforgetest.block.ModBlocks;
 import net.kelsoncraft.neoforgetest.commands.KCCommands;
+import net.kelsoncraft.neoforgetest.commands.MiscCommands;
 import net.kelsoncraft.neoforgetest.events.ModEvents;
 import net.kelsoncraft.neoforgetest.item.ModCreativeModeTabs;
 import net.kelsoncraft.neoforgetest.item.ModItems;
@@ -79,6 +80,7 @@ public class NeoForgeTest {
         //---
         // Register commands
         NeoForge.EVENT_BUS.register(KCCommands.class);
+        NeoForge.EVENT_BUS.register(MiscCommands.class);
 
 
         NeoForge.EVENT_BUS.register(ModEvents.class);

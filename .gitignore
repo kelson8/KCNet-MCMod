@@ -7,7 +7,6 @@ original_mc_data/
 src/main/java/net/kelsoncraft/neoforgetest/test/
 
 # Test commands
-src/main/java/net/kelsoncraft/neoforgetest/commands/MiscCommands.java
 src/main/java/net/kelsoncraft/neoforgetest/commands/CommandTest.java
 
 
