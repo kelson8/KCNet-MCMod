@@ -3,11 +3,17 @@ package net.kelsoncraft.neoforgetest.item;
 import net.kelsoncraft.neoforgetest.NeoForgeTest;
 import net.kelsoncraft.neoforgetest.item.custom.ChiselItem;
 import net.kelsoncraft.neoforgetest.item.custom.FuelItem;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(NeoForgeTest.MOD_ID);
@@ -25,9 +31,18 @@ public class ModItems {
     () -> new ChiselItem(new Item.Properties()
             .durability(32)));
 
+    // Foods
     public static final DeferredItem<Item> RADISH = ITEMS.register("radish",
-            () -> new Item(new Item.Properties().food(ModFoodProperties.RADISH)));
+            // Using an anonymous class for this, any method can be overwritten in here.
+            () -> new Item(new Item.Properties().food(ModFoodProperties.RADISH)) {
+                @Override
+                public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+                    tooltipComponents.add(Component.translatable("tooltip.kcneoforgetest.radish.tooltip"));
+                    super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+                }
+            });
 
+    // Fuel
     // Adding with a class
     public static final DeferredItem<Item> FROSTFIRE_ICE = ITEMS.register("frostfire_ice",
             () -> new FuelItem(new Item.Properties(), 800));

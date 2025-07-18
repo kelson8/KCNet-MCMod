@@ -2,25 +2,25 @@ package net.kelsoncraft.neoforgetest.block.custom;
 
 import net.kelsoncraft.neoforgetest.item.ModItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Interaction;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.TargetBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 // Basic magic block test
 // https://www.youtube.com/watch?v=DBNkfoVAzNE&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=7
@@ -28,16 +28,15 @@ import org.jetbrains.annotations.NotNull;
 // Requires an iron pickaxe to be mined in survival.
 
 public class MagicBlock extends Block {
-//public class MagicBlock extends TargetBlock {
 
     public MagicBlock(Properties properties) {
         super(properties);
+
     }
 
     @Override
-    protected InteractionResult useWithoutItem(@NotNull BlockState state, Level level, @NotNull BlockPos pos,
-                                               @NotNull Player player, @NotNull BlockHitResult hitResult) {
-
+    protected @NotNull InteractionResult useWithoutItem(@NotNull BlockState state, Level level, @NotNull BlockPos pos,
+                                                        @NotNull Player player, @NotNull BlockHitResult hitResult) {
         // Play a sound on the block.
         level.playSound(player, pos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1f, 1f);
 
@@ -46,6 +45,21 @@ public class MagicBlock extends Block {
 
     @Override
     public void stepOn(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Entity entity) {
+        // Magma block test, this makes the block act like a magma block
+        // It will make you take damage also.
+
+        // Look into magma block source file.
+//        if (!entity.isSteppingCarefully() && entity instanceof LivingEntity) {
+//            entity.hurt(level.damageSources().hotFloor(), 1.0F);
+//        }
+        //
+
+//        if(entity instanceof Player player) {
+//            if(InvTest.hasItemInVanillaInventory(player, Items.DIAMOND)){
+//
+//            }
+//        }
+
 
         // Check if the entity is an item
         if(entity instanceof ItemEntity itemEntity) {
@@ -66,24 +80,16 @@ public class MagicBlock extends Block {
         super.stepOn(level, pos, state, entity);
     }
 
-    // Magma block testing
-//    @Override
-//    public void stepOn(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state, Entity entity) {
-//
-//        // Taken from MagmaBlock.
-////        if (!entity.isSteppingCarefully() && entity instanceof LivingEntity) {
-////            entity.hurt(level.damageSources().hotFloor(), 1.0F);
-////        }
-//
-//        super.stepOn(level, pos, state, entity);
-//    }
+    @Override
+    public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+        // Formatting codes can be used in the en_us.json for colors
+        // https://minecraft.wiki/w/Formatting_codes
+        tooltipComponents.add(Component.translatable("tooltip.kcneoforgetest.magic_block.tooltip"));
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    }
 
 
-    // TODO Setup a target block to have a redstone signal like in vanilla.
-//    @Override
-//    protected void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
-//        super.onProjectileHit(level, state, hit, projectile);
-//    }
+    //--------------
 
 
     //    @Override

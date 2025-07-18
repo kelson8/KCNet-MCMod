@@ -21,5 +21,14 @@
   "block.kcneoforgetest.bismuth_deepslate_ore": "Bismuth Deepslate Ore",
 
   "creativetab.kcneoforgetest.bismuth_items": "Bismuth Items",
-  "creativetab.kcneoforgetest.bismuth_blocks": "Bismuth Blocks"
+  "creativetab.kcneoforgetest.bismuth_blocks": "Bismuth Blocks",
+
+
+  "tooltip.kcneoforgetest.magic_block.tooltip": "This Block is very §3MAGICAL§r",
+
+  "tooltip.kcneoforgetest.chisel.shift_down": "This Item can chisel Blocks into Bricks",
+  "tooltip.kcneoforgetest.chisel": "Press §eShift§r for more information",
+
+  "tooltip.kcneoforgetest.radish.tooltip": "Tastes good, sometimes gives health boost."
+
 }

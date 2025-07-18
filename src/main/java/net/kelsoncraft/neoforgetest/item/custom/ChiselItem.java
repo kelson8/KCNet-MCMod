@@ -1,18 +1,23 @@
 package net.kelsoncraft.neoforgetest.item.custom;
 
 import net.kelsoncraft.neoforgetest.block.ModBlocks;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Map;
 
 public class ChiselItem extends Item {
@@ -24,9 +29,15 @@ public class ChiselItem extends Item {
                     Blocks.END_STONE, Blocks.END_STONE_BRICKS,
                     Blocks.DEEPSLATE, Blocks.DEEPSLATE_BRICKS,
 
+
+                    // Sandstone to cut sandstone, and cut sandstone to chiseled sandstone.
+                    Blocks.SANDSTONE, Blocks.CUT_SANDSTONE,
+                    Blocks.CUT_SANDSTONE, Blocks.CHISELED_SANDSTONE,
+
+
                     // Extras
-                    Blocks.GOLD_BLOCK, Blocks.IRON_BLOCK,
-                    Blocks.IRON_BLOCK, Blocks.STONE,
+//                    Blocks.GOLD_BLOCK, Blocks.IRON_BLOCK,
+//                    Blocks.IRON_BLOCK, Blocks.STONE,
                     // .get is required for custom blocks.
                     Blocks.NETHERRACK, ModBlocks.BISMUTH_BLOCK.get()
 
@@ -63,5 +74,17 @@ public class ChiselItem extends Item {
         return InteractionResult.SUCCESS;
     }
 
-//    override
+    @Override
+    public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+        // If the player is pressing shift, then show the description.
+        if(Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("tooltip.kcneoforgetest.chisel.shift_down"));
+        } else {
+            tooltipComponents.add(Component.translatable("tooltip.kcneoforgetest.chisel"));
+        }
+
+        // "tooltip.kcneoforgetest.chisel.tooltip"
+
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    }
 }
