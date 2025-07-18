@@ -3,7 +3,97 @@ plugins {
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.99'
     id 'idea'
+
+    // https://projects.neoforged.net/neoforged/neogradle
+
+    //---- Enable this for Yet Another Config Lib
+    // https://github.com/thedarkcolour/KotlinForForge/blob/5.x/README.md
+    // Adds the Kotlin Gradle plugin
+//    id 'org.jetbrains.kotlin.jvm' version '2.1.21'
+    // OPTIONAL Kotlin Serialization plugin
+    //id 'org.jetbrains.kotlin.plugin.serialization' version '2.1.21'
 }
+
+// New for creating a version file
+
+// https://stackoverflow.com/questions/33020069/how-to-get-version-attribute-from-a-gradle-build-to-be-included-in-runtime-swing
+//tasks.register('createProperties') {
+//    dependsOn processResources
+//    doLast {
+//        new File("$buildDir/resources/main/version.properties").withWriter { w ->
+//            Properties p = new Properties()
+//            p['version'] = project.version.toString()
+//            p.store w, null
+//        }
+//    }
+//}
+
+//
+
+//
+
+
+// Add this task to create a resource file with project version
+// https://codingtechroom.com/question/how-to-retrieve-project-version-from-build-gradle-in-java-class
+
+// Working method to create version from gradle
+//-----
+
+// Define a task to create the version.properties file.
+// Using tasks.register for lazy task creation, which is a best practice.
+tasks.register('createVersionFile') {
+    // Define the output file for this task.
+    // We use layout.projectDirectory to get a reference to the project's root directory,
+    // and then specify the path to the resources folder.
+    // .asFile converts the RegularFileProperty to a standard Java File object.
+    def versionFile = layout.projectDirectory.file("src/main/resources/version.properties").asFile
+
+    // Declare the output of this task. This helps Gradle determine task dependencies
+    // and enables incremental builds and task caching.
+    outputs.file(versionFile).withPropertyName("versionPropertiesFile")
+
+    // Define properties on the task to hold the project version, name, and description.
+    // These capture the project properties during configuration time.
+    def modVersion = project.objects.property(String)
+    modVersion.set(project.version.toString())
+
+    def modName = project.objects.property(String)
+    // Capture the mod_name from gradle.properties.
+    // Use project.findProperty() to access properties defined in gradle.properties.
+    // Fallback to project.name.toString() if mod_name is not found in gradle.properties.
+    modName.set(project.findProperty('mod_name')?.toString() ?: project.name.toString())
+
+    def modDescription = project.objects.property(String)
+    // Capture the mod_description from gradle.properties
+    // Use project.findProperty() to access properties defined in gradle.properties
+    modDescription.set(project.findProperty('mod_description')?.toString() ?: "")
+
+    // The action to perform when the task runs.
+    doLast {
+        // Ensure the parent directory for the version file exists.
+        versionFile.parentFile.mkdirs()
+        // Write all properties to the file.
+        // Escape newline characters in the description to prevent breaking the .properties file format.
+        def escapedDescription = modDescription.get().replace('\n', '\\n')
+        versionFile.text = """\
+project.version=${modVersion.get()}
+project.name=${modName.get()}
+project.description=${escapedDescription}
+"""
+        println "Generated version.properties with project.version=${modVersion.get()}, name=${modName.get()}, description=${modDescription.get()}"
+    }
+}
+
+
+// Configure the 'processResources' task to depend on 'createVersionFile'.
+// This ensures that 'createVersionFile' runs and generates the version.properties
+// before 'processResources' collects and copies the resources into the build output.
+// Using tasks.named() ensures lazy configuration of existing tasks.
+tasks.named('processResources') {
+    dependsOn(tasks.named('createVersionFile'))
+}
+
+//
 
 tasks.named('wrapper', Wrapper).configure {
     // Define wrapper values here so as to not have to always do so when updating gradlew.properties.
@@ -19,6 +109,44 @@ group = mod_group_id
 
 repositories {
     // Add here additional repositories if required by some of the dependencies below.
+
+    // Bookshelf test
+    maven {
+        url = 'https://maven.blamejared.com'
+    }
+
+    // https://shedaniel.gitbook.io/cloth-config/setup-cloth-config/setup-with-forge
+    maven {
+        url = "https://maven.shedaniel.me/"
+    }
+
+    maven {
+        url = "https://maven.txni.dev/"
+    }
+    maven {
+        url = "https://maven.su5ed.dev/releases"
+    }
+
+    // https://github.com/Glitchfiend/TerraBlender/wiki/Getting-started
+    maven {
+        url = 'https://maven.minecraftforge.net/'
+    }
+
+    //---- Enable these for Yet Another Config Lib
+    // https://docs.isxander.dev/yet-another-config-lib/installing-yacl
+//    maven {
+//        name 'Xander Maven'
+//        url 'https://maven.isxander.dev/releases'
+//    }
+//
+//    // https://github.com/thedarkcolour/KotlinForForge/blob/5.x/README.md
+//    // Add KFF Maven repository
+//    maven {
+//        name = 'Kotlin for Forge'
+//        url = 'https://thedarkcolour.github.io/KotlinForForge/'
+//    }
+
+    //----------
 }
 
 base {
@@ -133,6 +261,63 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+
+
+
+    //---------
+
+    //---
+    // Neo Gradle test
+    // https://projects.neoforged.net/neoforged/neogradle
+//    implementation 'net.neoforged:neoforge:7.0.190'
+//    implementation 'net.neoforged:neoforge:${project}'
+
+    //
+
+
+
+    //---
+    // I got this to build and work, not sure how to use it so i'll disable it for now.
+    // https://docs.isxander.dev/yet-another-config-lib/installing-yacl
+//    compileOnly fg.deobf("dev.isxander:yet-another-config-lib:${project.yacl_version}")
+//    implementation("dev.isxander:yet-another-config-lib:${project.yacl_version}")
+//    fg.deobf
+
+    //
+
+    // Kotlin for Forge
+//    implementation 'thedarkcolour:kotlinforforge-neoforge:5.9.0'
+
+    // TODO Figure out how to use these later
+
+    // Bookshelf test
+    // https://docs.darkhax.net/1.20.1/bookshelf/dependency_info/
+    // https://mvnrepository.com/artifact/net.darkhax.bookshelf/bookshelf-neoforge-1.21.1/21.1.67
+//    implementation "net.darkhax.bookshelf:bookshelf-neoforge-1.21.1:21.1.67"
+    localRuntime("net.darkhax.bookshelf:bookshelf-neoforge-1.21.1:21.1.67")
+
+    // https://linkie.shedaniel.dev/dependencies?loader=neoforge&version=1.21.1
+//    implementation("me.shedaniel.cloth:cloth-config-neoforge:15.0.140")
+
+    // https://www.curseforge.com/minecraft/mc-mods/sodium-options-api
+    // I'm not sure how to make this one work.
+    // I could possibly add options to Sodium.
+//    implementation("maven.modrinth:sodium-options-api:1.21.1-neoforge")
+
+
+    //----
+    // https://immersive.txni.dev/guide
+    // TODO Figure this out
+    // It should allow me to use a custom message API like sending messages to the player.
+//    implementation("toni.immersivemessages:${loader}-${mcVersion}:${immersiveMessagesVersion}") { isTransitive = false }
+//    implementation("tony.immersivemessages:neoforge-1.21.1:1.0.18")
+//    implementation("toni.txnilib:neoforge-1.21.1:1.0.24")
+//    implementation("toni.txnilib:${loader}-${mcVersion}:${txnilibVersion}")
+
+    //---------
+
+
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
