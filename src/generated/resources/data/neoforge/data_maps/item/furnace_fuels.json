@@ -1,0 +1,10 @@
+{
+  "values": {
+    "kcnet_mod:frostfire_ice": {
+      "burn_time": 2400
+    },
+    "kcnet_mod:starlight_ashes": {
+      "burn_time": 1200
+    }
+  }
+}

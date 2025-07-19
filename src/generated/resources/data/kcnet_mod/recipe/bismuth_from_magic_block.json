@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "kcnet_mod:magic_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "kcnet_mod:bismuth"
+  }
+}
