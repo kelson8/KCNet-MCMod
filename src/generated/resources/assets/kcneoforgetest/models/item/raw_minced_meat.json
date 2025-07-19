@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "kcneoforgetest:item/raw_minced_meat"
-  }
-}

@@ -30,7 +30,8 @@ import java.util.Properties;
 @Mod(NeoForgeTest.MOD_ID)
 public class NeoForgeTest {
     // Define mod id in a common place for everything to reference
-    public static final String MOD_ID = "kcneoforgetest";
+    public static final String MOD_ID = "kcnet_mod";
+
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 

@@ -93,7 +93,7 @@ public class MagicBlock extends Block {
     public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         // Formatting codes can be used in the en_us.json for colors
         // https://minecraft.wiki/w/Formatting_codes
-        tooltipComponents.add(Component.translatable("tooltip.kcneoforgetest.magic_block.tooltip"));
+        tooltipComponents.add(Component.translatable("tooltip.kcnet_mod.magic_block.tooltip"));
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 

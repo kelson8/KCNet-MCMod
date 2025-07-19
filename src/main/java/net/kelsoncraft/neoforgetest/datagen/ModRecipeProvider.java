@@ -53,7 +53,7 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.BISMUTH, 9)
                 .requires(ModBlocks.MAGIC_BLOCK)
                 .unlockedBy("has_magic_block", has(ModBlocks.MAGIC_BLOCK))
-                .save(recipeOutput, "kcneoforgetest:bismuth_from_magic_block");
+                .save(recipeOutput, "kcnet_mod:bismuth_from_magic_block");
 
         // Smelting/Blasting
         oreSmelting(recipeOutput, BISMUTH_SMELTABLES, RecipeCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 200, "bismuth");
@@ -88,7 +88,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     // https://github.com/Tutorials-By-Kaupenjoe/NeoForge-Tutorial-1.21.X/blob/11-datagen/src/main/java/net/kaupenjoe/tutorialmod/datagen/ModRecipeProvider.java#L46-L65
-    // Move the recipes out of the 'minecraft' folder in data and into the 'kcneoforgetest' folder.
+    // Move the recipes out of the 'minecraft' folder in data and into the 'kcnet_mod' folder.
     protected static void oreSmelting(@NotNull RecipeOutput recipeOutput,
                                       List<ItemLike> pIngredients,
                                       @NotNull RecipeCategory pCategory,

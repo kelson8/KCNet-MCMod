@@ -39,7 +39,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoodProperties.RADISH)) {
                 @Override
                 public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
-                    tooltipComponents.add(Component.translatable("tooltip.kcneoforgetest.radish.tooltip"));
+                    tooltipComponents.add(Component.translatable("tooltip.kcnet_mod.radish.tooltip"));
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });

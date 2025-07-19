@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "kcnet_mod:block/magic_block"
+    }
+  }
+}
