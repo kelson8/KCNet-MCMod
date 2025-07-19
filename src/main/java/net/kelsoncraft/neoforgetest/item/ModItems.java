@@ -31,7 +31,9 @@ public class ModItems {
     () -> new ChiselItem(new Item.Properties()
             .durability(32)));
 
+    //------
     // Foods
+    //------
     public static final DeferredItem<Item> RADISH = ITEMS.register("radish",
             // Using an anonymous class for this, any method can be overwritten in here.
             () -> new Item(new Item.Properties().food(ModFoodProperties.RADISH)) {
@@ -41,6 +43,43 @@ public class ModItems {
                     super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
                 }
             });
+
+    // New
+    //----
+
+    // Burger
+    public static final DeferredItem<Item> BURGER = ITEMS.register("burger",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.BURGER)));
+
+
+    // Chili Pepper
+    public static final DeferredItem<Item> CHILI_PEPPER = ITEMS.register("chili_pepper",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.CHILI_PEPPER)));
+
+    // Minced Meat
+    public static final DeferredItem<Item> RAW_MINCED_MEAT = ITEMS.register("raw_minced_meat",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_MINCED_MEAT)));
+
+    public static final DeferredItem<Item> COOKED_MINCED_MEAT = ITEMS.register("cooked_minced_meat",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_MINCED_MEAT)));
+
+    // Hamburger
+    public static final DeferredItem<Item> RAW_PATTY = ITEMS.register("raw_patty",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_PATTY)));
+
+    public static final DeferredItem<Item> COOKED_PATTY = ITEMS.register("cooked_patty",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_PATTY)));
+
+    // Sausage
+    public static final DeferredItem<Item> RAW_SAUSAGE = ITEMS.register("raw_sausage",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.RAW_SAUSAGE)));
+
+    public static final DeferredItem<Item> COOKED_SAUSAGE = ITEMS.register("cooked_sausage",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.COOKED_SAUSAGE)));
+
+
+    //----
+
 
     // Fuel
     // Adding with a class

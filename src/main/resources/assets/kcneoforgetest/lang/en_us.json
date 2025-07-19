@@ -10,6 +10,21 @@
 
   "item.kcneoforgetest.radish": "Radish",
 
+  "item.kcneoforgetest.burger": "Hamburger",
+
+  "item.kcneoforgetest.chili_pepper": "Chili Pepper",
+
+  "item.kcneoforgetest.raw_minced_meat": "Raw Minced Meat",
+  "item.kcneoforgetest.cooked_minced_meat": "Cooked Minced Meat",
+
+  "item.kcneoforgetest.raw_patty": "Raw Hamburger Patty",
+  "item.kcneoforgetest.cooked_patty": "Cooked Hamburger Patty",
+
+  "item.kcneoforgetest.raw_sausage": "Raw Sausage",
+  "item.kcneoforgetest.cooked_sausage": "Cooked Sausage",
+
+
+
   "item.kcneoforgetest.frostfire_ice": "Frostfire Ice",
   "item.kcneoforgetest.starlight_ashes": "Starlight Ashes",
 
@@ -29,6 +44,7 @@
   "tooltip.kcneoforgetest.chisel.shift_down": "This Item can chisel Blocks into Bricks",
   "tooltip.kcneoforgetest.chisel": "Press §eShift§r for more information",
 
-  "tooltip.kcneoforgetest.radish.tooltip": "Tastes good, sometimes gives health boost."
+  "tooltip.kcneoforgetest.radish.tooltip": "Tastes good, sometimes gives health boost.",
+  "creativetab.kcneoforgetest.extra_food_items": "Extra Food Items"
 
 }

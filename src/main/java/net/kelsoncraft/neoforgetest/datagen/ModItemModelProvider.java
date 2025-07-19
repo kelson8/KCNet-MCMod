@@ -17,11 +17,29 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.BISMUTH.get());
         basicItem(ModItems.RAW_BISMUTH.get());
 
-        basicItem(ModItems.RADISH.get());
+
         basicItem(ModItems.STARLIGHT_ASHES.get());
 
         basicItem(ModItems.FROSTFIRE_ICE.get());
 
         basicItem(ModItems.CHISEL.get());
+
+        // Foods
+        basicItem(ModItems.RADISH.get());
+
+        basicItem(ModItems.BURGER.get());
+        basicItem(ModItems.CHILI_PEPPER.get());
+
+        // Minced Meat
+        basicItem(ModItems.RAW_MINCED_MEAT.get());
+        basicItem(ModItems.COOKED_MINCED_MEAT.get());
+
+        // Hamburger Patty
+        basicItem(ModItems.RAW_PATTY.get());
+        basicItem(ModItems.COOKED_PATTY.get());
+
+        // Sausage
+        basicItem(ModItems.RAW_SAUSAGE.get());
+        basicItem(ModItems.COOKED_SAUSAGE.get());
     }
 }

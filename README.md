@@ -25,6 +25,9 @@ YouTube Tutorials:
 YouTube Playlist
 * [NeoForge Modding Tutorial - Minecraft 1.21: Getting Started | #1](https://www.youtube.com/watch?v=yG-oJPR_40w&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=1)
 
+I'm on part 12
+* [NeoForge Modding Tutorial - Minecraft 1.21: Non-Block Blocks | #12](https://www.youtube.com/watch?v=0famOskqo24&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=12)
+
 * [NeoForge 1.21 Mixin Setup](https://www.youtube.com/watch?v=Q5041hErnvA)
 
 ---
@@ -158,3 +161,35 @@ Additional Resources:
 
 Community Documentation: https://docs.neoforged.net/  
 NeoForged Discord: https://discord.neoforged.net/
+
+---
+
+Credits:
+===========
+
+**Darkhax-Minecraft on GitHub:**
+
+I have used some utility code from the Dark Utilities mod.
+* https://github.com/Darkhax-Minecraft/Dark-Utilities
+
+Usages:
+* `InvTest.java` - Used some code from here [DarkUtilsCommon.java](https://github.com/Darkhax-Minecraft/Dark-Utilities/blob/1.20.4/common/src/main/java/net/darkhax/darkutilities/DarkUtilsCommon.java)
+
+---
+
+**Textures**
+---
+
+**Futureazoo on GitHub:**
+
+Some textures in my textures folder are from this GitHub repo, such as the new foods.
+* https://github.com/Futureazoo/TextureRepository
+
+These are licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+---
+
+**Tutorials-By-Kaupenjoe on GitHub**
+
+Most main textures in my textures folder are from this GitHub repo
+* https://github.com/Tutorials-By-Kaupenjoe/NeoForge-Tutorial-1.21.X/tree/main/src/main/resources/assets/tutorialmod/textures

@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -36,6 +37,32 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.STARLIGHT_ASHES);
 
                     }).build());
+
+    // Food tabs
+    public static final Supplier<CreativeModeTab> EXTRA_FOODS_TAB = CREATIVE_MODE_TAB.register("extra_foods_tab",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.BURGER.get()))
+                    .title(Component.translatable("creativetab.kcneoforgetest.extra_food_items"))
+                    .displayItems((itemDisplayParameters, output) -> {
+
+                        output.accept(ModItems.BURGER);
+                        output.accept(ModItems.CHILI_PEPPER);
+
+                        // Minced meat
+                        output.accept(ModItems.RAW_MINCED_MEAT);
+                        output.accept(ModItems.COOKED_MINCED_MEAT);
+
+                        // Hamburger patty
+                        output.accept(ModItems.RAW_PATTY);
+                        output.accept(ModItems.COOKED_PATTY);
+
+                        // Sausage
+                        output.accept(ModItems.RAW_SAUSAGE);
+                        output.accept(ModItems.COOKED_SAUSAGE);
+
+                    }).build());
+
+            //
+
 
     public static final Supplier<CreativeModeTab> BISMUTH_BLOCK_TAB = CREATIVE_MODE_TAB.register("bismuth_blocks_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.BISMUTH_BLOCK))

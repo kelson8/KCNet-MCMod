@@ -3,9 +3,11 @@ package net.kelsoncraft.neoforgetest.datagen;
 import net.kelsoncraft.neoforgetest.NeoForgeTest;
 import net.kelsoncraft.neoforgetest.block.ModBlocks;
 import net.kelsoncraft.neoforgetest.item.ModItems;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
@@ -18,10 +20,16 @@ public class ModRecipeProvider extends RecipeProvider {
         super(output, registries);
     }
 
+
     @Override
     protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
         List<ItemLike> BISMUTH_SMELTABLES = List.of(ModItems.RAW_BISMUTH,
                 ModBlocks.BISMUTH_ORE, ModBlocks.BISMUTH_DEEPSLATE_ORE);
+
+        // Foods
+        List<ItemLike> EXTRA_FOODS_COOKABLES = List.of(ModItems.RAW_PATTY, ModItems.RAW_MINCED_MEAT); //ModItems.RAW_MINCED_MEAT, ModItems.RAW_SAUSAGE);
+
+        //
 
 
         // Shaped crafting
@@ -50,11 +58,41 @@ public class ModRecipeProvider extends RecipeProvider {
         // Smelting/Blasting
         oreSmelting(recipeOutput, BISMUTH_SMELTABLES, RecipeCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 200, "bismuth");
         oreBlasting(recipeOutput, BISMUTH_SMELTABLES, RecipeCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 100, "bismuth");
+
+        //----
+        // Cooking - Foods
+        //-----
+        // I almost got these working here
+        // Disabled - You can make Cooked Patty from Raw minced Meat in a smoker.
+
+        // TODO Compact this, make a helper method that can make the cooking(smelting), smoking, and camp fire recipes for each one.
+        // TODO Try to figure out why this duplicates everything so much.
+        // Raw patty to cooked patty
+        // cooking
+//        foodCooking(recipeOutput, EXTRA_FOODS_COOKABLES, RecipeCategory.FOOD, ModItems.COOKED_PATTY.get(), 0.25f, 100, "cooked_patty");
+//        foodSmoking(recipeOutput, EXTRA_FOODS_COOKABLES, RecipeCategory.FOOD, ModItems.COOKED_PATTY.get(), 0.25f, 100, "cooked_patty");
+//        foodCampFire(recipeOutput, EXTRA_FOODS_COOKABLES, RecipeCategory.FOOD, ModItems.COOKED_PATTY.get(), 0.25f, 100, "cooked_patty");
+//
+//
+//        // Raw Minced Meat to Cooked Minced Meat
+//        foodCooking(recipeOutput, EXTRA_FOODS_COOKABLES, RecipeCategory.FOOD, ModItems.COOKED_MINCED_MEAT.get(), 0.25f, 100, "cooked_minced_meat");
+//        foodSmoking(recipeOutput, EXTRA_FOODS_COOKABLES, RecipeCategory.FOOD, ModItems.COOKED_MINCED_MEAT.get(), 0.25f, 100, "cooked_minced_meat");
+//        foodCampFire(recipeOutput, EXTRA_FOODS_COOKABLES, RecipeCategory.FOOD, ModItems.COOKED_MINCED_MEAT.get(), 0.25f, 100, "cooked_minced_meat");
+//
+
+
+//        foodSmelting(recipeOutput, EXTRA_FOODS_COOKABLES, RecipeCategory.FOOD, ModItems.COOKED_SAUSAGE.get(), 0.25f, 100, "cooking");
+//        oreCooking(recipeOutput, RecipeSerializer.SMELTING_RECIPE, EXTRA_FOODS_COOKABLES, RecipeCategory.MISC, ModItems.RAW_PATTY.get(), 0.25f, 200, "", "");
+
+
     }
 
     // https://github.com/Tutorials-By-Kaupenjoe/NeoForge-Tutorial-1.21.X/blob/11-datagen/src/main/java/net/kaupenjoe/tutorialmod/datagen/ModRecipeProvider.java#L46-L65
     // Move the recipes out of the 'minecraft' folder in data and into the 'kcneoforgetest' folder.
-    protected static void oreSmelting(@NotNull RecipeOutput recipeOutput, List<ItemLike> pIngredients, @NotNull RecipeCategory pCategory, @NotNull ItemLike pResult,
+    protected static void oreSmelting(@NotNull RecipeOutput recipeOutput,
+                                      List<ItemLike> pIngredients,
+                                      @NotNull RecipeCategory pCategory,
+                                      @NotNull ItemLike pResult,
                                       float pExperience, int pCookingTIme, @NotNull String pGroup) {
         oreCooking(recipeOutput, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new, pIngredients, pCategory, pResult,
                 pExperience, pCookingTIme, pGroup, "_from_smelting");
@@ -66,8 +104,76 @@ public class ModRecipeProvider extends RecipeProvider {
                 pExperience, pCookingTime, pGroup, "_from_blasting");
     }
 
-    protected static <T extends AbstractCookingRecipe> void oreCooking(@NotNull RecipeOutput recipeOutput, RecipeSerializer<T> pCookingSerializer, AbstractCookingRecipe.@NotNull Factory<T> factory,
-                                                                       List<ItemLike> pIngredients, @NotNull RecipeCategory pCategory, @NotNull ItemLike pResult, float pExperience, int pCookingTime, @NotNull String pGroup, String pRecipeName) {
+    // Foods
+    //
+     //
+    protected static void foodCooking(@NotNull RecipeOutput recipeOutput,
+                                      List<ItemLike> pIngredients,
+                                      @NotNull RecipeCategory pCategory,
+                                      @NotNull ItemLike pResult,
+                                      float pExperience, int pCookingTIme, @NotNull String pGroup) {
+        oreCooking(recipeOutput, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new, pIngredients, pCategory, pResult,
+                pExperience, pCookingTIme, pGroup, "_from_cooking");
+    }
+
+    protected static void foodSmoking(@NotNull RecipeOutput recipeOutput,
+                                       List<ItemLike> pIngredients,
+                                       @NotNull RecipeCategory pCategory,
+                                       @NotNull ItemLike pResult,
+                                       float pExperience, int pCookingTIme, @NotNull String pGroup) {
+        oreCooking(recipeOutput, RecipeSerializer.SMOKING_RECIPE, SmokingRecipe::new, pIngredients, pCategory, pResult,
+                pExperience, pCookingTIme, pGroup, "_from_smoking");
+    }
+
+    protected static void foodCampFire(@NotNull RecipeOutput recipeOutput,
+                                      List<ItemLike> pIngredients,
+                                      @NotNull RecipeCategory pCategory,
+                                      @NotNull ItemLike pResult,
+                                      float pExperience, int pCookingTIme, @NotNull String pGroup) {
+        oreCooking(recipeOutput, RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new, pIngredients, pCategory, pResult,
+                pExperience, pCookingTIme, pGroup, "_from_campfire_cooking");
+    }
+
+    // TODO Fix this later, not sure how to do it.
+    // https://stackoverflow.com/questions/1759549/java-generics-multiple-generic-parameters
+//    protected  static <S extends Recipe<RecipeInput>> void allFoodsCooking(@NotNull RecipeOutput recipeOutput,
+//                                          // TODO Test this
+//                                          RecipeSerializer<S> recipeSerializer,
+//                                          List<ItemLike> pIngredients,
+//                                          @NotNull RecipeCategory pCategory,
+//                                          @NotNull ItemLike pResult,
+//                                          float pExperience, int pCookingTIme, @NotNull String pGroup) {
+//        oreCooking(recipeOutput, recipeSerializer, CampfireCookingRecipe::new, pIngredients, pCategory, pResult,
+////        oreCooking(recipeOutput, RecipeSerializer.CAMPFIRE_COOKING_RECIPE, CampfireCookingRecipe::new, pIngredients, pCategory, pResult,
+//                pExperience, pCookingTIme, pGroup, "_from_campfire_cooking");
+//    }
+
+
+    // https://github.com/vectorwing/FarmersDelight/blob/1.20/src/main/java/vectorwing/farmersdelight/data/recipe/SmeltingRecipes.java#L59-L70
+//    private static void foodSmeltingRecipes(String name, ItemLike ingredient, ItemLike result, float experience, Consumer<FinishedRecipe> consumer) {
+//        String namePrefix = new ResourceLocation(NeoForgeTest.MOD_ID, name).toString();
+//        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, 200)
+//                .unlockedBy(name, InventoryChangeTrigger.TriggerInstance.hasItems(ingredient))
+//                .save(consumer);
+//        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, 600)
+//                .unlockedBy(name, InventoryChangeTrigger.TriggerInstance.hasItems(ingredient))
+//                .save(consumer, namePrefix + "_from_campfire_cooking");
+//        SimpleCookingRecipeBuilder.smoking(Ingredient.of(ingredient), RecipeCategory.FOOD, result, experience, 100)
+//                .unlockedBy(name, InventoryChangeTrigger.TriggerInstance.hasItems(ingredient))
+//                .save(consumer, namePrefix + "_from_smoking");
+//    }
+    //
+
+    protected static <T extends AbstractCookingRecipe> void oreCooking(@NotNull RecipeOutput recipeOutput,
+                                                                       RecipeSerializer<T> pCookingSerializer,
+                                                                       AbstractCookingRecipe.@NotNull Factory<T> factory,
+                                                                       List<ItemLike> pIngredients,
+                                                                       @NotNull RecipeCategory pCategory,
+                                                                       @NotNull ItemLike pResult,
+                                                                       float pExperience,
+                                                                       int pCookingTime,
+                                                                       @NotNull String pGroup,
+                                                                       String pRecipeName) {
         for(ItemLike itemlike : pIngredients) {
             SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime, pCookingSerializer, factory).group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike))
                     .save(recipeOutput, NeoForgeTest.MOD_ID + ":" + getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
