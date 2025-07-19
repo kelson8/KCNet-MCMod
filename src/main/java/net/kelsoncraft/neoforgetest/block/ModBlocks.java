@@ -45,7 +45,9 @@ public class ModBlocks {
     public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock("magic_block",
             () -> new MagicBlock(BlockBehaviour.Properties.of()
                     .strength(2f)
+                    // If I want to disable this from dropping in survival, call the '.noLootTable()' method
                     .requiresCorrectToolForDrops()
+
             ));
 
     // Helper for creating and registering a block.

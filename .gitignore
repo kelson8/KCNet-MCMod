@@ -13,6 +13,7 @@ src/main/java/net/kelsoncraft/neoforgetest/commands/CommandTest.java
 # Auto generated from build
 # I do depend on this in game so I'll leave it in the build.
 #src/main/resources/version.properties
+.cache/
 
 # New blocks, needs worked on
 src/main/java/net/kelsoncraft/neoforgetest/block/custom/NewTargetBlock.java

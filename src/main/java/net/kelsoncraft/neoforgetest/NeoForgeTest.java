@@ -3,6 +3,7 @@ package net.kelsoncraft.neoforgetest;
 import net.kelsoncraft.neoforgetest.block.ModBlocks;
 import net.kelsoncraft.neoforgetest.commands.KCCommands;
 import net.kelsoncraft.neoforgetest.commands.MiscCommands;
+import net.kelsoncraft.neoforgetest.datagen.DataGenerators;
 import net.kelsoncraft.neoforgetest.events.ModEvents;
 import net.kelsoncraft.neoforgetest.item.ModCreativeModeTabs;
 import net.kelsoncraft.neoforgetest.item.ModItems;
@@ -87,6 +88,10 @@ public class NeoForgeTest {
         LOGGER.info("{} Registered mod commands as an event listener.", NeoForgeTest.MOD_NAME);
 
         //---
+
+        //---
+        // Register data gen
+        modEventBus.register(DataGenerators.class);
 
 
         //---
