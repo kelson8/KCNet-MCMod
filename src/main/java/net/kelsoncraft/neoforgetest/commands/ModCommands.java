@@ -1,8 +1,11 @@
-package net.kelsoncraft.neoforgetest.events;
+package net.kelsoncraft.neoforgetest.commands;
 
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.kelsoncraft.neoforgetest.NeoForgeTest;
-import net.kelsoncraft.neoforgetest.commands.ReturnHomeCommand;
-import net.kelsoncraft.neoforgetest.commands.SetHomeCommand;
+import net.minecraft.commands.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -15,7 +18,18 @@ import net.neoforged.neoforge.server.command.ConfigCommand;
 // To this
 //        NeoForge.EVENT_BUS.register(ModEvents.class);
 
-public class ModEvents {
+public class ModCommands {
+    // TODO Possibly switch to this format and keep all commands in one place.
+    // Mostly adapted from the InControl project, licensed under MIT
+    // https://github.com/McJtyMods/InControl/blob/1.21_neo/src/main/java/mcjty/incontrol/commands/ModCommands.java
+//    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+//        LiteralCommandNode<CommandSourceStack> commands = dispatcher.register(
+//                Commands.literal(NeoForgeTest.MOD_ID)
+//                        .then(SetHomeCommand.register(dispatcher)));
+//    }
+//    }
+
+    //
 
     @SubscribeEvent
     public static void onCommandsRegister(RegisterCommandsEvent event) {
@@ -27,7 +41,6 @@ public class ModEvents {
 
 
     // I don't think this one works.
-
 
     /**
      * Event handler for PlayerEvent.Clone.

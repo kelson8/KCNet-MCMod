@@ -32,24 +32,46 @@ public class KCCommands {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
         // Register the '/kc' command
+        // TODO Test permissions later
         dispatcher.register(
                 Commands.literal("kc") // Defines the root command: /kc
                         .then(Commands.literal("version") // Defines a subcommand: /kc version
                                 .executes(KCCommands::executeVersionCommand) // Specifies the method to execute when this subcommand is run
                         )
-                        .then(Commands.literal("pos") // Defines subcommand: /kc coords
-                                .then(Commands.argument("x", DoubleArgumentType.doubleArg()) // Defines double argument 'x'
-                                        .then(Commands.argument("y", DoubleArgumentType.doubleArg()) // Defines double argument 'y'
-                                                .then(Commands.argument("z", DoubleArgumentType.doubleArg()) // Defines double argument 'z'
-                                                        .executes(CustomTeleportCommand::command_kc_teleport) // Executes when /kc coords <x> <y> <z> is run
+
+                        // Position command test, teleport the player to the specified coordinates.
+                        .then(Commands.literal("pos") // Defines subcommand: /kc pos
+                                .requires(sourceStack -> sourceStack.hasPermission(2)) // Require OP for this command.
+                                .then(Commands.argument("x", DoubleArgumentType.doubleArg())
+                                        .then(Commands.argument("y", DoubleArgumentType.doubleArg())
+                                                .then(Commands.argument("z", DoubleArgumentType.doubleArg())
+                                                        .executes(CustomTeleportCommand::command_kc_teleport)
                                                 )
                                         )
                                 )
                         )
 
+                        // Display player XP on screen.
+                        .then(Commands.literal("getxp").executes(MessageCommands::MessagePlayerXp))
+
+                        // Display a test toast message
+                        .then(Commands.literal("toast").executes(MessageCommands::MessageToastTest))
+
+                        // Display a test popup message
+                        .then(Commands.literal("popup").executes(MessageCommands::MessagePopupTest))
+
+//                        .then(Commands.literal("spawnmob")
+//                                .requires(sourceStack -> sourceStack.hasPermission(2)) // Require OP for this command.
+//                                .then(Commands.argument("x", DoubleArgumentType.doubleArg()) // Defines double argument 'x'
+//                                        .then(Commands.argument("y", DoubleArgumentType.doubleArg()) // Defines double argument 'y'
+//                                                .then(Commands.argument("z", DoubleArgumentType.doubleArg()) // Defines double argument 'z'
+//                                        .executes(SummonCommand.createEntity(dispatcher, EntityType.ZOMBIE, ))
+
+
+
                 // You can add more subcommands here if needed
         );
-        NeoForgeTest.LOGGER.info("Registered command: /kc version"); // Use the main mod's logger
+//        NeoForgeTest.LOGGER.info("Registered command: /kc version"); // Use the main mod's logger
     }
 
     /**
@@ -76,6 +98,7 @@ public class KCCommands {
                 .append(Component.literal(NeoForgeTest.MOD_DESCRIPTION).withStyle(ChatFormatting.LIGHT_PURPLE));
 
         //---- Send messages
+
 
         // --- Mod Details --- (e.g., Green)
         source.sendSuccess(() -> Component.literal("--- Mod Details ---").withStyle(ChatFormatting.GREEN), false);

@@ -3,19 +3,52 @@
 This is really just a test mod on Minecraft for me to mess around with.
 It is in an alpha state currently, there isn't much in here so far.
 
+I have added a few commands and some libraries for this mod.
+
 Version info (Running on NeoForge 1.21.1):
 * I have other mods and modpacks that work on 1.21.1 so that's
 why I decided to use that version.
 
 ---
 
+
+
 Features:
 ========
 
-* So far I just have a custom block and item for testing.
+* I have a custom block and item for testing.
 * There is mixin testing setup in this project, so far it just has a test that makes your flying speed
 faster if you right-click a block.
 
+---
+
+**Commands:**
+
+**Home commands** (So far these cannot be removed and only one can be set):
+* `/home set` - Set your home
+* `/home return` - Return back to your home
+
+* `/kc pos [x] [y] [z]` - Teleport you to the position specified.
+* `/kc version` - Show the mod name, mod version, and mod description in chat.
+* `/kc getxp` - Show your current xp levels as a popup on screen.
+* `/kc toast` - Show a test toast on screen.
+* `/kc popup` - Show a test popup on screen.
+
+---
+
+---
+
+Files:
+========
+
+This is just a small list of files for the project, I will add other useful files into here later.
+
+**Mixins:**
+* `FlySpeedMixin.java` - This is a work in progress for setting the players fly speed, it works, but it cannot be turned off and doesn't set properly.
+* `MiscTestMixin.java` - Blank mixin for testing.
+* `PutPlayerInSkyMixin.java` - Put the player into the sky (+50 blocks up) if right-clicking with most items, this is disabled.
+* `TestMixin.java` - Another mixin just for testing.
+* `VillagerMixin.java` - This file is for testing with villagers and mixins.
 
 ---
 
@@ -164,8 +197,25 @@ NeoForged Discord: https://discord.neoforged.net/
 
 ---
 
+Libraries used:
+==========
+
+These below are required for this mod to work, currently they are not in the neoforge.mods.toml so the game may crash without them.
+I need to fix that later.
+* [Immersive Messages API](https://modrinth.com/mod/immersive-messages-api)
+* [TxniLib](https://modrinth.com/mod/txnilib)
+* [Sinytra Connector](https://modrinth.com/mod/connector)
+
+---
+
 Credits:
 ===========
+
+**legobmw99 on GitHub**
+
+I have used the [Utilities.java](https://github.com/legobmw99/BetterThanMending/blob/1.21.1/common/src/main/java/com/legobmw99/BetterThanMending/core/util/Utilities.java) from their code, it has been renamed to XPUtil.java in my util folder.
+
+---
 
 **Darkhax-Minecraft on GitHub:**
 

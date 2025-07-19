@@ -120,9 +120,12 @@ repositories {
         url = "https://maven.shedaniel.me/"
     }
 
+    // https://maven.txni.dev/#/releases/toni/txnilib
     maven {
-        url = "https://maven.txni.dev/"
+        url "https://maven.txni.dev/releases"
     }
+
+    // https://github.com/Sinytra/ForgifiedFabricAPI
     maven {
         url = "https://maven.su5ed.dev/releases"
     }
@@ -131,6 +134,23 @@ repositories {
     maven {
         url = 'https://maven.minecraftforge.net/'
     }
+
+    // https://gitlab.com/Kyarei/caxton/-/blob/master/build.gradle?ref_type=heads#L51
+    // Jitpack.io
+    maven {
+        url = 'https://jitpack.io'
+    }
+
+    // Terraformers MC
+    maven {
+        url = 'https://maven.terraformersmc.com'
+    }
+
+    // Modrinth API
+    maven {
+        url = 'https://api.modrinth.com/maven'
+    }
+
 
     //---- Enable these for Yet Another Config Lib
     // https://docs.isxander.dev/yet-another-config-lib/installing-yacl
@@ -308,12 +328,13 @@ dependencies {
 
     //----
     // https://immersive.txni.dev/guide
-    // TODO Figure this out
     // It should allow me to use a custom message API like sending messages to the player.
-//    implementation("toni.immersivemessages:${loader}-${mcVersion}:${immersiveMessagesVersion}") { isTransitive = false }
-//    implementation("tony.immersivemessages:neoforge-1.21.1:1.0.18")
-//    implementation("toni.txnilib:neoforge-1.21.1:1.0.24")
-//    implementation("toni.txnilib:${loader}-${mcVersion}:${txnilibVersion}")
+    implementation "toni.immersivemessages:neoforge-${minecraft_version}:${immersive_messages_version}"
+    implementation "toni.txnilib:neoforge-${minecraft_version}:${txni_lib_version}"
+
+    // Sinytra connector for fabric
+    // https://github.com/Sinytra/ForgifiedFabricAPI
+    implementation "org.sinytra.forgified-fabric-api:forgified-fabric-api:${fabric_api_version}"
 
     //---------
 

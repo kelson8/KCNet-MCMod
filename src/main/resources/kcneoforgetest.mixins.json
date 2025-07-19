@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "FlySpeedMixin",
-    "TestMixin"
+    "TestMixin",
+    "VillagerMixin"
   ],
   "client": [
   ],
