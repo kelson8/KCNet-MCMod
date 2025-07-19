@@ -10,8 +10,8 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 // This will generate the blockstates json, block model json, and the item model json file.
 
 public class ModBlockStateProvider extends BlockStateProvider {
-    public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, NeoForgeTest.MOD_ID, exFileHelper);
+    public ModBlockStateProvider(PackOutput output, String modId, ExistingFileHelper exFileHelper) {
+        super(output, modId, exFileHelper);
     }
 
     // Register block models

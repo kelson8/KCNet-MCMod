@@ -78,12 +78,11 @@ public class ChiselItem extends Item {
     public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
         // If the player is pressing shift, then show the description.
         if(Screen.hasShiftDown()) {
-            tooltipComponents.add(Component.translatable("tooltip.kcneoforgetest.chisel.shift_down"));
+            tooltipComponents.add(Component.translatable("tooltip.kcnet_mod.chisel.shift_down"));
         } else {
-            tooltipComponents.add(Component.translatable("tooltip.kcneoforgetest.chisel"));
+            tooltipComponents.add(Component.translatable("tooltip.kcnet_mod.chisel"));
         }
 
-        // "tooltip.kcneoforgetest.chisel.tooltip"
 
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }

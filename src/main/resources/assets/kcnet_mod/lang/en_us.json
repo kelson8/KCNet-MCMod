@@ -1,0 +1,50 @@
+{
+  "commands.kcnet_mod.return_home.success": "Player returned home!",
+  "commands.kcnet_mod.return_home.no_pos_found": "No home position has been set!",
+
+  "item.kcnet_mod.bismuth": "Bismuth",
+  "item.kcnet_mod.raw_bismuth": "Raw Bismuth",
+
+  "item.kcnet_mod.chisel": "Chisel",
+
+
+  "item.kcnet_mod.radish": "Radish",
+
+  "item.kcnet_mod.burger": "Hamburger",
+
+  "item.kcnet_mod.chili_pepper": "Chili Pepper",
+
+  "item.kcnet_mod.raw_minced_meat": "Raw Minced Meat",
+  "item.kcnet_mod.cooked_minced_meat": "Cooked Minced Meat",
+
+  "item.kcnet_mod.raw_patty": "Raw Hamburger Patty",
+  "item.kcnet_mod.cooked_patty": "Cooked Hamburger Patty",
+
+  "item.kcnet_mod.raw_sausage": "Raw Sausage",
+  "item.kcnet_mod.cooked_sausage": "Cooked Sausage",
+
+
+
+  "item.kcnet_mod.frostfire_ice": "Frostfire Ice",
+  "item.kcnet_mod.starlight_ashes": "Starlight Ashes",
+
+  "block.kcnet_mod.bismuth_block": "Block of Bismuth",
+  "block.kcnet_mod.bismuth_ore": "Bismuth Ore",
+
+  "block.kcnet_mod.magic_block": "Magic Block",
+
+  "block.kcnet_mod.bismuth_deepslate_ore": "Bismuth Deepslate Ore",
+
+  "creativetab.kcnet_mod.bismuth_items": "Bismuth Items",
+  "creativetab.kcnet_mod.bismuth_blocks": "Bismuth Blocks",
+
+
+  "tooltip.kcnet_mod.magic_block.tooltip": "This Block is very §3MAGICAL§r",
+
+  "tooltip.kcnet_mod.chisel.shift_down": "This Item can chisel Blocks into Bricks",
+  "tooltip.kcnet_mod.chisel": "Press §eShift§r for more information",
+
+  "tooltip.kcnet_mod.radish.tooltip": "Tastes good, sometimes gives health boost.",
+  "creativetab.kcnet_mod.extra_food_items": "Extra Food Items"
+
+}

@@ -42,8 +42,8 @@ public class ReturnHomeCommand {
 
 
                 // These can also use placeholders in the json if I wanted to make a system that has multiple homes by using %s
-//                source.sendSystemMessage(Component.translatable("commands.kcneoforgetest.return_home.success"));
-//                source.sendSystemMessage(Component.translatable("commands.kcneoforgetest.return_home.success", "homeId"));
+//                source.sendSystemMessage(Component.translatable("commands.kcnet_mod.return_home.success"));
+//                source.sendSystemMessage(Component.translatable("commands.kcnet_mod.return_home.success", "homeId"));
 
                 MessageUtil.SendMessage(player, "You were returned to your home.");
 
@@ -52,7 +52,7 @@ public class ReturnHomeCommand {
             } else {
                 // No home position
 //                source.sendSystemMessage(Component.literal("No home position has been set!"));
-//                source.sendSystemMessage(Component.translatable("commands.kcneoforgetest.return_home.no_pos_found"));
+//                source.sendSystemMessage(Component.translatable("commands.kcnet_mod.return_home.no_pos_found"));
                 MessageUtil.SendMessage(player, "You do not have a home set!");
 
                 return -1;

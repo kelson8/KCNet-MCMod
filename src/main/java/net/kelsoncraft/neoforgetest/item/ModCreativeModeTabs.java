@@ -20,7 +20,7 @@ public class ModCreativeModeTabs {
 
     public static final Supplier<CreativeModeTab> BISMUTH_ITEMS_TAB = CREATIVE_MODE_TAB.register("bismuth_items_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.BISMUTH.get()))
-                    .title(Component.translatable("creativetab.kcneoforgetest.bismuth_items"))
+                    .title(Component.translatable("creativetab.kcnet_mod.bismuth_items"))
                     .displayItems((itemDisplayParameters, output) -> {
 
                         // Add items in here for custom creative tab
@@ -41,7 +41,7 @@ public class ModCreativeModeTabs {
     // Food tabs
     public static final Supplier<CreativeModeTab> EXTRA_FOODS_TAB = CREATIVE_MODE_TAB.register("extra_foods_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.BURGER.get()))
-                    .title(Component.translatable("creativetab.kcneoforgetest.extra_food_items"))
+                    .title(Component.translatable("creativetab.kcnet_mod.extra_food_items"))
                     .displayItems((itemDisplayParameters, output) -> {
 
                         output.accept(ModItems.BURGER);
@@ -68,7 +68,8 @@ public class ModCreativeModeTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.BISMUTH_BLOCK))
                     // Make sure this name matches the previous creative mode tab
                     .withTabsBefore(ResourceLocation.fromNamespaceAndPath(NeoForgeTest.MOD_ID, "bismuth_items_tab"))
-                    .title(Component.translatable("creativetab.kcneoforgetest.bismuth_blocks"))
+                    .title(Component.translatable("creativetab.kcnet_mod.bismuth_blocks"))
+
                     .displayItems((itemDisplayParameters, output) -> {
 
                         // Add items in here for custom creative tab
