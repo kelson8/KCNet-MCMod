@@ -4,7 +4,16 @@
 original_mc_data/
 
 # Exclude the test folder for now, mostly just messing with APIs and other stuff in here.
-src/main/java/net/kelsoncraft/neoforgetest/test/
+# Oops, this was excluding my new ImmersiveMessageApi file, I moved it into the util folder anyways.
+#src/main/java/net/kelsoncraft/neoforgetest/test/
+
+# These below aren't in active use, I may mess with them later.
+src/main/java/net/kelsoncraft/neoforgetest/test/BookshelfApiTest.java
+src/main/java/net/kelsoncraft/neoforgetest/test/ClothConfigTest.java
+src/main/java/net/kelsoncraft/neoforgetest/test/InvTest.java
+src/main/java/net/kelsoncraft/neoforgetest/test/PlayerTest.java
+src/main/java/net/kelsoncraft/neoforgetest/test/VillagerTest.java
+
 
 # Test commands
 src/main/java/net/kelsoncraft/neoforgetest/commands/CommandTest.java

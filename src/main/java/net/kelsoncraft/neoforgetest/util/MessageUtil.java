@@ -1,6 +1,5 @@
 package net.kelsoncraft.neoforgetest.util;
 
-import net.kelsoncraft.neoforgetest.test.ImmersiveMessageApi;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
