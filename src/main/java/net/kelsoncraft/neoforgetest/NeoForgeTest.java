@@ -3,7 +3,6 @@ package net.kelsoncraft.neoforgetest;
 import net.kelsoncraft.neoforgetest.block.ModBlocks;
 import net.kelsoncraft.neoforgetest.commands.KCCommands;
 import net.kelsoncraft.neoforgetest.commands.MiscCommands;
-import net.kelsoncraft.neoforgetest.commands.TestCommands;
 import net.kelsoncraft.neoforgetest.datagen.DataGenerators;
 import net.kelsoncraft.neoforgetest.commands.ModCommands;
 import net.kelsoncraft.neoforgetest.item.ModCreativeModeTabs;
