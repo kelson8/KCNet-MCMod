@@ -1,20 +1,13 @@
-package net.kelsoncraft.neoforgetest.commands;
+package net.kelsoncraft.neoforgetest.commands.teleport;
 
-import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.builder.ArgumentBuilder;
-import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.kelsoncraft.neoforgetest.NeoForgeTest;
 import net.kelsoncraft.neoforgetest.util.MessageUtil;
-import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.neoforge.common.NeoForge;
-
 
 
 //public class SetHomeCommand implements Command<CommandSource> {

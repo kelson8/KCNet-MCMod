@@ -1,11 +1,8 @@
 package net.kelsoncraft.neoforgetest.commands;
 
-import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.kelsoncraft.neoforgetest.NeoForgeTest;
-import net.minecraft.commands.CommandSource;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
+import net.kelsoncraft.neoforgetest.commands.teleport.ReturnHomeCommand;
+import net.kelsoncraft.neoforgetest.commands.teleport.SetHomeCommand;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;

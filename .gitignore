@@ -16,7 +16,7 @@ src/main/java/net/kelsoncraft/neoforgetest/test/VillagerTest.java
 
 
 # Test commands
-src/main/java/net/kelsoncraft/neoforgetest/commands/CommandTest.java
+src/main/java/net/kelsoncraft/neoforgetest/commands/TestCommands.java
 
 
 # Auto generated from build
@@ -27,14 +27,16 @@ src/main/java/net/kelsoncraft/neoforgetest/commands/CommandTest.java
 # New blocks, needs worked on
 src/main/java/net/kelsoncraft/neoforgetest/block/custom/NewTargetBlock.java
 
-# Extra mixins
-src/main/java/net/kelsoncraft/neoforgetest/mixin/GiveCommandMixin.java
-src/main/java/net/kelsoncraft/neoforgetest/mixin/AutoLoadLastWorld.java
-
 # Other extras, these are work in progress files.
 src/main/java/net/kelsoncraft/neoforgetest/util/CommandHandler.java
 src/main/java/net/kelsoncraft/neoforgetest/util/AutoLoad.java
 src/main/java/net/kelsoncraft/neoforgetest/util/YaclConfigTest.java
+
+# Mixins
+src/main/java/net/kelsoncraft/neoforgetest/mixin/GiveCommandMixin.java
+src/main/java/net/kelsoncraft/neoforgetest/mixin/AutoLoadLastWorld.java
+src/main/java/net/kelsoncraft/neoforgetest/mixin/LevelStorageMixin.java
+src/main/java/net/kelsoncraft/neoforgetest/mixin/RandomTestMixin.java
 
 
 # eclipse

@@ -1,4 +1,4 @@
-package net.kelsoncraft.neoforgetest.commands;
+package net.kelsoncraft.neoforgetest.commands.teleport;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 
 public class CustomTeleportCommand {
 
-    public static int command_kc_teleport(CommandContext<CommandSourceStack> command) throws CommandSyntaxException {
+    public static int TeleportCommand(CommandContext<CommandSourceStack> command) throws CommandSyntaxException {
         Entity playerEntity = command.getSource().getEntity();
 //        if(command.getSource().getEntity() instanceof Player player) {
         if(playerEntity instanceof Player player) {

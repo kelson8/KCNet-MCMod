@@ -1,4 +1,4 @@
-package net.kelsoncraft.neoforgetest.commands;
+package net.kelsoncraft.neoforgetest.commands.teleport;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;

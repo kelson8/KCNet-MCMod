@@ -5,6 +5,8 @@ import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.neoforgetest.util.XPUtilities;
 import net.kelsoncraft.neoforgetest.util.MessageUtil;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -63,5 +65,19 @@ public class MessageCommands {
         }
 
         return Command.SINGLE_SUCCESS;
+    }
+
+    /**
+     * Helper method to send a single chat message composed of multiple colored components.
+     *
+     * @param source The CommandSourceStack to send the message to.
+     * @param components A variable argument list of Components to append.
+     */
+    public static void SendColoredMessage(CommandSourceStack source, Component... components) {
+        MutableComponent finalMessage = Component.empty(); // Start with an empty mutable component
+        for (Component comp : components) {
+            finalMessage.append(comp); // Append each component
+        }
+        source.sendSuccess(() -> finalMessage, false); // Send the combined message
     }
 }

@@ -5,6 +5,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.neoforgetest.NeoForgeTest;
+import net.kelsoncraft.neoforgetest.commands.teleport.CustomTeleportCommand;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -45,7 +46,7 @@ public class KCCommands {
                                 .then(Commands.argument("x", DoubleArgumentType.doubleArg())
                                         .then(Commands.argument("y", DoubleArgumentType.doubleArg())
                                                 .then(Commands.argument("z", DoubleArgumentType.doubleArg())
-                                                        .executes(CustomTeleportCommand::command_kc_teleport)
+                                                        .executes(CustomTeleportCommand::TeleportCommand)
                                                 )
                                         )
                                 )
