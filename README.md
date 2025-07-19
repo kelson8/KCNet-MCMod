@@ -1,10 +1,5 @@
 # KCNeoForge Test Mod
 
-This is the Development branch for testing with my mod, but currently this build is broken.
-I am in progress of renaming the project to kcnet_mod instead of kcneoforgetest.
-
-This doesn't generate the json files properly.
-
 This is really just a test mod on Minecraft for me to mess around with.
 It is in an alpha state currently, there isn't much in here so far.
 
