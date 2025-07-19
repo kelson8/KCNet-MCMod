@@ -329,7 +329,15 @@ dependencies {
     //----
     // https://immersive.txni.dev/guide
     // It should allow me to use a custom message API like sending messages to the player.
-    implementation "toni.immersivemessages:neoforge-${minecraft_version}:${immersive_messages_version}"
+//    implementation "toni.immersivemessages:neoforge-${minecraft_version}:${immersive_messages_version}"
+
+    // This is the line that's pulling in Caxton, I disabled this and that fixed the runData gradle task.
+    // This was annoying to fix.
+    implementation("toni.immersivemessages:neoforge-${minecraft_version}:${immersive_messages_version}") {
+        // Add this rule to exclude Caxton, which is a transitive dependency
+        exclude group: 'maven.modrinth', module: 'caxton'
+    }
+
     implementation "toni.txnilib:neoforge-${minecraft_version}:${txni_lib_version}"
 
     // Sinytra connector for fabric
