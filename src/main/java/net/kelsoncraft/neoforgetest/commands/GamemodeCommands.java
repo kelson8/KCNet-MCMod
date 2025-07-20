@@ -3,7 +3,7 @@ package net.kelsoncraft.neoforgetest.commands;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import net.kelsoncraft.neoforgetest.Config;
-import net.kelsoncraft.neoforgetest.NeoForgeTest;
+import net.kelsoncraft.neoforgetest.util.LogUtil;
 import net.kelsoncraft.neoforgetest.util.MessageUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
@@ -64,22 +64,22 @@ public class GamemodeCommands {
         if (Config.COMMON.ENABLE_CREATIVE_COMMAND.get()) {
 
             dispatcher.register(Commands.literal("gmc") // Alias /gmc
-                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                .executes(command -> creativeCommand(command.getSource())));
+                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                    .executes(command -> creativeCommand(command.getSource())));
 
             dispatcher.register(Commands.literal("creative") // Alias /creative
                     .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                .executes(command -> creativeCommand(command.getSource())));
+                    .executes(command -> creativeCommand(command.getSource())));
 
             dispatcher.register(Commands.literal("gm") // Alias /gm c
                     .then(Commands.literal("c")
                             .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                    .executes(command -> creativeCommand(command.getSource()))
-                ));
+                            .executes(command -> creativeCommand(command.getSource()))
+                    ));
 
-//            NeoForgeTest.LOGGER.info("Registered creative gamemode aliases (/gmc, /creative, /gm c).");
+//            LogUtil.LogInfo("Registered creative gamemode aliases (/gmc, /creative, /gm c).");
         } else {
-            NeoForgeTest.LOGGER.info("Creative gamemode aliases are disabled in config.");
+            LogUtil.LogInfo("Creative gamemode aliases are disabled in config.");
         }
 
         //---
@@ -95,23 +95,22 @@ public class GamemodeCommands {
                     .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .executes(command -> survivalCommand(command.getSource())));
 
-        // Separate '/survival' command
+            // Separate '/survival' command
             dispatcher.register(Commands.literal("survival")
                     .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .executes(command -> survivalCommand(command.getSource()))
-        );
+            );
 
             dispatcher.register(Commands.literal("gm")
                     .then(Commands.literal("s")
                             .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                    .executes(command -> survivalCommand(command.getSource()))
-        ));
+                            .executes(command -> survivalCommand(command.getSource()))
+                    ));
 
-//        NeoForgeTest.LOGGER.info("Registered survival gamemode aliases (/gms, /survival, /gm s).");
-    } else {
-        NeoForgeTest.LOGGER.info("Survival gamemode aliases are disabled in config.");
-    }
-
+//        LogUtil.LogInfo("Registered survival gamemode aliases (/gms, /survival, /gm s).");
+        } else {
+            LogUtil.LogInfo("Survival gamemode aliases are disabled in config.");
+        }
 
 
         //---
@@ -122,22 +121,22 @@ public class GamemodeCommands {
 //                .executes(command -> adventureCommand(command.getSource())));
 
         if (Config.COMMON.ENABLE_ADVENTURE_COMMAND.get()) {
-                dispatcher.register(Commands.literal("gma")
-                        .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                        .executes(command -> adventureCommand(command.getSource())));
+            dispatcher.register(Commands.literal("gma")
+                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                    .executes(command -> adventureCommand(command.getSource())));
 
-                dispatcher.register(Commands.literal("adventure")
-                        .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                        .executes(command -> adventureCommand(command.getSource())));
+            dispatcher.register(Commands.literal("adventure")
+                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                    .executes(command -> adventureCommand(command.getSource())));
 
-                dispatcher.register(Commands.literal("gm")
-                            .then(Commands.literal("a")
-                                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
+            dispatcher.register(Commands.literal("gm")
+                    .then(Commands.literal("a")
+                            .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                             .executes(command -> adventureCommand(command.getSource()))
                     ));
 
         } else {
-            NeoForgeTest.LOGGER.info("Adventure gamemode aliases are disabled in config.");
+            LogUtil.LogInfo("Adventure gamemode aliases are disabled in config.");
         }
 
 
@@ -148,7 +147,7 @@ public class GamemodeCommands {
 //        gamemodeCommands.then(Commands.literal("spectator")
 //                .executes(command -> spectatorCommand(command.getSource())));
 
-        if(Config.COMMON.ENABLE_SPECTATOR_COMMAND.get()) {
+        if (Config.COMMON.ENABLE_SPECTATOR_COMMAND.get()) {
             dispatcher.register(Commands.literal("gmsp")
                     .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .executes(command -> spectatorCommand(command.getSource())));
@@ -163,9 +162,9 @@ public class GamemodeCommands {
                             .executes(command -> spectatorCommand(command.getSource()))
                     ));
 
-//            NeoForgeTest.LOGGER.info("Registered spectator gamemode aliases (/gmsp, /spectator, /gm sp).");
+//            LogUtil.LogInfo("Registered spectator gamemode aliases (/gmsp, /spectator, /gm sp).");
         } else {
-            NeoForgeTest.LOGGER.info("Spectator gamemode aliases are disabled in config.");
+            LogUtil.LogInfo("Spectator gamemode aliases are disabled in config.");
         }
 
 
@@ -208,16 +207,16 @@ public class GamemodeCommands {
 
     private static void setGameMode(CommandSourceStack source, GameType gameMode) {
         Entity entity = source.getEntity();
-        if(entity instanceof ServerPlayer player) {
+        if (entity instanceof ServerPlayer player) {
 
-            if(player.gameMode.getGameModeForPlayer() == gameMode) {
+            if (player.gameMode.getGameModeForPlayer() == gameMode) {
                 source.sendFailure(Component.literal("You are already in " + gameMode.getName() + " mode!").withStyle(ChatFormatting.RED));
                 return;
             }
 
             player.setGameMode(gameMode);
 
-            switch(gameMode) {
+            switch (gameMode) {
                 case CREATIVE -> MessageUtil.SendMessage(player, "Set gamemode to creative");
                 case SURVIVAL -> MessageUtil.SendMessage(player, "Set gamemode to survival");
                 case ADVENTURE -> MessageUtil.SendMessage(player, "Set gamemode to adventure");

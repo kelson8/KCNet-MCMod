@@ -72,7 +72,6 @@ public class KCCommands {
 
                 // You can add more subcommands here if needed
         );
-//        NeoForgeTest.LOGGER.info("Registered command: /kc version"); // Use the main mod's logger
     }
 
     /**
