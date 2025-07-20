@@ -67,16 +67,16 @@ public class GamemodeCommands {
         if (Config.COMMON.ENABLE_CREATIVE_COMMAND.get()) {
 
             dispatcher.register(Commands.literal("gmc") // Alias /gmc
-                .requires(sourceStack -> sourceStack.hasPermission(2))
+                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .executes(command -> creativeCommand(command.getSource())));
 
             dispatcher.register(Commands.literal("creative") // Alias /creative
-                .requires(sourceStack -> sourceStack.hasPermission(2))
+                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .executes(command -> creativeCommand(command.getSource())));
 
             dispatcher.register(Commands.literal("gm") // Alias /gm c
                     .then(Commands.literal("c")
-                    .requires(sourceStack -> sourceStack.hasPermission(2))
+                            .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .executes(command -> creativeCommand(command.getSource()))
                 ));
 
@@ -95,18 +95,18 @@ public class GamemodeCommands {
 
         if (Config.COMMON.ENABLE_SURVIVAL_COMMAND.get()) {
             dispatcher.register(Commands.literal("gms")
-                    .requires(sourceStack -> sourceStack.hasPermission(2))
+                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .executes(command -> survivalCommand(command.getSource())));
 
         // Separate '/survival' command
             dispatcher.register(Commands.literal("survival")
-                    .requires(sourceStack -> sourceStack.hasPermission(2))
+                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .executes(command -> survivalCommand(command.getSource()))
         );
 
             dispatcher.register(Commands.literal("gm")
                     .then(Commands.literal("s")
-                    .requires(sourceStack -> sourceStack.hasPermission(2))
+                            .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .executes(command -> survivalCommand(command.getSource()))
         ));
 
@@ -126,16 +126,16 @@ public class GamemodeCommands {
 
         if (Config.COMMON.ENABLE_ADVENTURE_COMMAND.get()) {
                 dispatcher.register(Commands.literal("gma")
-                        .requires(sourceStack -> sourceStack.hasPermission(2))
+                        .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                         .executes(command -> adventureCommand(command.getSource())));
 
                 dispatcher.register(Commands.literal("adventure")
-                        .requires(sourceStack -> sourceStack.hasPermission(2))
+                        .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                         .executes(command -> adventureCommand(command.getSource())));
 
                 dispatcher.register(Commands.literal("gm")
                             .then(Commands.literal("a")
-                            .requires(sourceStack -> sourceStack.hasPermission(2))
+                                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                             .executes(command -> adventureCommand(command.getSource()))
                     ));
 
@@ -153,16 +153,16 @@ public class GamemodeCommands {
 
         if(Config.COMMON.ENABLE_SPECTATOR_COMMAND.get()) {
             dispatcher.register(Commands.literal("gmsp")
-                    .requires(sourceStack -> sourceStack.hasPermission(2))
+                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .executes(command -> spectatorCommand(command.getSource())));
 
             dispatcher.register(Commands.literal("spectator")
-                    .requires(sourceStack -> sourceStack.hasPermission(2))
+                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                     .executes(command -> spectatorCommand(command.getSource())));
 
             dispatcher.register(Commands.literal("gm")
                     .then(Commands.literal("sp")
-                            .requires(sourceStack -> sourceStack.hasPermission(2))
+                            .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                             .executes(command -> spectatorCommand(command.getSource()))
                     ));
 
@@ -182,24 +182,14 @@ public class GamemodeCommands {
 
     // Creative
     private static int creativeCommand(CommandSourceStack source) throws CommandSyntaxException {
-        Entity entity = source.getEntity();
-        if(entity instanceof ServerPlayer player) {
-            if (player.gameMode.getGameModeForPlayer() == GameType.CREATIVE) {
-                source.sendFailure(Component.literal("You are already in creative mode!").withStyle(ChatFormatting.RED));
-                return 0;
-            }
-
-            setGameMode(source, GameType.CREATIVE);
-        }
-
+        setGameMode(source, GameType.CREATIVE);
         return Command.SINGLE_SUCCESS;
     }
 
+    // TODO Set these below to set the player on the ground if in creative, I've done it in Spigot.
     // Survival
     private static int survivalCommand(CommandSourceStack source) throws CommandSyntaxException {
         setGameMode(source, GameType.SURVIVAL);
-
-
         return Command.SINGLE_SUCCESS;
     }
 

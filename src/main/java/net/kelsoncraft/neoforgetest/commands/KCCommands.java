@@ -42,7 +42,7 @@ public class KCCommands {
 
                         // Position command test, teleport the player to the specified coordinates.
                         .then(Commands.literal("pos") // Defines subcommand: /kc pos
-                                .requires(sourceStack -> sourceStack.hasPermission(2)) // Require OP for this command.
+                                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
                                 .then(Commands.argument("x", DoubleArgumentType.doubleArg())
                                         .then(Commands.argument("y", DoubleArgumentType.doubleArg())
                                                 .then(Commands.argument("z", DoubleArgumentType.doubleArg())
@@ -62,7 +62,7 @@ public class KCCommands {
                         .then(Commands.literal("popup").executes(MessageCommands::MessagePopupTest))
 
 //                        .then(Commands.literal("spawnmob")
-//                                .requires(sourceStack -> sourceStack.hasPermission(2)) // Require OP for this command.
+//                                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
 //                                .then(Commands.argument("x", DoubleArgumentType.doubleArg()) // Defines double argument 'x'
 //                                        .then(Commands.argument("y", DoubleArgumentType.doubleArg()) // Defines double argument 'y'
 //                                                .then(Commands.argument("z", DoubleArgumentType.doubleArg()) // Defines double argument 'z'

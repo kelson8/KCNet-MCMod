@@ -39,15 +39,22 @@ faster if you right-click a block.
 
 --
 
-**Gamemode commands, like Essentials**
+**Essentials like commands**
+
+**Gamemode commands**
 
 These can be turned off in the mod config, and it should save the data.
 To apply changes if in single-player, save and quit then reload the world, 
-you don't have to exit the game, or at least I didn't during my testing
+you don't have to exit the game, or at least I didn't during my testing.
 * Creative: `/gmc`, `/creative`, `/gm c`
 * Survival: `/gms`, `/survival, /gm s`
 * Adventure: `/gma`, `/adventure, /gm a`
 * Spectator: `/gmsp`, `/spectator`, `/gm sp`
+
+--
+
+**Other Commands**
+* Heal: `/heal` - Give yourself max health and food.
 
 ---
 
@@ -67,6 +74,11 @@ This is just a small list of files for the project, I will add other useful file
 * `PutPlayerInSkyMixin.java` - Put the player into the sky (+50 blocks up) if right-clicking with most items, this is disabled.
 * `TestMixin.java` - Another mixin just for testing.
 * `VillagerMixin.java` - This file is for testing with villagers and mixins.
+
+**Util**
+* `MessageUtil.java` - Contains some useful message utilities for my mod.
+
+* `XPUtilities.java` - Get the players xp, level, and add to players XP. Here is the original code for it: [Utilities.java](https://github.com/legobmw99/BetterThanMending/blob/1.21.1/common/src/main/java/com/legobmw99/BetterThanMending/core/util/Utilities.java)
 
 ---
 

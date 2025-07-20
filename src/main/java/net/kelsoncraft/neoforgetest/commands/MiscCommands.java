@@ -1,6 +1,7 @@
 package net.kelsoncraft.neoforgetest.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
+import net.kelsoncraft.neoforgetest.commands.misc.HealCommand;
 import net.kelsoncraft.neoforgetest.commands.misc.PlayerInfoCommand;
 import net.kelsoncraft.neoforgetest.commands.misc.SummonMobCommand;
 import net.minecraft.commands.CommandSourceStack;
@@ -13,28 +14,17 @@ public class MiscCommands {
     @SubscribeEvent
     public static void onCommandsRegister(RegisterCommandsEvent event) {
         // Player info command
+        // '/playerinfo'
         new PlayerInfoCommand(event.getDispatcher());
 
         // Summon mob command
+        // '/summon_mob', just setup to spawn a wolf for now.
         new SummonMobCommand(event.getDispatcher());
 
-    }
+        // '/heal' command
+        new HealCommand(event.getDispatcher());
 
-    // TODO Remove this
-    public MiscCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
-        // Misc commands
-        // This one is now located in /kc coords.
-//        dispatcher.register(Commands.literal("test1")
-//                .then(Commands.literal("coords") // Defines subcommand: /kc coords
-//                        .then(Commands.argument("x", DoubleArgumentType.doubleArg()) // Defines double argument 'x'
-//                                .then(Commands.argument("y", DoubleArgumentType.doubleArg()) // Defines double argument 'y'
-//                                        .then(Commands.argument("z", DoubleArgumentType.doubleArg()) // Defines double argument 'z'
-////                                                .executes(MiscCommands::command_kc_teleport) // Executes when /kc coords <x> <y> <z> is run
-//                                                .executes(CustomTeleportCommand::command_kc_teleport) // Executes when /kc coords <x> <y> <z> is run
-//                                        )
-//                                )
-//                        )
-//                )
-//        );
     }
 }
+
+
