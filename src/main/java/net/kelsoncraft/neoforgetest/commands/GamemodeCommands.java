@@ -2,11 +2,8 @@ package net.kelsoncraft.neoforgetest.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.kelsoncraft.neoforgetest.Config;
 import net.kelsoncraft.neoforgetest.NeoForgeTest;
-//import net.kelsoncraft.neoforgetest.commands.misc.GamemodeCreativeCommand;
 import net.kelsoncraft.neoforgetest.util.MessageUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
@@ -181,26 +178,26 @@ public class GamemodeCommands {
     //-----
 
     // Creative
-    private static int creativeCommand(CommandSourceStack source) throws CommandSyntaxException {
+    private static int creativeCommand(CommandSourceStack source) {
         setGameMode(source, GameType.CREATIVE);
         return Command.SINGLE_SUCCESS;
     }
 
     // TODO Set these below to set the player on the ground if in creative, I've done it in Spigot.
     // Survival
-    private static int survivalCommand(CommandSourceStack source) throws CommandSyntaxException {
+    private static int survivalCommand(CommandSourceStack source) {
         setGameMode(source, GameType.SURVIVAL);
         return Command.SINGLE_SUCCESS;
     }
 
     // Adventure
-    private static int adventureCommand(CommandSourceStack source) throws CommandSyntaxException {
+    private static int adventureCommand(CommandSourceStack source) {
         setGameMode(source, GameType.ADVENTURE);
         return Command.SINGLE_SUCCESS;
     }
 
     // Spectator
-    private static int spectatorCommand(CommandSourceStack source) throws CommandSyntaxException {
+    private static int spectatorCommand(CommandSourceStack source) {
         setGameMode(source, GameType.SPECTATOR);
         return Command.SINGLE_SUCCESS;
     }
@@ -210,7 +207,6 @@ public class GamemodeCommands {
     //-----
 
     private static void setGameMode(CommandSourceStack source, GameType gameMode) {
-//    private static void setCreativeMode(CommandSourceStack source) {
         Entity entity = source.getEntity();
         if(entity instanceof ServerPlayer player) {
 
@@ -219,7 +215,6 @@ public class GamemodeCommands {
                 return;
             }
 
-//            player.setGameMode(GameType.CREATIVE);
             player.setGameMode(gameMode);
 
             switch(gameMode) {
@@ -232,11 +227,6 @@ public class GamemodeCommands {
             }
 
             MessageUtil.SendMessage(player, "Set gamemode to creative");
-//            ServerPlayerGameMode serverPlayerGameMode = new ServerPlayerGameMode(player);
-////                // Hmm, I wonder if this will work, if so I can try it as a command.
-//            serverPlayerGameMode.changeGameModeForPlayer(GameType.CREATIVE);
-
-
         }
     }
 

@@ -14,9 +14,9 @@ public class MessageUtil {
     //---------
 
     // TODO Figure out how to clear these messages, if I run a bunch of commands they always wait a minute before running the next one.
-    public static void ClearMessage(){
-
-    }
+//    public static void ClearMessage(){
+//
+//    }
 
     // The time for the messages to stay on the screen.
     private static final float messageTime = 1.0f;
@@ -181,9 +181,9 @@ public class MessageUtil {
     }
 
     // I may use this later.
-    private Component messageBuilder(MutableComponent text) {
-        return Component.literal(text.toString());
-    }
+//    private Component messageBuilder(MutableComponent text) {
+//        return Component.literal(text.toString());
+//    }
 
     //----
     // Extras

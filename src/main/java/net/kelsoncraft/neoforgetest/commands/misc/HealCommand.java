@@ -14,9 +14,8 @@ public class HealCommand {
     public HealCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("heal")
                 .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                .executes(command -> {
-                    return healPlayer(command.getSource());
-                }));
+                        .executes(command -> healPlayer(command.getSource()))
+        );
     }
 
     /**
