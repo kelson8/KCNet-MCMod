@@ -29,13 +29,30 @@ faster if you right-click a block.
 * `/home set` - Set your home
 * `/home return` - Return back to your home
 
+--
+
 * `/kc pos [x] [y] [z]` - Teleport you to the position specified.
 * `/kc version` - Show the mod name, mod version, and mod description in chat.
 * `/kc getxp` - Show your current xp levels as a popup on screen.
 * `/kc toast` - Show a test toast on screen.
 * `/kc popup` - Show a test popup on screen.
 
+--
+
+**Gamemode commands, like Essentials**
+
+These can be turned off in the mod config, and it should save the data.
+To apply changes if in single-player, save and quit then reload the world, 
+you don't have to exit the game, or at least I didn't during my testing
+* Creative: `/gmc`, `/creative`, `/gm c`
+* Survival: `/gms`, `/survival, /gm s`
+* Adventure: `/gma`, `/adventure, /gm a`
+* Spectator: `/gmsp`, `/spectator`, `/gm sp`
+
 ---
+
+**Test Commands**
+* `/summon_mob` - So far just spawns a tamed wolf for the player.
 
 ---
 
@@ -211,6 +228,16 @@ I need to fix that later.
 
 Credits:
 ===========
+
+**TheTurkeyDev on GitHub**
+
+I am using some utility classes and files from the ChanceCubes project.
+
+* https://github.com/TheTurkeyDev/ChanceCubes/
+
+Files with code that has been used: `CommandUtil.java`, `EntityUtil.java`, and `SummonMobCommand.java`.
+
+---
 
 **legobmw99 on GitHub**
 

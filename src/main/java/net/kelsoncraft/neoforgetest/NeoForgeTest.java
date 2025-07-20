@@ -1,10 +1,12 @@
 package net.kelsoncraft.neoforgetest;
 
 import net.kelsoncraft.neoforgetest.block.ModBlocks;
+import net.kelsoncraft.neoforgetest.commands.GamemodeCommands;
 import net.kelsoncraft.neoforgetest.commands.KCCommands;
 import net.kelsoncraft.neoforgetest.commands.MiscCommands;
 import net.kelsoncraft.neoforgetest.datagen.DataGenerators;
 import net.kelsoncraft.neoforgetest.commands.ModCommands;
+import net.kelsoncraft.neoforgetest.events.EventHandler;
 import net.kelsoncraft.neoforgetest.item.ModCreativeModeTabs;
 import net.kelsoncraft.neoforgetest.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -82,6 +84,7 @@ public class NeoForgeTest {
         //---
         // Register commands
         NeoForge.EVENT_BUS.register(KCCommands.class);
+        NeoForge.EVENT_BUS.register(GamemodeCommands.class);
         NeoForge.EVENT_BUS.register(MiscCommands.class);
 
 
@@ -89,6 +92,15 @@ public class NeoForgeTest {
         LOGGER.info("{} Registered mod commands as an event listener.", NeoForgeTest.MOD_NAME);
 
         //---
+
+        //---
+        // Register events
+        // Oops, I had this disabled in the file, moved to @EventBusSubscriber in EventHandler.
+        //
+        //---
+//        NeoForge.EVENT_BUS.register(EventHandler.class);
+
+
 
         //---
         // Register data gen
@@ -125,7 +137,7 @@ public class NeoForgeTest {
         //---
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         //---
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

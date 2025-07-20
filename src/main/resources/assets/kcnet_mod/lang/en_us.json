@@ -45,6 +45,15 @@
   "tooltip.kcnet_mod.chisel": "Press §eShift§r for more information",
 
   "tooltip.kcnet_mod.radish.tooltip": "Tastes good, sometimes gives health boost.",
-  "creativetab.kcnet_mod.extra_food_items": "Extra Food Items"
+  "creativetab.kcnet_mod.extra_food_items": "Extra Food Items",
+
+
+
+  "config.kcnet_mod.commands.category": "Gamemode Settings",
+
+  "config.kcnet_mod.commands.toggle_creative_command": "Toggle creative command",
+  "config.kcnet_mod.commands.toggle_survival_command": "Toggle survival commands",
+  "config.kcnet_mod.commands.toggle_adventure_command": "Toggle adventure commands",
+  "config.kcnet_mod.commands.toggle_spectator_command": "Toggle spectator commands"
 
 }
