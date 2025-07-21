@@ -106,111 +106,47 @@ Also, it needs a block texture file.
 
 ---
 
-**To add crafting recipes:**
-* Create a .json file in `resources/data/kcneoforgetest/recipe/`
+## Editing datagen
 
-<details>
+**Generating these files**
 
-<summary> Example for bismuth.json (Make a bismuth block into bismuth ingot) </summary>
+* To generate the data gen files, I use IntelliJ and run the gradle task `runData`
 
-This is a shapeless recipe
-```json
-{
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "item": "kcneoforgetest:bismuth_block"
-    }
-  ],
-  "result": {
-    "count": 9,
-    "id": "kcneoforgetest:bismuth"
-  }
-}
-```
-</details>
+**Adding more data generators**
 
-<details>
-<summary> Example for bismuth_block.json (Make 9 bismuth into a bismuth block) </summary>
+* To add more data generators to this, create one in the `datagen` folder, and add it into `DataGenerators.java`
 
-This is a shaped recipe, it requires a certain setup below, the 'B' in the pattern is where the items go in the crafting grid.
-```json
-{
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "B": {
-      "item": "kcneoforgetest:bismuth"
-    }
-  },
-  "pattern": [
-    "BBB",
-    "BBB",
-    "BBB"
-  ],
-  "result": {
-    "count": 1,
-    "id": "kcneoforgetest:bismuth_block"
-  }
-}
+**Making a block mineable and be able to drop**
 
-```
-</details>
+* Add the block into `ModBlockTagProvier.java`, under a specific tool such as pickaxe, axe, sword, or hoe.
+
+**To add tags to items**
+
+* Add the item into `ModItemTagProvier.java`
+
+**Adding recipes**
+
+* Add the recipe into `ModRecipeProvider.java`
+
+**Adding foods**
+
+* I need to figure this one out.
+
+**Adding furnace fuels**
+
+Add these into `ModDataMapProvider.java`
+
+**Adding loot tables for blocks and items (For dropping the correct item)**
+
+* Add items/blocks into `ModBlockLootTableProvider.java`
+
+**Adding item models for all blocks and items**
+
+* Add these into `ModItemModelProvider.java`, this is where all items get registered for the inventory menu, shows the texture.
 
 ---
 
-**To make a block mineable and be able to drop**
-* Add the block into the `resources/data/minecraft/tags/block/mineable/` folder
 
-These can be added to a pickaxe.json, axe.json, hoe.json, shovel.json and possibly others.
-
-<details>
-<summary> Example for pickaxe.json (For mining blocks with pickaxes and getting drops) </summary>
-
-```json
-{
-  "replace": false,
-  "values": [
-    "kcneoforgetest:bismuth_block",
-    "kcneoforgetest:bismuth_ore",
-    "kcneoforgetest:bismuth_deepslate_ore"
-  ]
-}
-```
-
-</details>
-
----
-
-**To make a specific tool required for mineable items**
-
-In this folder `resources/data/minecraft/tags/block/`
-
-* Create the files named `needs_diamond_tool.json`, `needs_iron_tool.json`, and `needs_stone_tool.json` .
-
-<details>
-<summary> Example for needs_diamond_tool.json </summary>
-
-```json
-{
-  "replace": false,
-  "values": [
-    "kcneoforgetest:bismuth_deepslate_ore"
-  ]
-}
-```
-
-</details>
-
-All of these not placed in a needs_tool json above, should be mineable with a wooden pickaxe.
-
----
-**Adding blocks to loot tables for drops**
-
-Check out the examples in `data/kcneoforgetest/loot_table_blocks` 
-
----
 
 Project build info:
 =========

@@ -94,6 +94,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.BISMUTH_DOOR);
                         output.accept(ModBlocks.BISMUTH_TRAP_DOOR);
 
+                        output.accept(ModBlocks.BISMUTH_LAMP);
+
 
                     }).build());
 

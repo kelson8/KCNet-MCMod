@@ -1,6 +1,7 @@
 package net.kelsoncraft.kcmod.block;
 
 import net.kelsoncraft.kcmod.KCMod;
+import net.kelsoncraft.kcmod.block.custom.BismuthLampBlock;
 import net.kelsoncraft.kcmod.block.custom.MagicBlock;
 import net.kelsoncraft.kcmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -88,6 +89,12 @@ public class ModBlocks {
             () -> new TrapDoorBlock(BlockSetType.IRON, BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops().noOcclusion()));
 
     //
+
+    public static final DeferredBlock<Block> BISMUTH_LAMP = registerBlock("bismuth_lamp",
+            () -> new BismuthLampBlock(BlockBehaviour.Properties.of().strength(0.3f)
+//                    .requiresCorrectToolForDrops().lightLevel(state -> state.getValue(BismuthLampBlock.CLICKED) ? 15 : 0)));
+                    .sound(SoundType.GLASS)
+                    .lightLevel(state -> state.getValue(BismuthLampBlock.CLICKED) ? 15 : 0)));
 
 
     // Helper for creating and registering a block.
