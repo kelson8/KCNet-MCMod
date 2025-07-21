@@ -1,32 +1,41 @@
 package net.kelsoncraft.kcmod.util;
 
-public enum ChatColors {
+import net.minecraft.ChatFormatting;
 
-    BLACK(0),
-    DARK_BLUE( 1),
-    DARK_GREEN( 2),
-    DARK_AQUA(3),
-    DARK_RED(4),
-    DARK_PURPLE(5),
-    GOLD(6),
-    GRAY( 7),
-    DARK_GRAY( 8),
-    BLUE( 9),
-    GREEN(10),
-    AQUA( 11),
-    RED( 12),
-    LIGHT_PURPLE(13),
-    YELLOW(14),
-    WHITE(15),
+public enum ChatColors {
+    BLACK(ChatFormatting.BLACK),
+    DARK_BLUE(ChatFormatting.DARK_BLUE),
+    DARK_GREEN(ChatFormatting.DARK_GREEN),
+    DARK_AQUA(ChatFormatting.DARK_AQUA),
+    DARK_RED(ChatFormatting.DARK_RED),
+    DARK_PURPLE(ChatFormatting.DARK_PURPLE),
+    GOLD(ChatFormatting.GOLD),
+    GRAY(ChatFormatting.GRAY),
+    DARK_GRAY(ChatFormatting.DARK_GRAY),
+    BLUE(ChatFormatting.BLUE),
+    GREEN(ChatFormatting.GREEN),
+    AQUA(ChatFormatting.AQUA),
+    RED(ChatFormatting.RED),
+    LIGHT_PURPLE(ChatFormatting.LIGHT_PURPLE),
+    YELLOW(ChatFormatting.YELLOW),
+    WHITE(ChatFormatting.WHITE),
 
     // Extras
-    OBFUSCATED(16),
-    BOLD(17),
-    STRIKETHROUGH(18),
-    UNDERLINE(19),
-    ITALIC(20),
-    RESET(21);
+    OBFUSCATED(ChatFormatting.OBFUSCATED),
+    BOLD(ChatFormatting.BOLD),
+    STRIKETHROUGH(ChatFormatting.STRIKETHROUGH),
+    UNDERLINE(ChatFormatting.UNDERLINE),
+    ITALIC(ChatFormatting.ITALIC),
+    RESET(ChatFormatting.RESET);
 
-    ChatColors(int i) {
+    private final ChatFormatting formatting;
+
+    ChatColors(ChatFormatting formatting) {
+        this.formatting = formatting;
+    }
+
+    public ChatFormatting getFormatting() {
+        return this.formatting;
     }
 }
+

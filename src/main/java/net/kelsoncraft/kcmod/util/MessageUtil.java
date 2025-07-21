@@ -75,7 +75,6 @@ public class MessageUtil {
         source.sendSystemMessage(Component.literal(text));
     }
 
-
     /**
      * Send a colored message to the player using my enum.
      * @param source Source to display chat message to.
@@ -84,100 +83,8 @@ public class MessageUtil {
      */
     public static void sendColorMessage(CommandSourceStack source, String text, ChatColors chatColor) {
 
-//        switch(chatFormatting.getColor())
-        switch(chatColor)
-        {
-            case BLACK:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.BLACK));
-                break;
-
-            case DARK_BLUE:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.DARK_BLUE));
-                break;
-
-            case DARK_GREEN:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.DARK_GREEN));
-                break;
-
-            case DARK_AQUA:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.DARK_AQUA));
-                break;
-
-            case DARK_RED:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.DARK_RED));
-                break;
-
-            case DARK_PURPLE:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.DARK_PURPLE));
-                break;
-
-            case GOLD:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.GOLD));
-                break;
-
-            case GRAY:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.GRAY));
-                break;
-
-            case DARK_GRAY:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.DARK_GRAY));
-                break;
-
-            case BLUE:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.BLUE));
-                break;
-
-            case GREEN:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.GREEN));
-                break;
-
-            case AQUA:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.AQUA));
-                break;
-
-            case RED:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.RED));
-                break;
-
-            case LIGHT_PURPLE:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.LIGHT_PURPLE));
-                break;
-
-            case YELLOW:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.YELLOW));
-                break;
-
-            case WHITE:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.WHITE));
-                break;
-
-            // Extras
-
-            case OBFUSCATED:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.OBFUSCATED));
-                break;
-
-            case BOLD:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.BOLD));
-                break;
-
-            case STRIKETHROUGH:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.STRIKETHROUGH));
-                break;
-
-            case UNDERLINE:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.UNDERLINE));
-                break;
-
-            case ITALIC:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.ITALIC));
-                break;
-
-            case RESET:
-                source.sendSystemMessage(kcMessageBuilder(text, ChatFormatting.RESET));
-                break;
-        }
-
+        ChatFormatting formatting = chatColor.getFormatting();
+        source.sendSystemMessage(kcMessageBuilder(text, formatting));
     }
 
     // I may use this later.
