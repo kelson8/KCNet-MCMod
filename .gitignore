@@ -5,18 +5,27 @@ original_mc_data/
 
 # Exclude the test folder for now, mostly just messing with APIs and other stuff in here.
 # Oops, this was excluding my new ImmersiveMessageApi file, I moved it into the util folder anyways.
-#src/main/java/net/kelsoncraft/neoforgetest/test/
+#src/main/java/net/kelsoncraft/kcmod/test/
+
+TODO.md
+
+# Misc
+src/main/java/net/kelsoncraft/kcmod/NewConfig.java
+src/main/java/net/kelsoncraft/kcmod/client/AutoLoad.java
+src/main/java/net/kelsoncraft/kcmod/test/ExplosiveArrowTest.java
+src/main/java/net/kelsoncraft/kcmod/commands/misc/EntitySelectorTestCommand.java
+src/main/java/net/kelsoncraft/kcmod/datagen/ModDimensionProvider.java
 
 # These below aren't in active use, I may mess with them later.
-src/main/java/net/kelsoncraft/neoforgetest/test/BookshelfApiTest.java
-src/main/java/net/kelsoncraft/neoforgetest/test/ClothConfigTest.java
-src/main/java/net/kelsoncraft/neoforgetest/test/InvTest.java
-src/main/java/net/kelsoncraft/neoforgetest/test/PlayerTest.java
-src/main/java/net/kelsoncraft/neoforgetest/test/VillagerTest.java
+src/main/java/net/kelsoncraft/kcmod/test/BookshelfApiTest.java
+src/main/java/net/kelsoncraft/kcmod/test/ClothConfigTest.java
+src/main/java/net/kelsoncraft/kcmod/test/InvTest.java
+src/main/java/net/kelsoncraft/kcmod/test/PlayerTest.java
+src/main/java/net/kelsoncraft/kcmod/test/VillagerTest.java
 
 
 # Test commands
-src/main/java/net/kelsoncraft/neoforgetest/commands/TestCommands.java
+src/main/java/net/kelsoncraft/kcmod/commands/TestCommands.java
 
 
 # Auto generated from build
@@ -25,18 +34,21 @@ src/main/java/net/kelsoncraft/neoforgetest/commands/TestCommands.java
 .cache/
 
 # New blocks, needs worked on
-src/main/java/net/kelsoncraft/neoforgetest/block/custom/NewTargetBlock.java
+src/main/java/net/kelsoncraft/kcmod/block/custom/NewTargetBlock.java
 
 # Other extras, these are work in progress files.
-src/main/java/net/kelsoncraft/neoforgetest/util/CommandHandler.java
-src/main/java/net/kelsoncraft/neoforgetest/util/AutoLoad.java
-src/main/java/net/kelsoncraft/neoforgetest/util/YaclConfigTest.java
+src/main/java/net/kelsoncraft/kcmod/util/CommandHandler.java
+src/main/java/net/kelsoncraft/kcmod/util/AutoLoad.java
+src/main/java/net/kelsoncraft/kcmod/util/YaclConfigTest.java
 
 # Mixins
-src/main/java/net/kelsoncraft/neoforgetest/mixin/GiveCommandMixin.java
-src/main/java/net/kelsoncraft/neoforgetest/mixin/AutoLoadLastWorld.java
-src/main/java/net/kelsoncraft/neoforgetest/mixin/LevelStorageMixin.java
-src/main/java/net/kelsoncraft/neoforgetest/mixin/RandomTestMixin.java
+src/main/java/net/kelsoncraft/kcmod/mixin/AbstractMinecartMixin.java
+src/main/java/net/kelsoncraft/kcmod/mixin/HorseMixin.java
+src/main/java/net/kelsoncraft/kcmod/mixin/GiveCommandMixin.java
+src/main/java/net/kelsoncraft/kcmod/mixin/AutoLoadLastWorld.java
+src/main/java/net/kelsoncraft/kcmod/mixin/LevelStorageMixin.java
+src/main/java/net/kelsoncraft/kcmod/mixin/RandomTestMixin.java
+
 
 
 # eclipse

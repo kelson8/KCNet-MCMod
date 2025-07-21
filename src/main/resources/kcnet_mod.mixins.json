@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.kelsoncraft.neoforgetest.mixin",
+  "package": "net.kelsoncraft.kcmod.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "FlySpeedMixin",
