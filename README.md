@@ -89,8 +89,8 @@ YouTube Tutorials:
 YouTube Playlist
 * [NeoForge Modding Tutorial - Minecraft 1.21: Getting Started | #1](https://www.youtube.com/watch?v=yG-oJPR_40w&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=1)
 
-I'm on part 14
-* [NeoForge Modding Tutorial - Minecraft 1.21: Data Components Explained | #14](https://www.youtube.com/watch?v=du6O6zEQwc4&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=14)
+I'm on part 15
+* [NeoForge Modding Tutorial - Minecraft 1.21: Custom Tools | #15](https://www.youtube.com/watch?v=QMIk1k67pnw&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=15)
 
 --
 * [NeoForge 1.21 Mixin Setup](https://www.youtube.com/watch?v=Q5041hErnvA)

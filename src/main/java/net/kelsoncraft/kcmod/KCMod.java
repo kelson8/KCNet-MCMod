@@ -4,6 +4,7 @@ import net.kelsoncraft.kcmod.block.ModBlocks;
 import net.kelsoncraft.kcmod.commands.GamemodeCommands;
 import net.kelsoncraft.kcmod.commands.KCCommands;
 import net.kelsoncraft.kcmod.commands.MiscCommands;
+import net.kelsoncraft.kcmod.component.ModDataComponents;
 import net.kelsoncraft.kcmod.datagen.DataGenerators;
 import net.kelsoncraft.kcmod.commands.ModCommands;
 import net.kelsoncraft.kcmod.item.ModCreativeModeTabs;
@@ -104,6 +105,10 @@ public class KCMod {
         //---
         // Register events
         registerEvents();
+
+        //---
+        // Register data components
+        ModDataComponents.register(modEventBus);
 
 
 

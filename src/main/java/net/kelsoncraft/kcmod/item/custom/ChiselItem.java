@@ -1,6 +1,7 @@
 package net.kelsoncraft.kcmod.item.custom;
 
 import net.kelsoncraft.kcmod.block.ModBlocks;
+import net.kelsoncraft.kcmod.component.ModDataComponents;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -19,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class ChiselItem extends Item {
 
@@ -67,6 +69,11 @@ public class ChiselItem extends Item {
 
                     level.playSound(null, context.getClickedPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS);
 
+                    // New for getting coordinates for ModDataComponents
+                    // Saves to the item tooltip.
+                    // null can be passed to this to clear it.
+                    context.getItemInHand().set(ModDataComponents.COORDINATES, context.getClickedPos());
+
                 }
             }
         }
@@ -81,6 +88,15 @@ public class ChiselItem extends Item {
             tooltipComponents.add(Component.translatable("tooltip.kcnet_mod.chisel.shift_down"));
         } else {
             tooltipComponents.add(Component.translatable("tooltip.kcnet_mod.chisel"));
+        }
+
+        // Set last used coordinates to display on the chisel
+        if(stack.get(ModDataComponents.COORDINATES) != null) {
+            String lastBlockChanged = "Last Block changed at "
+                    + "X: " + Objects.requireNonNull(stack.get(ModDataComponents.COORDINATES)).getX()
+                    + " Y: " + Objects.requireNonNull(stack.get(ModDataComponents.COORDINATES)).getY()
+                    + " Z: " + Objects.requireNonNull(stack.get(ModDataComponents.COORDINATES)).getZ();
+            tooltipComponents.add(Component.literal(lastBlockChanged));
         }
 
 
