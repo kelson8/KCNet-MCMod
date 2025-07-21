@@ -3,6 +3,15 @@
     "kcnet_mod:bismuth_block",
     "kcnet_mod:bismuth_ore",
     "kcnet_mod:bismuth_deepslate_ore",
-    "kcnet_mod:magic_block"
+    "kcnet_mod:magic_block",
+    "kcnet_mod:bismuth_fence",
+    "kcnet_mod:bismuth_fence_gate",
+    "kcnet_mod:bismuth_wall",
+    "kcnet_mod:bismuth_stairs",
+    "kcnet_mod:bismuth_slab",
+    "kcnet_mod:bismuth_door",
+    "kcnet_mod:bismuth_trap_door",
+    "kcnet_mod:bismuth_button",
+    "kcnet_mod:bismuth_pressure_plate"
   ]
 }
