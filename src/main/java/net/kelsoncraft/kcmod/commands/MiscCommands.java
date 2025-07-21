@@ -34,6 +34,9 @@ public class MiscCommands {
         // Send the player to the world spawn.
         new SpawnCommand(event.getDispatcher());
 
+        // '/lightning' command, strike lightning where the player is looking.
+        new LightningCommand(event.getDispatcher());
+
     }
 }
 

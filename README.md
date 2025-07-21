@@ -54,8 +54,9 @@ you don't have to exit the game, or at least I didn't during my testing.
 --
 
 **Other Commands**
-* Heal: `/heal` - Give yourself max health and food.
-
+* Heal (Give yourself max health and food): `/heal`
+* Teleport to world spawn: `/spawn`
+* Strike lightning where you are looking: `/lightning`, `/smite`
 ---
 
 **Test Commands**
@@ -88,8 +89,8 @@ YouTube Tutorials:
 YouTube Playlist
 * [NeoForge Modding Tutorial - Minecraft 1.21: Getting Started | #1](https://www.youtube.com/watch?v=yG-oJPR_40w&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=1)
 
-I'm on part 13
-* [NeoForge Modding Tutorial - Minecraft 1.21: Blockstates Explained | #13 ](https://www.youtube.com/watch?v=U3y55P4c-P8&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=13)
+I'm on part 14
+* [NeoForge Modding Tutorial - Minecraft 1.21: Data Components Explained | #14](https://www.youtube.com/watch?v=du6O6zEQwc4&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=14)
 
 --
 * [NeoForge 1.21 Mixin Setup](https://www.youtube.com/watch?v=Q5041hErnvA)
@@ -187,6 +188,10 @@ I am using some utility classes and files from the ChanceCubes project.
 Files with code that has been used: `CommandUtil.java`, `EntityUtil.java`, and `SummonMobCommand.java`.
 
 ---
+
+**FTB Essentials on GitHub**
+
+I have used the utility class from here [BlockUtil.java](https://github.com/FTBTeam/FTB-Essentials/blob/main/common/src/main/java/dev/ftb/mods/ftbessentials/util/BlockUtil.java).
 
 **legobmw99 on GitHub**
 
