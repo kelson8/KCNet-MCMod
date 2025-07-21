@@ -43,6 +43,23 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
                 );
 
+        // If needed, possibly for other blocks in the future
+//        tag(BlockTags.MINEABLE_WITH_AXE)
+//                .add(ModBlocks.BISMUTH_BLOCK.get());
+
+//        tag(BlockTags.MINEABLE_WITH_SHOVEL)
+//                .add(ModBlocks.BISMUTH_BLOCK.get());
+//
+//        tag(BlockTags.MINEABLE_WITH_HOE)
+//                .add(ModBlocks.BISMUTH_BLOCK.get());
+
+
+//        tag(BlockTags.SIGNS)
+//                .add(ModBlocks.BISMUTH_BLOCK.get());
+
+        //
+
+
         tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get())
                 .add(ModBlocks.MAGIC_BLOCK.get());

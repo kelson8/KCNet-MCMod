@@ -28,6 +28,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+// Register commands guide
+// https://forums.minecraftforge.net/topic/109194-add-commands-in-118/
+
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(NeoForgeTest.MOD_ID)
 public class NeoForgeTest {
@@ -62,15 +65,29 @@ public class NeoForgeTest {
         }
     }
 
-    //---
-    // Register commands
-    // https://forums.minecraftforge.net/topic/109194-add-commands-in-118/
-    // This just crashes it with static, didn't do anything without it..
-    //---
-//    @SubscribeEvent
-//    public void registerCommand(RegisterCommandsEvent event){
-//        TestCommand.register(event.getDispatcher());
-//    }
+    /**
+     * Register all commands
+     */
+    private void registerCommands() {
+        NeoForge.EVENT_BUS.register(KCCommands.class);
+        NeoForge.EVENT_BUS.register(GamemodeCommands.class);
+        NeoForge.EVENT_BUS.register(MiscCommands.class);
+
+
+        NeoForge.EVENT_BUS.register(ModCommands.class);
+        LOGGER.info("{} Registered mod commands as an event listener.", NeoForgeTest.MOD_NAME);
+    }
+
+    /**
+     * Register all events
+     */
+    private void registerEvents() {
+        // Oops, I had this disabled in the file, moved to @EventBusSubscriber in EventHandler.
+        //
+        //---
+//        NeoForge.EVENT_BUS.register(EventHandler.class);
+
+    }
 
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -83,22 +100,11 @@ public class NeoForgeTest {
 
         //---
         // Register commands
-        NeoForge.EVENT_BUS.register(KCCommands.class);
-        NeoForge.EVENT_BUS.register(GamemodeCommands.class);
-        NeoForge.EVENT_BUS.register(MiscCommands.class);
-
-
-        NeoForge.EVENT_BUS.register(ModCommands.class);
-        LOGGER.info("{} Registered mod commands as an event listener.", NeoForgeTest.MOD_NAME);
-
-        //---
+        registerCommands();
 
         //---
         // Register events
-        // Oops, I had this disabled in the file, moved to @EventBusSubscriber in EventHandler.
-        //
-        //---
-//        NeoForge.EVENT_BUS.register(EventHandler.class);
+        registerEvents();
 
 
 
@@ -106,6 +112,7 @@ public class NeoForgeTest {
         // Register data gen
         modEventBus.register(DataGenerators.class);
 
+        // Since the rest of these are only one item being registered for now, I'll leave them in this main function.
 
         //---
         // Register ourselves for server and other game events we are interested in.

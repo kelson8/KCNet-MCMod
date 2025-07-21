@@ -2,10 +2,10 @@ package net.kelsoncraft.neoforgetest.commands.misc;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import net.kelsoncraft.neoforgetest.api.PlayerApi;
 import net.kelsoncraft.neoforgetest.util.ChatColors;
 import net.kelsoncraft.neoforgetest.util.LogUtil;
 import net.kelsoncraft.neoforgetest.util.MessageUtil;
-import net.kelsoncraft.neoforgetest.util.PlayerUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
@@ -54,7 +54,7 @@ public class FlyCommand {
 
 
             // Get the players current gamemode
-            GameType currentGameMode = PlayerUtil.currentGameMode(player);
+            GameType currentGameMode = PlayerApi.getCurrentGamemode(player);
 
 
 //            Vec3i newBlockPos = new Vec3i(playerBlockPos.getX(), playerBlockPos.getY() - 1, playerBlockPos.getZ());
@@ -70,6 +70,9 @@ public class FlyCommand {
                 switch (currentGameMode) {
                     case CREATIVE, SURVIVAL, ADVENTURE, SPECTATOR -> {
                         player.getAbilities().flying = false;
+                        // TODO Test this.
+                        // Well this didn't seem to do anything..
+//                        source.getEntity().setOnGround(false);
 //                            MessageUtil.sendColorMessage(source, "You are in the air, putting you back on the ground, disabling fly mode.", ChatColors.BLUE);
                         MessageUtil.sendColorMessage(source, "Disabling fly mode.", ChatColors.BLUE);
                     }
@@ -100,7 +103,6 @@ public class FlyCommand {
             } else {
                 MessageUtil.sendColorMessage(source, "You are on the ground.", ChatColors.BLUE);
             }
-
         }
 
         return Command.SINGLE_SUCCESS;

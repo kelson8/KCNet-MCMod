@@ -29,6 +29,11 @@ public class MiscCommands {
         // Well the block ground position I thought I found didn't work, I'm not sure how to do it in NeoForge.
         // https://github.com/kelson8/KBP/blob/master/src/main/java/net/Kelsoncraft/KBP/commands/FlyCommand.java
 //        new FlyCommand(event.getDispatcher());
+
+        // '/spawn' command, this mostly seems to work fine.
+        // Send the player to the world spawn.
+        new SpawnCommand(event.getDispatcher());
+
     }
 }
 
