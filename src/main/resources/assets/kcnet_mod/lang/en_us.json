@@ -35,6 +35,21 @@
 
   "block.kcnet_mod.bismuth_deepslate_ore": "Bismuth Deepslate Ore",
 
+
+  "block.kcnet_mod.bismuth_stairs": "Bismuth Stairs",
+  "block.kcnet_mod.bismuth_slab": "Bismuth Slab",
+
+  "block.kcnet_mod.bismuth_button": "Bismuth Button",
+  "block.kcnet_mod.bismuth_pressure_plate": "Bismuth Pressure Plate",
+
+  "block.kcnet_mod.bismuth_fence": "Bismuth Fence",
+  "block.kcnet_mod.bismuth_fence_gate": "Bismuth Fence Gate",
+  "block.kcnet_mod.bismuth_wall": "Bismuth Wall",
+
+  "block.kcnet_mod.bismuth_door": "Bismuth Door",
+  "block.kcnet_mod.bismuth_trap_door": "Bismuth Trapdoor",
+
+
   "creativetab.kcnet_mod.bismuth_items": "Bismuth Items",
   "creativetab.kcnet_mod.bismuth_blocks": "Bismuth Blocks",
 

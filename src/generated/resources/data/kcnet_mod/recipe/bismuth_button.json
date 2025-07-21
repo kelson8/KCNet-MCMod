@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "bismuth",
+  "ingredients": [
+    {
+      "item": "kcnet_mod:bismuth"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "kcnet_mod:bismuth_button"
+  }
+}

@@ -145,6 +145,7 @@ public class NeoForgeTest {
 //        LOGGER.info("HELLO FROM COMMON SETUP");
     }
 
+    // TODO Move this into another file.
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {

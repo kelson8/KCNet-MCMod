@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "kcnet_mod:block/bismuth_slab"
+    },
+    "type=double": {
+      "model": "kcnet_mod:block/bismuth_block"
+    },
+    "type=top": {
+      "model": "kcnet_mod:block/bismuth_slab_top"
+    }
+  }
+}

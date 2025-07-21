@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "kcnet_mod:block/bismuth_block",
+    "side": "kcnet_mod:block/bismuth_block",
+    "top": "kcnet_mod:block/bismuth_block"
+  }
+}

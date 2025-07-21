@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_pressed",
+  "textures": {
+    "texture": "kcnet_mod:block/bismuth_block"
+  }
+}

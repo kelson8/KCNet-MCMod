@@ -7,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -80,6 +79,21 @@ public class ModCreativeModeTabs {
 
                         // Magic block
                         output.accept(ModBlocks.MAGIC_BLOCK);
+
+                        // New blocks
+                        output.accept(ModBlocks.BISMUTH_STAIRS);
+                        output.accept(ModBlocks.BISMUTH_SLAB);
+
+                        output.accept(ModBlocks.BISMUTH_PRESSURE_PLATE);
+                        output.accept(ModBlocks.BISMUTH_BUTTON);
+
+                        output.accept(ModBlocks.BISMUTH_FENCE);
+                        output.accept(ModBlocks.BISMUTH_FENCE_GATE);
+                        output.accept(ModBlocks.BISMUTH_WALL);
+
+                        output.accept(ModBlocks.BISMUTH_DOOR);
+                        output.accept(ModBlocks.BISMUTH_TRAP_DOOR);
+
 
                     }).build());
 

@@ -88,9 +88,10 @@ YouTube Tutorials:
 YouTube Playlist
 * [NeoForge Modding Tutorial - Minecraft 1.21: Getting Started | #1](https://www.youtube.com/watch?v=yG-oJPR_40w&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=1)
 
-I'm on part 12
-* [NeoForge Modding Tutorial - Minecraft 1.21: Non-Block Blocks | #12](https://www.youtube.com/watch?v=0famOskqo24&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=12)
+I'm on part 13
+* [NeoForge Modding Tutorial - Minecraft 1.21: Blockstates Explained | #13 ](https://www.youtube.com/watch?v=U3y55P4c-P8&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=13)
 
+--
 * [NeoForge 1.21 Mixin Setup](https://www.youtube.com/watch?v=Q5041hErnvA)
 
 ---

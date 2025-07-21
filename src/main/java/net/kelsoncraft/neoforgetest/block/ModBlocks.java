@@ -6,10 +6,10 @@ import net.kelsoncraft.neoforgetest.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -49,6 +49,46 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
 
             ));
+
+
+    // New blocks
+
+    // Stairs
+    public static final DeferredBlock<StairBlock> BISMUTH_STAIRS = registerBlock("bismuth_stairs",
+            () -> new StairBlock(ModBlocks.BISMUTH_BLOCK.get().defaultBlockState(),
+            BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops()));
+    // Slab
+    public static final DeferredBlock<SlabBlock> BISMUTH_SLAB = registerBlock("bismuth_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops()));
+
+    // Pressure plate
+    public static final DeferredBlock<PressurePlateBlock> BISMUTH_PRESSURE_PLATE = registerBlock("bismuth_pressure_plate",
+            // Set the BlockStateType to which pressure plate to make this act like
+            () -> new PressurePlateBlock(BlockSetType.IRON,
+                    BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops()));
+    // Button, can modify the number 20 for ticks, calling no collision means it won't have a collision like a normal button.
+    public static final DeferredBlock<ButtonBlock> BISMUTH_BUTTON = registerBlock("bismuth_button",
+            () -> new ButtonBlock(BlockSetType.IRON, 20,
+                    BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops().noCollission()));
+
+    // Fence
+    public static final DeferredBlock<FenceBlock> BISMUTH_FENCE = registerBlock("bismuth_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops()));
+    // Fence Gate
+    public static final DeferredBlock<FenceGateBlock> BISMUTH_FENCE_GATE = registerBlock("bismuth_fence_gate",
+            () -> new FenceGateBlock(WoodType.ACACIA, BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops()));
+    // Wall
+    public static final DeferredBlock<WallBlock> BISMUTH_WALL = registerBlock("bismuth_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops()));
+
+    // Door
+    public static final DeferredBlock<DoorBlock> BISMUTH_DOOR = registerBlock("bismuth_door",
+            () -> new DoorBlock(BlockSetType.IRON, BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops().noOcclusion()));
+    public static final DeferredBlock<TrapDoorBlock> BISMUTH_TRAP_DOOR = registerBlock("bismuth_trap_door",
+            () -> new TrapDoorBlock(BlockSetType.IRON, BlockBehaviour.Properties.of().strength(2.0f).requiresCorrectToolForDrops().noOcclusion()));
+
+    //
+
 
     // Helper for creating and registering a block.
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
