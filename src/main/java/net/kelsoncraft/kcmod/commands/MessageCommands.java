@@ -22,7 +22,7 @@ public class MessageCommands {
 //    }
 
     /// Send a test toast message to the player.
-    public static int MessageToastTest(CommandContext<CommandSourceStack> context) {
+    public static int messageToastTest(CommandContext<CommandSourceStack> context) {
         Entity currentEntity = context.getSource().getEntity();
         if (currentEntity instanceof Player player) {
             MessageUtil.SendToastMessage((ServerPlayer) player, "Test Toast", "This is a test toast message");
@@ -32,7 +32,7 @@ public class MessageCommands {
     }
 
     ///  Send a test popup message to the player.
-    public static int MessagePopupTest(CommandContext<CommandSourceStack> context) {
+    public static int messagePopupTest(CommandContext<CommandSourceStack> context) {
         Entity currentEntity = context.getSource().getEntity();
         if (currentEntity instanceof Player player) {
             MessageUtil.SendPopupMessage((ServerPlayer) player, "Test popup", "This is a test popup message");
@@ -43,7 +43,7 @@ public class MessageCommands {
 
 
     /// Send a toast message on screen with the player XP
-    public static int MessagePlayerXp(CommandContext<CommandSourceStack> context) {
+    public static int messagePlayerXp(CommandContext<CommandSourceStack> context) {
         Entity currentEntity = context.getSource().getEntity();
         CommandSourceStack source = context.getSource();
 
@@ -73,7 +73,7 @@ public class MessageCommands {
      * @param source The CommandSourceStack to send the message to.
      * @param components A variable argument list of Components to append.
      */
-    public static void SendColoredMessage(CommandSourceStack source, Component... components) {
+    public static void sendColoredMessage(CommandSourceStack source, Component... components) {
         MutableComponent finalMessage = Component.empty(); // Start with an empty mutable component
         for (Component comp : components) {
             finalMessage.append(comp); // Append each component

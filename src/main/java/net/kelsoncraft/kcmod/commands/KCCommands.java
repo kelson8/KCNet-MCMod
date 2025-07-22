@@ -46,20 +46,20 @@ public class KCCommands {
                                 .then(Commands.argument("x", DoubleArgumentType.doubleArg())
                                         .then(Commands.argument("y", DoubleArgumentType.doubleArg())
                                                 .then(Commands.argument("z", DoubleArgumentType.doubleArg())
-                                                        .executes(CustomTeleportCommand::TeleportCommand)
+                                                        .executes(CustomTeleportCommand::teleportCommand)
                                                 )
                                         )
                                 )
                         )
 
                         // Display player XP on screen.
-                        .then(Commands.literal("getxp").executes(MessageCommands::MessagePlayerXp))
+                        .then(Commands.literal("getxp").executes(MessageCommands::messagePlayerXp))
 
                         // Display a test toast message
-                        .then(Commands.literal("toast").executes(MessageCommands::MessageToastTest))
+                        .then(Commands.literal("toast").executes(MessageCommands::messageToastTest))
 
                         // Display a test popup message
-                        .then(Commands.literal("popup").executes(MessageCommands::MessagePopupTest))
+                        .then(Commands.literal("popup").executes(MessageCommands::messagePopupTest))
 
 //                        .then(Commands.literal("spawnmob")
 //                                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))

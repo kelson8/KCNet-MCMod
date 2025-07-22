@@ -14,18 +14,8 @@ public class ReturnHomeCommand {
 
     // TODO Make this able to return to multiple homes.
     // TODO Make a delete command, make this into new format: '/home <name>' instead of '/home return <name>'
-    public ReturnHomeCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
-        // /home return
-        // This is how to make a command with arguments, tested working on NeoForge 1.21.1.
-        dispatcher.register(Commands.literal("home") // Command name
-                .then(Commands.literal("return") // Arg 1
-                        .executes((command) -> { // Execute the command
-                            return returnHome(command.getSource());
-                        })));
 
-    }
-
-    private int returnHome(CommandSourceStack source) throws CommandSyntaxException {
+    public static int returnHomeCommand(CommandSourceStack source) {
         Entity entity = source.getEntity();
 
         // Check if the entity is a ServerPlayer

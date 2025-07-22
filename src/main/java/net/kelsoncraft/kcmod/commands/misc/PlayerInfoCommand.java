@@ -1,14 +1,11 @@
 package net.kelsoncraft.kcmod.commands.misc;
 
 import com.mojang.brigadier.Command;
-import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.kelsoncraft.kcmod.commands.MessageCommands;
 import net.kelsoncraft.kcmod.util.Messages;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -40,7 +37,7 @@ public class PlayerInfoCommand {
 //                    .append(Component.literal(String.valueOf(playerHealth)).withStyle(ChatFormatting.GOLD)
 //                    ));
 
-            MessageCommands.SendColoredMessage(source,
+            MessageCommands.sendColoredMessage(source,
                     // Prefix
                     Component.literal(Messages.KCNetMain).withStyle(ChatFormatting.GRAY),
 

@@ -72,7 +72,7 @@ public class KCMod {
         NeoForge.EVENT_BUS.register(MiscCommands.class);
 
 
-        NeoForge.EVENT_BUS.register(ModCommands.class);
+        NeoForge.EVENT_BUS.register(TeleportCommands.class);
         NeoForge.EVENT_BUS.register(SpeedCommands.class);
 
         LOGGER.info("{} Registered mod commands as an event listener.", KCMod.MOD_NAME);

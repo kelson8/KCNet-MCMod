@@ -14,7 +14,8 @@ import net.minecraft.world.level.Level;
 
 public class CustomTeleportCommand {
 
-    public static int TeleportCommand(CommandContext<CommandSourceStack> command) throws CommandSyntaxException {
+    // TODO Possibly move this into TeleportCommands later, come up with a new name for this file and command.
+    public static int teleportCommand(CommandContext<CommandSourceStack> command) {
         Entity playerEntity = command.getSource().getEntity();
 //        if(command.getSource().getEntity() instanceof Player player) {
         if(playerEntity instanceof Player player) {

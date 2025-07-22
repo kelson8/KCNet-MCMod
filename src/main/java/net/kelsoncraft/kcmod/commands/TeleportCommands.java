@@ -1,40 +1,53 @@
 package net.kelsoncraft.kcmod.commands;
 
+import com.mojang.brigadier.CommandDispatcher;
 import net.kelsoncraft.kcmod.KCMod;
 import net.kelsoncraft.kcmod.commands.teleport.ReturnHomeCommand;
 import net.kelsoncraft.kcmod.commands.teleport.SetHomeCommand;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.server.command.ConfigCommand;
 
-// I got this working, I had to change something in the NeoForgeTest.java file.
+// I got this working, I had to change something in the KCMod.java file.
 
 // Changed from this
 //        modEventBus.register(ModEvents.class);
 // To this
 //        NeoForge.EVENT_BUS.register(ModEvents.class);
 
-public class ModCommands {
-    // TODO Possibly switch to this format and keep all commands in one place.
-    // Mostly adapted from the InControl project, licensed under MIT
-    // https://github.com/McJtyMods/InControl/blob/1.21_neo/src/main/java/mcjty/incontrol/commands/ModCommands.java
-//    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-//        LiteralCommandNode<CommandSourceStack> commands = dispatcher.register(
-//                Commands.literal(NeoForgeTest.MOD_ID)
-//                        .then(SetHomeCommand.register(dispatcher)));
-//    }
-//    }
+public class TeleportCommands {
 
-    //
-
+    // For registering the commands.
+    // TODO Test this
     @SubscribeEvent
     public static void onCommandsRegister(RegisterCommandsEvent event) {
-        new SetHomeCommand(event.getDispatcher());
-        new ReturnHomeCommand(event.getDispatcher());
+        CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-        ConfigCommand.register(event.getDispatcher());
+        dispatcher.register(Commands.literal("home")
+
+                .then(Commands.literal("set")
+                        .executes((command) -> { // Execute the command
+                            return SetHomeCommand.setHomeCommand(command.getSource());
+                        }))
+
+                .then(Commands.literal("return")
+                        .executes(command -> ReturnHomeCommand.returnHomeCommand(command.getSource()))
+                )
+
+        );
     }
+
+
+//        @SubscribeEvent
+//    public static void onCommandsRegister(RegisterCommandsEvent event) {
+//        new SetHomeCommand(event.getDispatcher());
+//        new ReturnHomeCommand(event.getDispatcher());
+//
+//        ConfigCommand.register(event.getDispatcher());
+//    }
 
 
     // I don't think this one works.
