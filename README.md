@@ -23,21 +23,23 @@ faster if you right-click a block.
 
 ---
 
-**Commands:**
+Commands:
+========
 
 **Home commands** (So far these cannot be removed and only one can be set):
 * `/home set` - Set your home
 * `/home return` - Return back to your home
 
---
+---
 
-* `/kc pos [x] [y] [z]` - Teleport you to the position specified.
-* `/kc version` - Show the mod name, mod version, and mod description in chat.
+**Test commands**
+
+
 * `/kc getxp` - Show your current xp levels as a popup on screen.
 * `/kc toast` - Show a test toast on screen.
 * `/kc popup` - Show a test popup on screen.
 
---
+---
 
 **Essentials like commands**
 
@@ -51,12 +53,16 @@ you don't have to exit the game, or at least I didn't during my testing.
 * Adventure: `/gma`, `/adventure, /gm a`
 * Spectator: `/gmsp`, `/spectator`, `/gm sp`
 
---
+---
 
 **Other Commands**
 * Heal (Give yourself max health and food): `/heal`
 * Teleport to world spawn: `/spawn`
 * Strike lightning where you are looking: `/lightning`, `/smite`
+
+* `/kc pos [x] [y] [z]` - Teleport you to the position specified.
+* `/kc version` - Show the mod name, mod version, and mod description in chat.
+
 ---
 
 **Test Commands**
@@ -92,7 +98,7 @@ YouTube Playlist
 I'm on part 15
 * [NeoForge Modding Tutorial - Minecraft 1.21: Custom Tools | #15](https://www.youtube.com/watch?v=QMIk1k67pnw&list=PLKGarocXCE1G6CQOoiYdMVx-E1d9F_itF&index=15)
 
---
+Mixin tutorial
 * [NeoForge 1.21 Mixin Setup](https://www.youtube.com/watch?v=Q5041hErnvA)
 
 ---
@@ -155,6 +161,7 @@ If at any point you are missing libraries in your IDE, or you've run into proble
 run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything
 {this does not affect your code} and then start the process again.
 
+---
 
 Additional Resources:
 ==========
