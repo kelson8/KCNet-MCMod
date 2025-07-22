@@ -79,7 +79,7 @@ public class GamemodeCommands {
 
 //            LogUtil.LogInfo("Registered creative gamemode aliases (/gmc, /creative, /gm c).");
         } else {
-            LogUtil.LogInfo("Creative gamemode aliases are disabled in config.");
+            LogUtil.logInfo("Creative gamemode aliases are disabled in config.");
         }
 
         //---
@@ -109,7 +109,7 @@ public class GamemodeCommands {
 
 //        LogUtil.LogInfo("Registered survival gamemode aliases (/gms, /survival, /gm s).");
         } else {
-            LogUtil.LogInfo("Survival gamemode aliases are disabled in config.");
+            LogUtil.logInfo("Survival gamemode aliases are disabled in config.");
         }
 
 
@@ -136,7 +136,7 @@ public class GamemodeCommands {
                     ));
 
         } else {
-            LogUtil.LogInfo("Adventure gamemode aliases are disabled in config.");
+            LogUtil.logInfo("Adventure gamemode aliases are disabled in config.");
         }
 
 
@@ -164,7 +164,7 @@ public class GamemodeCommands {
 
 //            LogUtil.LogInfo("Registered spectator gamemode aliases (/gmsp, /spectator, /gm sp).");
         } else {
-            LogUtil.LogInfo("Spectator gamemode aliases are disabled in config.");
+            LogUtil.logInfo("Spectator gamemode aliases are disabled in config.");
         }
 
 

@@ -1,15 +1,15 @@
 package net.kelsoncraft.kcmod.commands.misc;
 
 import com.mojang.brigadier.Command;
-import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.kcmod.api.PlayerApi;
 import net.kelsoncraft.kcmod.util.ChatColors;
 import net.kelsoncraft.kcmod.util.LogUtil;
 import net.kelsoncraft.kcmod.util.MessageUtil;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.GameType;
 
 
@@ -19,18 +19,25 @@ import net.minecraft.world.level.GameType;
 
 public class FlyCommand {
 
-    public FlyCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("fly")
-                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                .executes(command -> flyCommand(command.getSource())));
-    }
+    // TODO Figure out how to replicate this from Spigot, for a /fly command
+    // https://github.com/kelson8/KBP/blob/master/src/main/java/net/Kelsoncraft/KBP/commands/FlyCommand.java
+    /*
+        Location location = player.getLocation();
+    	int highestY = location.getWorld().getHighestBlockYAt(location);
+		//Put the player on the ground so they don't die.
+		location.setY(highestY + 1); //Add 1 so the player doesn't get stuck in the ground.
+     */
+    //
 
-
-
-
+    // This is disabled for now, it isn't being called anywhere
     // TODO Fix this command, if the player is in survival and disables fly, it will put them on the ground.
     // For now I'm just seeing if this will show the ground Y coordinate.
-    private int flyCommand(CommandSourceStack source) {
+//    private int flyCommand(CommandSourceStack source) {
+    public static int flyCommand(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        Entity playerEntity = source.getEntity();
+
+
         if (source.getEntity() instanceof ServerPlayer player) {
 
 //            if(isPlayerOnGround(player.createCommandSourceStack())) {
@@ -50,7 +57,7 @@ public class FlyCommand {
             String blockPosStr = String.format("Block position below: X:%s, Y:%s, Z:%s", blockPosX, blockPosY, blockPosZ);
 
             // Log the block position message, I'm wondering where it shows the coords.
-            LogUtil.LogInfo(blockPosStr);
+            LogUtil.logInfo(blockPosStr);
 
 
             // Get the players current gamemode

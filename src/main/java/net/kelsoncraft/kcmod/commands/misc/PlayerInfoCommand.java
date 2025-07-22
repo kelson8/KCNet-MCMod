@@ -2,6 +2,7 @@ package net.kelsoncraft.kcmod.commands.misc;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.kelsoncraft.kcmod.commands.MessageCommands;
 import net.kelsoncraft.kcmod.util.Messages;
@@ -9,22 +10,21 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 
 public class PlayerInfoCommand {
 
 
-    public PlayerInfoCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("playerinfo")
-                .executes(command -> {
-                    return playerInfo(command.getSource());
-                }));
-    }
-
-
-    // TODO Move this into PlayerInfoCommand.java.
-//    private int playerInfo(CommandContext<CommandSourceStack> command) {
-    private int playerInfo(CommandSourceStack source) throws CommandSyntaxException {
+    /**
+     * Basic player info command, shows a few stats for the player.
+     *
+     * @param context The command context
+     * @return Command success.
+     */
+    public static int playerInfoCommand(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        Entity entity = source.getEntity();
 
 //        if(command.getSource().getEntity() instanceof Player player) {
         if(source.getEntity() instanceof Player player) {

@@ -10,6 +10,20 @@ import toni.immersivemessages.api.ImmersiveMessage;
 public class MessageUtil {
 
     //---------
+    // Java specific, these should work anywhere outside of Minecraft.
+    //---------
+
+    /**
+     * Very simple implementation to print to the console in java, instead of typing out 'System.out.println' everytime.
+     * @param text The text to display in the console.
+     */
+    public static void printToConsole(String text) {
+        System.out.println(text);
+    }
+
+    //---------
+
+    //---------
     // Immersive Message API
     //---------
 

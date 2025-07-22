@@ -20,8 +20,18 @@ public class PlayerUtil {
 //    }
 
     // TODO Setup more of these.
+    /**
+     * Heal the player
+     * @param player The player to heal
+     */
     public static void healPlayer(ServerPlayer player) {
+        player.heal(20.0f);
+        player.getFoodData().setExhaustion(0.0f);
+        player.getFoodData().setFoodLevel(20);
+        // This gives me too much saturation lol.
+//            player.getFoodData().setSaturation(20.0f);
 
+        MessageUtil.sendColorMessage(player.createCommandSourceStack(), "You have been healed!", ChatColors.AQUA);
     }
 
     /**

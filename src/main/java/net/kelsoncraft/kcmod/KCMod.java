@@ -1,12 +1,10 @@
 package net.kelsoncraft.kcmod;
 
 import net.kelsoncraft.kcmod.block.ModBlocks;
-import net.kelsoncraft.kcmod.commands.GamemodeCommands;
-import net.kelsoncraft.kcmod.commands.KCCommands;
-import net.kelsoncraft.kcmod.commands.MiscCommands;
+import net.kelsoncraft.kcmod.commands.*;
 import net.kelsoncraft.kcmod.component.ModDataComponents;
 import net.kelsoncraft.kcmod.datagen.DataGenerators;
-import net.kelsoncraft.kcmod.commands.ModCommands;
+import net.kelsoncraft.kcmod.events.EventHandler;
 import net.kelsoncraft.kcmod.item.ModCreativeModeTabs;
 import net.kelsoncraft.kcmod.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -75,6 +73,8 @@ public class KCMod {
 
 
         NeoForge.EVENT_BUS.register(ModCommands.class);
+        NeoForge.EVENT_BUS.register(SpeedCommands.class);
+
         LOGGER.info("{} Registered mod commands as an event listener.", KCMod.MOD_NAME);
     }
 
@@ -85,7 +85,7 @@ public class KCMod {
         // Oops, I had this disabled in the file, moved to @EventBusSubscriber in EventHandler.
         //
         //---
-//        NeoForge.EVENT_BUS.register(EventHandler.class);
+        NeoForge.EVENT_BUS.register(EventHandler.class);
 
     }
 

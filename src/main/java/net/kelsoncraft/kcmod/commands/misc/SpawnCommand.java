@@ -2,6 +2,7 @@ package net.kelsoncraft.kcmod.commands.misc;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.kcmod.api.WorldApi;
 import net.kelsoncraft.kcmod.util.ChatColors;
 import net.kelsoncraft.kcmod.util.MessageUtil;
@@ -15,21 +16,15 @@ import net.minecraft.world.level.Level;
 
 public class SpawnCommand {
 
-    public SpawnCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("spawn")
-                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                .executes(command -> spawnCommand(command.getSource()))
-        );
-    }
-
     /**
      * Basic spawn command, this works fine now after changing it a bit.
      * This teleports the player to the world spawn point.
      *
-     * @param source The source to run this on.
+     * @param context The command context
      * @return Command success.
      */
-    private static int spawnCommand(CommandSourceStack source) {
+    public static int spawnCommand(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
         Entity entity = source.getEntity();
 
         teleportToSpawn(source, entity);

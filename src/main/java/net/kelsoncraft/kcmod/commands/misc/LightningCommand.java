@@ -2,6 +2,7 @@ package net.kelsoncraft.kcmod.commands.misc;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.kcmod.util.EntityUtil;
 import net.kelsoncraft.kcmod.util.PlayerUtil;
 import net.minecraft.commands.CommandSourceStack;
@@ -10,28 +11,31 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 
 public class LightningCommand {
 
-    public LightningCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("lightning")
-                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                .executes(command -> lightningCommand(command.getSource())));
-
-        // '/smite' alias
-        dispatcher.register(Commands.literal("smite")
-                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                .executes(command -> lightningCommand(command.getSource())));
-    }
+//    public LightningCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
+//        dispatcher.register(Commands.literal("lightning")
+//                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
+//                .executes(command -> lightningCommand(command.getSource())));
+//
+//        // '/smite' alias
+//        dispatcher.register(Commands.literal("smite")
+//                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
+//                .executes(command -> lightningCommand(command.getSource())));
+//    }
 
     /**
      * Lightning command, this works now, strikes lightning at the block the player is looking at.
      * The idea came from the EssentialsX commands.
-     * @param source The source to run this on, for the current position.
+     * @param context The command context
      * @return Command success
      */
-    private static int lightningCommand(CommandSourceStack source) {
+    public static int lightningCommand(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        Entity entity = source.getEntity();
 
         ServerLevel level = source.getLevel();
         if(source.getEntity() instanceof ServerPlayer player) {
