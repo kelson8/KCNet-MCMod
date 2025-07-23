@@ -56,6 +56,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         // Sausage
         basicItem(ModItems.RAW_SAUSAGE.get());
         basicItem(ModItems.COOKED_SAUSAGE.get());
+
+        // Amethyst Ingot
+        basicItem(ModItems.AMETHYST_INGOT.get());
     }
 
     // https://github.com/Tutorials-By-Kaupenjoe/NeoForge-Tutorial-1.21.X/blob/12-nonBlockBlocks/src/main/java/net/kaupenjoe/tutorialmod/datagen/ModItemModelProvider.java

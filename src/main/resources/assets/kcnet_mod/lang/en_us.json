@@ -28,6 +28,8 @@
   "item.kcnet_mod.frostfire_ice": "Frostfire Ice",
   "item.kcnet_mod.starlight_ashes": "Starlight Ashes",
 
+  "item.kcnet_mod.amethyst_ingot": "Amethyst Ingot",
+
   "block.kcnet_mod.bismuth_block": "Block of Bismuth",
   "block.kcnet_mod.bismuth_ore": "Bismuth Ore",
 
@@ -52,7 +54,8 @@
   "block.kcnet_mod.bismuth_lamp": "Bismuth Lamp",
 
 
-  "creativetab.kcnet_mod.bismuth_items": "Bismuth Items",
+  "creativetab.kcnet_mod.kc_items": "KCMod Items",
+
   "creativetab.kcnet_mod.bismuth_blocks": "Bismuth Blocks",
 
 

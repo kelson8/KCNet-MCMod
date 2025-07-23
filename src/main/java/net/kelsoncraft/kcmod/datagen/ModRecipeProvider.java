@@ -6,6 +6,7 @@ import net.kelsoncraft.kcmod.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +31,9 @@ public class ModRecipeProvider extends RecipeProvider {
         //
 
 
+        //-----
         // Shaped crafting
+        //-----
 
         // Create Bismuth block out of 9 Bismuth
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BISMUTH_BLOCK.get())
@@ -41,7 +44,22 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_bismuth", has(ModItems.BISMUTH)).save(recipeOutput);
 
 
+        //
+
+        // Amethyst ingot to Block of Amethyst, takes 9 of them.
+        // Well I got it working, it is generating into the data/minecraft/recipe folder instead of my main one.
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.AMETHYST_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItems.AMETHYST_INGOT.get())
+//                .unlockedBy("has_bismuth", has(ModItems.));
+                .unlockedBy("has_amethyst", has(ModItems.AMETHYST_INGOT)).save(recipeOutput);
+
+        //-----
         // Shapeless crafting
+        //-----
+
         // Create 9 Bismuth out of a Bismuth block
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.BISMUTH, 9)
                 .requires(ModBlocks.BISMUTH_BLOCK)
@@ -53,11 +71,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_magic_block", has(ModBlocks.MAGIC_BLOCK))
                 .save(recipeOutput, "kcnet_mod:bismuth_from_magic_block");
 
+        //-----
         // Smelting/Blasting
+        //-----
+
         oreSmelting(recipeOutput, BISMUTH_SMELTABLES, RecipeCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 200, "bismuth");
         oreBlasting(recipeOutput, BISMUTH_SMELTABLES, RecipeCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 100, "bismuth");
 
+        //-----
         // New
+        //-----
+
         stairBuilder(ModBlocks.BISMUTH_STAIRS.get(), Ingredient.of(ModItems.BISMUTH)).group("bismuth")
                 .unlockedBy("has_bismuth", has(ModItems.BISMUTH)).save(recipeOutput);
         slab(recipeOutput, RecipeCategory.BUILDING_BLOCKS, ModBlocks.BISMUTH_SLAB.get(), ModItems.BISMUTH.get());
@@ -76,10 +100,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_bismuth", has(ModItems.BISMUTH.get())).save(recipeOutput);
         trapdoorBuilder(ModBlocks.BISMUTH_TRAP_DOOR.get(), Ingredient.of(ModItems.BISMUTH.get())).group("bismuth")
                 .unlockedBy("has_bismuth", has(ModItems.BISMUTH.get())).save(recipeOutput);
-
-
-        //
-
 
         //----
         // Cooking - Foods

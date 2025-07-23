@@ -17,9 +17,11 @@ public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, KCMod.MOD_ID);
 
-    public static final Supplier<CreativeModeTab> BISMUTH_ITEMS_TAB = CREATIVE_MODE_TAB.register("bismuth_items_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.BISMUTH.get()))
-                    .title(Component.translatable("creativetab.kcnet_mod.bismuth_items"))
+    public static final Supplier<CreativeModeTab> KCMOD_ITEMS_TAB = CREATIVE_MODE_TAB.register("kcmod_items_tab",
+//            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.BISMUTH.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.AMETHYST_INGOT.get()))
+//                    .title(Component.translatable("creativetab.kcnet_mod.bismuth_items"))
+                    .title(Component.translatable("creativetab.kcnet_mod.kc_items"))
                     .displayItems((itemDisplayParameters, output) -> {
 
                         // Add items in here for custom creative tab
@@ -34,6 +36,9 @@ public class ModCreativeModeTabs {
                         // Fuel items
                         output.accept(ModItems.FROSTFIRE_ICE);
                         output.accept(ModItems.STARLIGHT_ASHES);
+
+                        // New
+                        output.accept(ModItems.AMETHYST_INGOT);
 
                     }).build());
 
@@ -66,7 +71,8 @@ public class ModCreativeModeTabs {
     public static final Supplier<CreativeModeTab> BISMUTH_BLOCK_TAB = CREATIVE_MODE_TAB.register("bismuth_blocks_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.BISMUTH_BLOCK))
                     // Make sure this name matches the previous creative mode tab
-                    .withTabsBefore(ResourceLocation.fromNamespaceAndPath(KCMod.MOD_ID, "bismuth_items_tab"))
+//                    .withTabsBefore(ResourceLocation.fromNamespaceAndPath(KCMod.MOD_ID, "bismuth_items_tab"))
+                    .withTabsBefore(ResourceLocation.fromNamespaceAndPath(KCMod.MOD_ID, "kcmod_items_tab"))
                     .title(Component.translatable("creativetab.kcnet_mod.bismuth_blocks"))
 
                     .displayItems((itemDisplayParameters, output) -> {

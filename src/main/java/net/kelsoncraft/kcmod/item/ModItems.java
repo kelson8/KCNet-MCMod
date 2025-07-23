@@ -90,6 +90,15 @@ public class ModItems {
     public static final DeferredItem<Item> STARLIGHT_ASHES = ITEMS.register("starlight_ashes",
             () -> new Item(new Item.Properties()));
 
+
+    //-----
+    // Test
+    //-----
+    // This is a custom texture test, it doesn't look too good but something to mess around with
+    // Adapted from the emerald.
+    public static final DeferredItem<Item> AMETHYST_INGOT = ITEMS.register("amethyst_ingot",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
