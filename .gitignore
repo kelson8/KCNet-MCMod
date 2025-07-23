@@ -24,7 +24,6 @@ src/main/java/net/kelsoncraft/kcmod/test/BookshelfApiTest.java
 src/main/java/net/kelsoncraft/kcmod/test/ClothConfigTest.java
 src/main/java/net/kelsoncraft/kcmod/test/DimensionTest.java
 src/main/java/net/kelsoncraft/kcmod/test/InvTest.java
-src/main/java/net/kelsoncraft/kcmod/test/PlayerTest.java
 src/main/java/net/kelsoncraft/kcmod/test/VillagerTest.java
 
 # Auto generated from build
