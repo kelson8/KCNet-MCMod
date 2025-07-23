@@ -9,6 +9,9 @@ original_mc_data/
 
 TODO.md
 
+src/main/resources/logback.xml
+.vscode
+
 # Misc
 src/main/java/net/kelsoncraft/kcmod/NewConfig.java
 src/main/java/net/kelsoncraft/kcmod/client/AutoLoad.java
@@ -19,14 +22,10 @@ src/main/java/net/kelsoncraft/kcmod/datagen/ModDimensionProvider.java
 # These below aren't in active use, I may mess with them later.
 src/main/java/net/kelsoncraft/kcmod/test/BookshelfApiTest.java
 src/main/java/net/kelsoncraft/kcmod/test/ClothConfigTest.java
+src/main/java/net/kelsoncraft/kcmod/test/DimensionTest.java
 src/main/java/net/kelsoncraft/kcmod/test/InvTest.java
 src/main/java/net/kelsoncraft/kcmod/test/PlayerTest.java
 src/main/java/net/kelsoncraft/kcmod/test/VillagerTest.java
-
-
-# Test commands
-src/main/java/net/kelsoncraft/kcmod/commands/TestCommands.java
-
 
 # Auto generated from build
 # I do depend on this in game so I'll leave it in the build.
@@ -38,6 +37,7 @@ src/main/java/net/kelsoncraft/kcmod/block/custom/NewTargetBlock.java
 
 # Other extras, these are work in progress files.
 src/main/java/net/kelsoncraft/kcmod/util/CommandHandler.java
+src/main/java/net/kelsoncraft/kcmod/util/ModLogger.java
 src/main/java/net/kelsoncraft/kcmod/util/AutoLoad.java
 src/main/java/net/kelsoncraft/kcmod/util/YaclConfigTest.java
 
