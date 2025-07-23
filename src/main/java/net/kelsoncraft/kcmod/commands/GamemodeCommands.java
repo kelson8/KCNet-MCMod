@@ -2,18 +2,22 @@ package net.kelsoncraft.kcmod.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.kcmod.Config;
+import net.kelsoncraft.kcmod.KCMod;
 import net.kelsoncraft.kcmod.util.LogUtil;
 import net.kelsoncraft.kcmod.util.MessageUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.GameType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+
+import static net.kelsoncraft.kcmod.util.CommandUtil.registerCommandOp;
+import static net.kelsoncraft.kcmod.util.CommandUtil.registerCommandWithArg;
 
 public class GamemodeCommands {
 
@@ -28,7 +32,6 @@ public class GamemodeCommands {
         // Adventure: /gma, /adventure, /gm a
         // Spectator: /gmsp, /spectator, /gm sp
         GamemodeCommands.GamemodeCmds(event.getDispatcher());
-
     }
 
 
@@ -52,30 +55,13 @@ public class GamemodeCommands {
         // Creative
         //---
 
-        // Register aliases that point to the same command logic
-//        gamemodeCommands.then(Commands.literal("creative"))
-//                .executes(command -> creativeCommand(command.getSource()));
-
-//        NeoForgeTest.LOGGER.info("Registered command alias: /creative");
-
-
-//        dispatcher.register(Commands.literal(""))
-
         if (Config.COMMON.ENABLE_CREATIVE_COMMAND.get()) {
 
-            dispatcher.register(Commands.literal("gmc") // Alias /gmc
-                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                    .executes(command -> creativeCommand(command.getSource())));
-
-            dispatcher.register(Commands.literal("creative") // Alias /creative
-                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                    .executes(command -> creativeCommand(command.getSource())));
-
-            dispatcher.register(Commands.literal("gm") // Alias /gm c
-                    .then(Commands.literal("c")
-                            .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                            .executes(command -> creativeCommand(command.getSource()))
-                    ));
+            // Creative commands
+            registerCommandOp(dispatcher, "gmc", GamemodeCommands::creativeCommand);
+            registerCommandOp(dispatcher, "creative", GamemodeCommands::creativeCommand);
+            registerCommandWithArg(dispatcher, "gm", "c", GamemodeCommands::creativeCommand);
+            KCMod.LOGGER.info("Registered creative gamemode aliases (/gmc, /creative, /gm c).");
 
 //            LogUtil.LogInfo("Registered creative gamemode aliases (/gmc, /creative, /gm c).");
         } else {
@@ -86,26 +72,12 @@ public class GamemodeCommands {
         // Survival
         //---
 
-
-//        gamemodeCommands.then(Commands.literal("survival"))
-//                .executes(command -> survivalCommand(command.getSource()));
-
         if (Config.COMMON.ENABLE_SURVIVAL_COMMAND.get()) {
-            dispatcher.register(Commands.literal("gms")
-                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                    .executes(command -> survivalCommand(command.getSource())));
-
-            // Separate '/survival' command
-            dispatcher.register(Commands.literal("survival")
-                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                    .executes(command -> survivalCommand(command.getSource()))
-            );
-
-            dispatcher.register(Commands.literal("gm")
-                    .then(Commands.literal("s")
-                            .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                            .executes(command -> survivalCommand(command.getSource()))
-                    ));
+            // Survival commands
+            registerCommandOp(dispatcher, "gms", GamemodeCommands::survivalCommand);
+            registerCommandOp(dispatcher, "survival", GamemodeCommands::survivalCommand);
+            registerCommandWithArg(dispatcher, "gm", "s", GamemodeCommands::survivalCommand);
+            KCMod.LOGGER.info("Registered survival gamemode aliases (/gms, /survival, /gm s).");
 
 //        LogUtil.LogInfo("Registered survival gamemode aliases (/gms, /survival, /gm s).");
         } else {
@@ -117,23 +89,13 @@ public class GamemodeCommands {
         // Adventure
         //---
 
-//        gamemodeCommands.then(Commands.literal("adventure")
-//                .executes(command -> adventureCommand(command.getSource())));
-
         if (Config.COMMON.ENABLE_ADVENTURE_COMMAND.get()) {
-            dispatcher.register(Commands.literal("gma")
-                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                    .executes(command -> adventureCommand(command.getSource())));
 
-            dispatcher.register(Commands.literal("adventure")
-                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                    .executes(command -> adventureCommand(command.getSource())));
-
-            dispatcher.register(Commands.literal("gm")
-                    .then(Commands.literal("a")
-                            .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                            .executes(command -> adventureCommand(command.getSource()))
-                    ));
+            // Adventure commands
+            registerCommandOp(dispatcher, "gma", GamemodeCommands::adventureCommand);
+            registerCommandOp(dispatcher, "adventure", GamemodeCommands::adventureCommand);
+            registerCommandWithArg(dispatcher, "gm", "a", GamemodeCommands::adventureCommand);
+            KCMod.LOGGER.info("Registered adventure gamemode aliases (/gma, /adventure, /gm a).");
 
         } else {
             LogUtil.logInfo("Adventure gamemode aliases are disabled in config.");
@@ -144,23 +106,12 @@ public class GamemodeCommands {
         // Spectator
         //---
 
-//        gamemodeCommands.then(Commands.literal("spectator")
-//                .executes(command -> spectatorCommand(command.getSource())));
-
         if (Config.COMMON.ENABLE_SPECTATOR_COMMAND.get()) {
-            dispatcher.register(Commands.literal("gmsp")
-                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                    .executes(command -> spectatorCommand(command.getSource())));
-
-            dispatcher.register(Commands.literal("spectator")
-                    .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                    .executes(command -> spectatorCommand(command.getSource())));
-
-            dispatcher.register(Commands.literal("gm")
-                    .then(Commands.literal("sp")
-                            .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                            .executes(command -> spectatorCommand(command.getSource()))
-                    ));
+            // Adventure commands
+            registerCommandOp(dispatcher, "gmsp", GamemodeCommands::spectatorCommand);
+            registerCommandOp(dispatcher, "spectator", GamemodeCommands::spectatorCommand);
+            registerCommandWithArg(dispatcher, "gm", "sp", GamemodeCommands::spectatorCommand);
+            KCMod.LOGGER.info("Registered creative gamemode aliases (/gmsp, /spectator, /gm sp).");
 
 //            LogUtil.LogInfo("Registered spectator gamemode aliases (/gmsp, /spectator, /gm sp).");
         } else {
@@ -177,27 +128,28 @@ public class GamemodeCommands {
     //-----
 
     // Creative
-    private static int creativeCommand(CommandSourceStack source) {
-        setGameMode(source, GameType.CREATIVE);
+//    private static int creativeCommand(CommandSourceStack source) {
+    private static int creativeCommand(CommandContext<CommandSourceStack> context) {
+        setGameMode(context.getSource(), GameType.CREATIVE);
         return Command.SINGLE_SUCCESS;
     }
 
     // TODO Set these below to set the player on the ground if in creative, I've done it in Spigot.
     // Survival
-    private static int survivalCommand(CommandSourceStack source) {
-        setGameMode(source, GameType.SURVIVAL);
+    private static int survivalCommand(CommandContext<CommandSourceStack> context) {
+        setGameMode(context.getSource(), GameType.SURVIVAL);
         return Command.SINGLE_SUCCESS;
     }
 
     // Adventure
-    private static int adventureCommand(CommandSourceStack source) {
-        setGameMode(source, GameType.ADVENTURE);
+    private static int adventureCommand(CommandContext<CommandSourceStack> context) {
+        setGameMode(context.getSource(), GameType.ADVENTURE);
         return Command.SINGLE_SUCCESS;
     }
 
     // Spectator
-    private static int spectatorCommand(CommandSourceStack source) {
-        setGameMode(source, GameType.SPECTATOR);
+    private static int spectatorCommand(CommandContext<CommandSourceStack> context) {
+        setGameMode(context.getSource(), GameType.SPECTATOR);
         return Command.SINGLE_SUCCESS;
     }
 
