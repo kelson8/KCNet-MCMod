@@ -2,6 +2,7 @@ package net.kelsoncraft.kcmod.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.context.CommandContext;
 import com.mojang.datafixers.types.templates.Sum;
 import net.kelsoncraft.kcmod.commands.misc.*;
 import net.kelsoncraft.kcmod.util.CommandUtil;
@@ -84,6 +85,12 @@ public class MiscCommands {
         // New tests
         // Basic inventory test, for now it is just a trash can and destroys items placed in it.
         CommandUtil.registerCommandOp(dispatcher, "open_inv", TestCommands::testInvCommand);
+
+        // Anvil menu
+//        CommandUtil.registerCommand(dispatcher, "anvil", TestCommands::anvilCommand);
+        // TODO Figure out how to do this without static.
+//        TestCommands testCommands = new TestCommands();
+//        CommandUtil.registerCommand(dispatcher, "anvil", testCommands.anvilCommand());
         //-----
 
     }

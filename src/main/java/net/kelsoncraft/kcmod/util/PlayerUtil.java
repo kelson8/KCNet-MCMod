@@ -1,6 +1,7 @@
 package net.kelsoncraft.kcmod.util;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -32,6 +33,15 @@ public class PlayerUtil {
 //            player.getFoodData().setSaturation(20.0f);
 
         MessageUtil.sendColorMessage(player.createCommandSourceStack(), "You have been healed!", ChatColors.AQUA);
+    }
+
+    /**
+     * This checks if the entity is a player.
+     * @param entity The entity to check if they are a player.
+     * @return If the entity is a ServerPlayer.
+     */
+    public static boolean isPlayer(Entity entity) {
+        return entity instanceof ServerPlayer;
     }
 
     /**

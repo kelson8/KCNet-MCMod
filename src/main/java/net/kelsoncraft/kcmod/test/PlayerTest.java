@@ -105,27 +105,6 @@ public class PlayerTest {
 
     }
 
-    /**
-     * I would like to make this open a chest,
-     * Look into using the ChestMenu.java file.
-     * TODO Test this.
-     *
-     * @param player The player to open an inventory for.
-     */
-    public static void inventoryTest(ServerPlayer player) {
 
-        player.openMenu(new MenuProvider() {
-            @Override
-            public @NotNull Component getDisplayName() {
-                return Component.literal("Test Inventory");
-            }
-
-            @Override
-            public @Nullable AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player) {
-                return ChestMenu.fourRows(id, inventory);
-            }
-        });
-
-    }
 
 }
