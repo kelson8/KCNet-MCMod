@@ -56,12 +56,14 @@ public class Config {
             builder.pop(); // End the commands category
 
             // Auto load config
-            builder.comment("Auto World Loader for Development").push("auto_load_world");
-            builder.translation(getTranslationKey("auto_load_world.category"));
+            builder.comment("Auto World Loader for Development")
+                    .translation(getTranslationKey("auto_load_world.category"))
+                    .push("auto_load_world");
+//            builder.translation(getTranslationKey("auto_load_world.category"));
 
             ENABLE_AUTO_LOAD_WORLD = builder
                     .comment("Enable automatic loading of a specific world on game startup. For development purposes.")
-                    .translation(getTranslationKey("auto_load_world.enable"))
+                    .translation(getTranslationKey("auto_load_world.toggle"))
                     .define("enableAutoLoadWorld", false); // Default to false, so it's off by default
 
             AUTO_LOAD_WORLD_NAME = builder

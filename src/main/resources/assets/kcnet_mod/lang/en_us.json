@@ -74,6 +74,12 @@
   "config.kcnet_mod.commands.toggle_creative_command": "Toggle creative command",
   "config.kcnet_mod.commands.toggle_survival_command": "Toggle survival commands",
   "config.kcnet_mod.commands.toggle_adventure_command": "Toggle adventure commands",
-  "config.kcnet_mod.commands.toggle_spectator_command": "Toggle spectator commands"
+  "config.kcnet_mod.commands.toggle_spectator_command": "Toggle spectator commands",
+
+  "config.kcnet_mod.auto_load_world.category": "Auto Load World",
+  "config.kcnet_mod.auto_load_world.toggle": "Toggle autoloading into world.",
+  "config.kcnet_mod.auto_load_world.name": "Name of world to autoload"
+
+
 
 }
