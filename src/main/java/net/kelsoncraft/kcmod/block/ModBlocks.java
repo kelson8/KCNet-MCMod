@@ -94,7 +94,8 @@ public class ModBlocks {
             () -> new BismuthLampBlock(BlockBehaviour.Properties.of().strength(0.3f)
 //                    .requiresCorrectToolForDrops().lightLevel(state -> state.getValue(BismuthLampBlock.CLICKED) ? 15 : 0)));
                     .sound(SoundType.GLASS)
-                    .lightLevel(state -> state.getValue(BismuthLampBlock.CLICKED) ? 15 : 0)));
+//                    .lightLevel(state -> state.getValue(BismuthLampBlock.CLICKED) ? 15 : 0)));
+                    .lightLevel(state -> state.getValue(BismuthLampBlock.LIT) ? 15 : 0)));
 
 
     // Helper for creating and registering a block.

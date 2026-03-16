@@ -60,7 +60,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     // https://github.com/Tutorials-By-Kaupenjoe/NeoForge-Tutorial-1.21.X/blob/13-blockstates/src/main/java/net/kaupenjoe/tutorialmod/datagen/ModBlockStateProvider.java#L50-L63
     private void customLamp() {
         getVariantBuilder(ModBlocks.BISMUTH_LAMP.get()).forAllStates(state -> {
-            if(state.getValue(BismuthLampBlock.CLICKED)) {
+            if(state.getValue(BismuthLampBlock.LIT)) {
+//            if(state.getValue(BismuthLampBlock.CLICKED)) {
                 // If the state is true, get the lamp on texture
                 return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll("bismuth_lamp_on",
                         ResourceLocation.fromNamespaceAndPath(KCMod.MOD_ID, "block/" + "bismuth_lamp_on")))};
