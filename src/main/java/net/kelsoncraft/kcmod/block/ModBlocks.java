@@ -3,7 +3,9 @@ package net.kelsoncraft.kcmod.block;
 import net.kelsoncraft.kcmod.KCMod;
 import net.kelsoncraft.kcmod.block.custom.BismuthLampBlock;
 import net.kelsoncraft.kcmod.block.custom.MagicBlock;
+import net.kelsoncraft.kcmod.block.custom.SuperTntBlock;
 import net.kelsoncraft.kcmod.item.ModItems;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -97,6 +99,11 @@ public class ModBlocks {
 //                    .lightLevel(state -> state.getValue(BismuthLampBlock.CLICKED) ? 15 : 0)));
                     .lightLevel(state -> state.getValue(BismuthLampBlock.LIT) ? 15 : 0)));
 
+
+    // Super tnt
+//    public static final DeferredBlock<Block> SUPER_TNT = registerBlock("super_tnt",
+//            () -> new SuperTntBlock(BlockBehaviour.Properties.of().strength(0.1f)
+//                    .sound(SoundType.GRASS));
 
     // Helper for creating and registering a block.
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {

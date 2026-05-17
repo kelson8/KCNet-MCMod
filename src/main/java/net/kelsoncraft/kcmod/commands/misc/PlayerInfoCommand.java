@@ -32,6 +32,9 @@ public class PlayerInfoCommand {
             double playerY = player.getY();
             double playerZ = player.getZ();
 
+            float flyingSpeed = player.getAbilities().getFlyingSpeed();
+            float walkingSpeed = player.getAbilities().getWalkingSpeed();
+
 //            player.sendSystemMessage(Component.literal(Messages.KCNetMain + "Your uuid is: " + uuid));
 //            player.sendSystemMessage(Component.literal(Messages.KCNetMain + "Your health is: " ).withStyle(ChatFormatting.AQUA)
 //                    .append(Component.literal(String.valueOf(playerHealth)).withStyle(ChatFormatting.GOLD)
@@ -54,11 +57,16 @@ public class PlayerInfoCommand {
                     // Coordinates line
                     Component.literal("Your coordinates is: ").withStyle(ChatFormatting.AQUA),
                     Component.literal("X: ").withStyle(ChatFormatting.AQUA),
-                    Component.literal(String.format("%.3f", playerX)).withStyle(ChatFormatting.YELLOW), // Formatted to 3 decimal places
+                    Component.literal(String.format("%.3f", playerX)).withStyle(ChatFormatting.YELLOW),
                     Component.literal(", Y: ").withStyle(ChatFormatting.AQUA),
-                    Component.literal(String.format("%.3f", playerY)).withStyle(ChatFormatting.YELLOW), // Formatted to 3 decimal places
+                    Component.literal(String.format("%.3f", playerY)).withStyle(ChatFormatting.YELLOW),
                     Component.literal(", Z: ").withStyle(ChatFormatting.AQUA),
-                    Component.literal(String.format("%.3f", playerZ)).withStyle(ChatFormatting.YELLOW)  // Formatted to 3 decimal places
+                    Component.literal(String.format("%.3f", playerZ)).withStyle(ChatFormatting.YELLOW),
+
+                    // Fly Speed
+                    Component.literal("\n"),
+                    Component.literal("Flying Speed: ").withStyle(ChatFormatting.AQUA),
+                    Component.literal(String.format("%.3f", flyingSpeed)).withStyle(ChatFormatting.GOLD)
             );
 
 //            player.sendSystemMessage(Component.literal(Messages.KCNetMain + "X: " + playerX));

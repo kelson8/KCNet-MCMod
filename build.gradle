@@ -429,8 +429,10 @@ dependencies {
 
     //-----------
     // Lucky TNT Lib, hmm this version needs Forge and doesn't seem to work on NeoForge.
+    // I found the Neo Forge version of this
+    // https://github.com/SlimingHD/Neo-LuckyTNTLib
     //-----------
-//    implementation "com.github.SlimingHD:LuckyTNTLib:1.21-51.0.21.1"
+    implementation "com.github.SlimingHD:Neo-LuckyTNTLib:1.20.6-20.6.62.1"
 
 
 }
