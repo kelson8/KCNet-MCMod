@@ -121,9 +121,11 @@ repositories {
     }
 
     // https://maven.txni.dev/#/releases/toni/txnilib
-    maven {
-        url "https://maven.txni.dev/releases"
-    }
+    // This maven seems to be down, or the link is dead.
+    // It keeps making my GitHub builds fail.
+//    maven {
+//        url "https://maven.txni.dev/releases"
+//    }
 
     // https://github.com/Sinytra/ForgifiedFabricAPI
     maven {
