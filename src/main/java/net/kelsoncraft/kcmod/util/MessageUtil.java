@@ -5,6 +5,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import toni.immersivemessages.api.ImmersiveMessage;
 
 public class MessageUtil {
@@ -99,6 +100,18 @@ public class MessageUtil {
 
         ChatFormatting formatting = chatColor.getFormatting();
         source.sendSystemMessage(kcMessageBuilder(text, formatting));
+    }
+
+    /**
+     * Send a colored message to the player using my enum.
+     * @param player The player to display chat message to.
+     * @param text The text to display.
+     * @param chatColor The enum in use from here {@link ChatColors}
+     */
+    public static void sendColorMessage(Player player, String text, ChatColors chatColor) {
+
+        ChatFormatting formatting = chatColor.getFormatting();
+        player.sendSystemMessage(kcMessageBuilder(text, formatting));
     }
 
     // I may use this later.

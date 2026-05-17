@@ -43,9 +43,10 @@ public class FlySpeedMixin {
     @Unique
     float defaultFlySpeed = 0.1f;
 
-    // TODO Make fly speed into an int, so 1-10.
+    // Flying speeds are converted like this
     // 1 = 0.1
-    // 2 = 0.2, and so on..
+    // 2 = 0.2
+    // 3 = 0.3
     // 10 = 1.0
 
     /**
