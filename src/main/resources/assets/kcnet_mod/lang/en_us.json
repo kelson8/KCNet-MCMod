@@ -53,6 +53,8 @@
 
   "block.kcnet_mod.bismuth_lamp": "Bismuth Lamp",
 
+  "block.kcnet_mod.super_tnt": "Super TNT",
+
 
   "creativetab.kcnet_mod.kc_items": "KCMod Items",
 
@@ -78,7 +80,16 @@
 
   "config.kcnet_mod.auto_load_world.category": "Auto Load World",
   "config.kcnet_mod.auto_load_world.toggle": "Toggle autoloading into world.",
-  "config.kcnet_mod.auto_load_world.name": "Name of world to autoload"
+  "config.kcnet_mod.auto_load_world.name": "Name of world to autoload",
+
+  "config.kcnet_mod.misc.category": "Misc",
+
+  "config.kcnet_mod.misc.toggle_fast_fly_speed": "Toggle Flying Speed",
+  "config.kcnet_mod.misc.fly_speed": "Flying Speed",
+
+
+  "config.kcnet_mod.misc.tnt_auto_explode": "Tnt Auto Explode",
+  "config.kcnet_mod.misc.tnt_fuse_timer": "Tnt Fuse Timer"
 
 
 

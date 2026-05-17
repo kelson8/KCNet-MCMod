@@ -151,6 +151,41 @@ repositories {
         url = 'https://api.modrinth.com/maven'
     }
 
+    // https://modmaven.dev/info.html
+    maven {
+        name "ModMaven"
+        url "https://modmaven.dev"
+    }
+
+    // TODO Test this later
+    // https://github.com/SilentChaos512/SilentLib/tree/1.21.x?tab=readme-ov-file
+
+    // Seems to be broken now
+//    maven {
+//        url = uri("https://maven.pkg.github.com/silentchaos512/silentlib")
+//        credentials {
+//            username = property('gpr.username')
+//            password = property('gpr.token')
+//        }
+//    }
+
+    // https://github.com/FTBTeam/FTB-Ranks/blob/main/build.gradle#L55-L67
+    // FTB Mods, I may try to hook into the RtpEvent to test.
+//    maven {
+//        url "https://maven.ftb.dev/releases"
+//        content {
+//            includeGroup "dev.ftb.mods"
+//        }
+//    }
+//
+//    maven {
+//        url "https://maven.ftb.dev/snapshots"
+//        content {
+//            includeGroup "dev.ftb.mods"
+//        }
+//    }
+
+
 
     //---- Enable these for Yet Another Config Lib
     // https://docs.isxander.dev/yet-another-config-lib/installing-yacl
@@ -196,12 +231,18 @@ neoForge {
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+
+            // Add the log file path, TODO Fix this
+            systemProperty 'kelsoncraft.log.path', file('run/logs/kelsoncraft.log').absolutePath
         }
 
         server {
             server()
             programArgument '--nogui'
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+
+            // Add the log file path, TODO Fix this
+            systemProperty 'kelsoncraft.log.path', file('run/logs/kelsoncraft.log').absolutePath
         }
 
         // This run config launches GameTestServer and runs all registered gametests, then exits.
@@ -220,6 +261,9 @@ neoForge {
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+
+            // Add the log file path
+            systemProperty 'kelsoncraft.log.path', file('run/logs/kelsoncraft.log').absolutePath
         }
 
         // applies to all the run configs above
@@ -309,13 +353,32 @@ dependencies {
     // Kotlin for Forge
 //    implementation 'thedarkcolour:kotlinforforge-neoforge:5.9.0'
 
+
+    // Tesseract API
+    // https://www.curseforge.com/minecraft/mc-mods/tesseract-api-neoforge
+    // https://mvnrepository.com/artifact/net.swedz/tesseract-api-neoforge
+    // TODO Try to use this later for a config setup
+    // https://github.com/Swedz/tesseract-neoforge/blob/1.21.1/docs/CONFIGS.md
+//    runtimeOnly 'net.swedz:tesseract-api-neoforge:1.8.1-1.21.1'
+    implementation 'net.swedz:tesseract-api-neoforge:1.8.1-1.21.1'
+
+
+    // Obsidian UI
+    // TODO Use this later for GUIs
+    // This might be useful for making GUIs easier.
+    // https://www.curseforge.com/minecraft/mc-mods/obsidianui
+    // https://github.com/ThinkingStudios/ObsidianUI
+//    implementation("maven.modrinth:obsidianui:${project.obsidianui_version}-${modloader}")
+
+
+
     // TODO Figure out how to use these later
 
     // Bookshelf test
     // https://docs.darkhax.net/1.20.1/bookshelf/dependency_info/
     // https://mvnrepository.com/artifact/net.darkhax.bookshelf/bookshelf-neoforge-1.21.1/21.1.67
-//    implementation "net.darkhax.bookshelf:bookshelf-neoforge-1.21.1:21.1.67"
-    localRuntime("net.darkhax.bookshelf:bookshelf-neoforge-1.21.1:21.1.67")
+    implementation "net.darkhax.bookshelf:bookshelf-neoforge-1.21.1:21.1.67"
+//    localRuntime("net.darkhax.bookshelf:bookshelf-neoforge-1.21.1:21.1.67")
 
     // https://linkie.shedaniel.dev/dependencies?loader=neoforge&version=1.21.1
 //    implementation("me.shedaniel.cloth:cloth-config-neoforge:15.0.140")
@@ -341,6 +404,33 @@ dependencies {
     implementation "org.sinytra.forgified-fabric-api:forgified-fabric-api:${fabric_api_version}"
 
     //---------
+
+    //---------
+    // FTB
+    //---------
+
+    // FTB Essentials
+    // TODO Figure out how to add this.
+    // https://maven.ftb.dev/#/releases/dev/ftb/mods/ftb-essentials/2101.1.6
+//    implementation("dev.ftb.mods:ftb-essentials:2101.1.6")
+
+    // https://maven.ftb.dev/#/releases/dev/ftb/mods/ftb-ranks/2101.1.3
+//    implementation("dev.ftb.mods:ftb-ranks:2101.1.3")
+
+    //---------
+
+    //---------
+    // Silent lib
+    // Available builds can be found here: https://github.com/SilentChaos512/silentlib/packages
+    // Current package: https://github.com/SilentChaos512/SilentLib/packages/2430162
+    //---------
+
+//    implementation "net.silentchaos512:silent-lib-${minecraft_version}-neoforge:${project.silentlib_version}"
+
+    //-----------
+    // Lucky TNT Lib, hmm this version needs Forge and doesn't seem to work on NeoForge.
+    //-----------
+//    implementation "com.github.SlimingHD:LuckyTNTLib:1.21-51.0.21.1"
 
 
 }

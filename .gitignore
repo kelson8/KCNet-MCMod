@@ -3,6 +3,13 @@
 # It isn't required for my mod to run, It's just there so I can easily find it.
 original_mc_data/
 
+# Archives
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+
 # Exclude the test folder for now, mostly just messing with APIs and other stuff in here.
 # Oops, this was excluding my new ImmersiveMessageApi file, I moved it into the util folder anyways.
 #src/main/java/net/kelsoncraft/kcmod/test/
@@ -25,6 +32,7 @@ src/main/java/net/kelsoncraft/kcmod/test/ClothConfigTest.java
 src/main/java/net/kelsoncraft/kcmod/test/DimensionTest.java
 src/main/java/net/kelsoncraft/kcmod/test/InvTest.java
 src/main/java/net/kelsoncraft/kcmod/test/VillagerTest.java
+src/main/java/net/kelsoncraft/kcmod/test/SilentLibTest.java
 
 # Auto generated from build
 # I do depend on this in game so I'll leave it in the build.

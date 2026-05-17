@@ -5,9 +5,13 @@ import net.kelsoncraft.kcmod.commands.*;
 import net.kelsoncraft.kcmod.component.ModDataComponents;
 import net.kelsoncraft.kcmod.datagen.DataGenerators;
 import net.kelsoncraft.kcmod.events.EventHandler;
+//import net.kelsoncraft.kcmod.events.TntHandler;
 import net.kelsoncraft.kcmod.item.ModCreativeModeTabs;
 import net.kelsoncraft.kcmod.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.neoforge.server.command.ConfigCommand;
+import net.swedz.tesseract.neoforge.config.ConfigManager;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -42,6 +46,9 @@ public class KCMod {
     public static String MOD_NAME = "UNKNOWN";    // Default value
     public static String MOD_VERSION = "UNKNOWN"; // Default value
     public static String MOD_DESCRIPTION = "UNKNOWN"; // Default value
+
+    // Hold an instance of the config instance
+    public static NewConfig CONFIG;
 
     // Static block to load the version on mod startup
     static {
@@ -87,6 +94,9 @@ public class KCMod {
         //---
         NeoForge.EVENT_BUS.register(EventHandler.class);
 
+        //---
+        // Register TNT handler, not implemented yet.
+//        NeoForge.EVENT_BUS.register(TntHandler.class);
     }
 
 
@@ -149,6 +159,15 @@ public class KCMod {
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         //---
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
+
+        // TODO Figure out how to use this, I am getting close to figuring it out.
+        // I can make this use .toml files which can be edited outside of the game.
+//        NewConfig config = new ConfigManager()
+//        CONFIG = new ConfigManager()
+//                .build(NewConfig.class)
+//                .register(modContainer, ModConfig.Type.COMMON)
+//                .listenToLoad(modEventBus)
+//                .config();
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
