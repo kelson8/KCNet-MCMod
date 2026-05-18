@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import toni.immersivemessages.api.ImmersiveMessage;
+//import toni.immersivemessages.api.ImmersiveMessage;
 
 public class MessageUtil {
 
@@ -41,12 +41,12 @@ public class MessageUtil {
      * @param player The player to send the message to.
      * @param text The text to display.
      */
-    public static void SendMessage(ServerPlayer player, String text) {
-        var message = ImmersiveMessage.builder(messageTime, text);
-        var styledMessage = ImmersiveMessageApi.goldText(message);
-
-        styledMessage.sendServer(player);
-    }
+//    public static void SendMessage(ServerPlayer player, String text) {
+//        var message = ImmersiveMessage.builder(messageTime, text);
+//        var styledMessage = ImmersiveMessageApi.goldText(message);
+//
+//        styledMessage.sendServer(player);
+//    }
 
     //
     // https://immersive.txni.dev/presets
@@ -58,11 +58,11 @@ public class MessageUtil {
      * @param text The text to display.
      * @param subtitle The subtitle to display
      */
-    public static void SendToastMessage(ServerPlayer player, String text, String subtitle) {
-        var message = ImmersiveMessage.toast(messageTime, text, subtitle);
-
-        message.sendServer(player);
-    }
+//    public static void SendToastMessage(ServerPlayer player, String text, String subtitle) {
+//        var message = ImmersiveMessage.toast(messageTime, text, subtitle);
+//
+//        message.sendServer(player);
+//    }
 
     /**
      * Show a message above the hotbar, as a popup.
@@ -70,11 +70,11 @@ public class MessageUtil {
      * @param text The text to display.
      * @param subtitle The subtitle to display
      */
-    public static void SendPopupMessage(ServerPlayer player, String text, String subtitle) {
-        var message = ImmersiveMessage.popup(messageTime, text, subtitle);
-
-        message.sendServer(player);
-    }
+//    public static void SendPopupMessage(ServerPlayer player, String text, String subtitle) {
+//        var message = ImmersiveMessage.popup(messageTime, text, subtitle);
+//
+//        message.sendServer(player);
+//    }
 
 
     //----------

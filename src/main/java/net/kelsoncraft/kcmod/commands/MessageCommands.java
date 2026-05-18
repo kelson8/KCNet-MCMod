@@ -2,6 +2,7 @@ package net.kelsoncraft.kcmod.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
+import net.kelsoncraft.kcmod.util.ChatColors;
 import net.kelsoncraft.kcmod.util.XPUtilities;
 import net.kelsoncraft.kcmod.util.MessageUtil;
 import net.minecraft.commands.CommandSourceStack;
@@ -22,24 +23,24 @@ public class MessageCommands {
 //    }
 
     /// Send a test toast message to the player.
-    public static int messageToastTest(CommandContext<CommandSourceStack> context) {
-        Entity currentEntity = context.getSource().getEntity();
-        if (currentEntity instanceof Player player) {
-            MessageUtil.SendToastMessage((ServerPlayer) player, "Test Toast", "This is a test toast message");
-        }
-
-        return Command.SINGLE_SUCCESS;
-    }
-
-    ///  Send a test popup message to the player.
-    public static int messagePopupTest(CommandContext<CommandSourceStack> context) {
-        Entity currentEntity = context.getSource().getEntity();
-        if (currentEntity instanceof Player player) {
-            MessageUtil.SendPopupMessage((ServerPlayer) player, "Test popup", "This is a test popup message");
-        }
-
-        return Command.SINGLE_SUCCESS;
-    }
+//    public static int messageToastTest(CommandContext<CommandSourceStack> context) {
+//        Entity currentEntity = context.getSource().getEntity();
+//        if (currentEntity instanceof Player player) {
+//            MessageUtil.SendToastMessage((ServerPlayer) player, "Test Toast", "This is a test toast message");
+//        }
+//
+//        return Command.SINGLE_SUCCESS;
+//    }
+//
+//    ///  Send a test popup message to the player.
+//    public static int messagePopupTest(CommandContext<CommandSourceStack> context) {
+//        Entity currentEntity = context.getSource().getEntity();
+//        if (currentEntity instanceof Player player) {
+//            MessageUtil.SendPopupMessage((ServerPlayer) player, "Test popup", "This is a test popup message");
+//        }
+//
+//        return Command.SINGLE_SUCCESS;
+//    }
 
 
     /// Send a toast message on screen with the player XP
@@ -54,7 +55,8 @@ public class MessageCommands {
             int currentXP = XPUtilities.getPlayerXP(player);
             int currentLevels = XPUtilities.getLevelForExperience(currentXP);
 
-            MessageUtil.SendToastMessage((ServerPlayer) player, "Current XP level", String.valueOf(currentLevels));
+//            MessageUtil.SendToastMessage((ServerPlayer) player, "Current XP level", String.valueOf(currentLevels));
+            MessageUtil.sendColorMessage(source, "Set XP to " + currentLevels + " levels", ChatColors.WHITE);
 
 
 //            MutableComponent xpComponent = Component.literal("XP Level: ").withStyle(ChatFormatting.AQUA)

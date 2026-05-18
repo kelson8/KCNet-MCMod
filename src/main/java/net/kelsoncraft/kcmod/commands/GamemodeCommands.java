@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.kcmod.Config;
 import net.kelsoncraft.kcmod.KCMod;
+import net.kelsoncraft.kcmod.util.ChatColors;
 import net.kelsoncraft.kcmod.util.LogUtil;
 import net.kelsoncraft.kcmod.util.MessageUtil;
 import net.minecraft.ChatFormatting;
@@ -162,22 +163,21 @@ public class GamemodeCommands {
         if (entity instanceof ServerPlayer player) {
 
             if (player.gameMode.getGameModeForPlayer() == gameMode) {
-                source.sendFailure(Component.literal("You are already in " + gameMode.getName() + " mode!").withStyle(ChatFormatting.RED));
+                MessageUtil.sendColorMessage(player, "You are already in " + gameMode.getName() + " mode!", ChatColors.RED);
+//                source.sendFailure(Component.literal("You are already in " + gameMode.getName() + " mode!").withStyle(ChatFormatting.RED));
                 return;
             }
 
             player.setGameMode(gameMode);
 
             switch (gameMode) {
-                case CREATIVE -> MessageUtil.SendMessage(player, "Set gamemode to creative");
-                case SURVIVAL -> MessageUtil.SendMessage(player, "Set gamemode to survival");
-                case ADVENTURE -> MessageUtil.SendMessage(player, "Set gamemode to adventure");
-                case SPECTATOR -> MessageUtil.SendMessage(player, "Set gamemode to spectator");
+                case CREATIVE -> MessageUtil.sendColorMessage(player, "Set gamemode to creative", ChatColors.WHITE);
+                case SURVIVAL -> MessageUtil.sendColorMessage(player, "Set gamemode to survival", ChatColors.WHITE);
+                case ADVENTURE -> MessageUtil.sendColorMessage(player, "Set gamemode to adventure", ChatColors.WHITE);
+                case SPECTATOR -> MessageUtil.sendColorMessage(player, "Set gamemode to spectator", ChatColors.WHITE);
 
-                default -> MessageUtil.SendChatMessage(source, "Error: Game mode invalid");
+                default -> MessageUtil.sendColorMessage(player, "Error: Game mode invalid", ChatColors.RED);
             }
-
-            MessageUtil.SendMessage(player, "Set gamemode to creative");
         }
     }
 

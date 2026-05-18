@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.kelsoncraft.kcmod.KCMod;
+import net.kelsoncraft.kcmod.util.ChatColors;
 import net.kelsoncraft.kcmod.util.MessageUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -44,7 +45,7 @@ public class SetHomeCommand {
 
 //            source.sendSystemMessage(Component.literal("Set home at " + pos));
 
-            MessageUtil.SendMessage(player, "Set home at " + pos);
+            MessageUtil.sendColorMessage(player, "Set home at " + pos, ChatColors.WHITE);
         }
 
 

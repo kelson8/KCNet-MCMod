@@ -3,6 +3,7 @@ package net.kelsoncraft.kcmod.commands.teleport;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.kelsoncraft.kcmod.KCMod;
+import net.kelsoncraft.kcmod.util.ChatColors;
 import net.kelsoncraft.kcmod.util.MessageUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -35,7 +36,7 @@ public class ReturnHomeCommand {
 //                source.sendSystemMessage(Component.translatable("commands.kcnet_mod.return_home.success"));
 //                source.sendSystemMessage(Component.translatable("commands.kcnet_mod.return_home.success", "homeId"));
 
-                MessageUtil.SendMessage(player, "You were returned to your home.");
+                MessageUtil.sendColorMessage(player, "You were returned to your home.", ChatColors.WHITE);
 
                 return 1;
 
@@ -43,7 +44,7 @@ public class ReturnHomeCommand {
                 // No home position
 //                source.sendSystemMessage(Component.literal("No home position has been set!"));
 //                source.sendSystemMessage(Component.translatable("commands.kcnet_mod.return_home.no_pos_found"));
-                MessageUtil.SendMessage(player, "You do not have a home set!");
+                MessageUtil.sendColorMessage(player, "You do not have a home set!", ChatColors.WHITE);
 
                 return -1;
             }
