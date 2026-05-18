@@ -8,7 +8,9 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.GrassBlock;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -107,13 +109,30 @@ public class FlySpeedMixin {
         }
 
         ItemStack itemStack = player.getItemInHand(usedHand);
+        Item heldItem = itemStack.getItem();
+
+        // This works!
+        // TODO Figure out how to check if this has a specific NBT value, such as fly: enabled or something.
+//        Item newItem = Items.ACACIA_LOG;
+        Item newItem = Items.POPPY;
+
+        if(heldItem == newItem) {
+            LOGGER.info("Item right clicked with special data");
+            // This works now, I had to fix something in the function
+            if (Config.COMMON.FAST_FLY_SPEED_TOGGLE.get()) {
+                setFlySpeed(player, Config.COMMON.FLY_SPEED.get());
+            }
+        } else {
+
+//            LOGGER.info("Item ID clicked with: {}", heldItem.getName(itemStack));
+            LOGGER.info("Item right clicked with: {}", heldItem);
+        }
+
+//        if(itemStack.is(item))
 //        if (itemStack instanceof TntBlock)
 //        if(itemStack == ItemStack.)
 
-        // This works now, I had to fix something in the function
-        if (Config.COMMON.FAST_FLY_SPEED_TOGGLE.get()) {
-            setFlySpeed(player, Config.COMMON.FLY_SPEED.get());
-        }
+
     }
 
 
