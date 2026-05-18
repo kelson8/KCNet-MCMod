@@ -69,27 +69,43 @@
   "tooltip.kcnet_mod.radish.tooltip": "Tastes good, sometimes gives health boost.",
   "creativetab.kcnet_mod.extra_food_items": "Extra Food Items",
 
-
-
+  "config.kcnet_mod.general.config.tooltip": "General Mod Configuration",
   "config.kcnet_mod.commands.category": "Gamemode Settings",
 
   "config.kcnet_mod.commands.toggle_creative_command": "Toggle creative command",
+  "config.kcnet_mod.commands.toggle_creative_command.tooltip": "Enable the custom /gmc, /creative, /gm c commands.",
+
   "config.kcnet_mod.commands.toggle_survival_command": "Toggle survival commands",
+  "config.kcnet_mod.commands.toggle_survival_command.tooltip": "Enable the custom /gms, /survival, /gm s commands.",
+
   "config.kcnet_mod.commands.toggle_adventure_command": "Toggle adventure commands",
+  "config.kcnet_mod.commands.toggle_adventure_command.tooltip": "Enable the custom /gma, /adventure, /gm a commands.",
+
   "config.kcnet_mod.commands.toggle_spectator_command": "Toggle spectator commands",
+  "config.kcnet_mod.commands.toggle_spectator_command.tooltip": "Enable the custom /gmsp, /spectator, /gm sp commands.",
 
   "config.kcnet_mod.auto_load_world.category": "Auto Load World",
+  "config.kcnet_mod.auto_load_world.tooltip": "Auto World Loader for Development",
+
   "config.kcnet_mod.auto_load_world.toggle": "Toggle autoloading into world.",
+  "config.kcnet_mod.auto_load_world.toggle.tooltip": "Enable automatic loading of a specific world on game startup. For development purposes.",
   "config.kcnet_mod.auto_load_world.name": "Name of world to autoload",
+  "config.kcnet_mod.auto_load_world.name.tooltip": "The name of the world to automatically load. Must be an exact match (folder name).",
 
   "config.kcnet_mod.misc.category": "Misc",
+  "config.kcnet_mod.misc.tooltip": "Misc Options",
 
-  "config.kcnet_mod.misc.toggle_fast_fly_speed": "Toggle Flying Speed",
   "config.kcnet_mod.misc.fly_speed": "Flying Speed",
-
+  "config.kcnet_mod.misc.fly_speed.tooltip": "Change your flying speed.",
+  "config.kcnet_mod.misc.fly_toggle": "Toggle Flying",
+  "config.kcnet_mod.misc.fly_toggle.tooltip": "Toggle flying on/off with a command block",
+  "config.kcnet_mod.misc.toggle_fast_fly_speed": "Toggle Flying Speed",
+  "config.kcnet_mod.misc.toggle_fast_fly_speed.tooltip": "Toggle fast flying speed",
 
   "config.kcnet_mod.misc.tnt_auto_explode": "Tnt Auto Explode",
-  "config.kcnet_mod.misc.tnt_fuse_timer": "Tnt Fuse Timer"
+  "config.kcnet_mod.misc.tnt_auto_explode.tooltip": "Set TNT to automatically explode when placed",
+  "config.kcnet_mod.misc.tnt_fuse_timer": "Tnt Fuse Timer",
+  "config.kcnet_mod.misc.tnt_fuse_timer.tooltip": "Set the length of the TNT fuse in seconds."
 
 
 

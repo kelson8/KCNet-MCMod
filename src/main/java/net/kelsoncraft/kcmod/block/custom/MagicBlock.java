@@ -13,10 +13,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -28,6 +31,9 @@ import java.util.List;
 
 public class MagicBlock extends Block {
 
+    // Toggle the cactus properties, so if someone steps on this block it hurts them.
+    private boolean cactusProperties = false;
+
     public MagicBlock(Properties properties) {
         super(properties);
 
@@ -38,6 +44,10 @@ public class MagicBlock extends Block {
                                                         @NotNull Player player, @NotNull BlockHitResult hitResult) {
         // Play a sound on the block.
         level.playSound(player, pos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1f, 1f);
+
+//        level.explode();
+
+//        level.explode(player)
 
         return InteractionResult.SUCCESS;
     }
@@ -94,6 +104,36 @@ public class MagicBlock extends Block {
         tooltipComponents.add(Component.translatable("tooltip.kcnet_mod.magic_block.tooltip"));
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
+
+
+    // Mostly taken from the CactusBlock.java code for experimenting with
+    // These make it to where I can get hurt on this, although what is a VoxelShape?
+    // This seems to be the collision for the block.
+    protected static final VoxelShape COLLISION_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 15.0, 15.0);
+    protected static final VoxelShape OUTLINE_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+
+    @Override
+    protected @NotNull VoxelShape getCollisionShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+        return COLLISION_SHAPE;
+    }
+
+    @Override
+    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+        return OUTLINE_SHAPE;
+    }
+
+    /**
+     * Override the check for if an entity is inside the block, make this like a cactus.
+     */
+    @Override
+    public void entityInside(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Entity entity) {
+        if(cactusProperties) {
+            entity.hurt(level.damageSources().cactus(), 1.0F);
+        }
+
+    }
+
+    //
 
 
     //--------------

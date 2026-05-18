@@ -3,12 +3,18 @@ package net.kelsoncraft.kcmod.mixin;
 import net.kelsoncraft.kcmod.Config;
 import net.kelsoncraft.kcmod.util.ChatColors;
 import net.kelsoncraft.kcmod.util.MessageUtil;
+import net.kelsoncraft.kcmod.util.PlayerUtil;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.GrassBlock;
 import org.slf4j.Logger;
@@ -25,22 +31,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 // TODO Make this to where it can only be clicked one time every so often, instead of being spammed.
 
 @Mixin(Item.class)
-public class FlySpeedMixin {
+public abstract class FlySpeedMixin {
 
     // If this is toggled, then it'll enable this Mixin testing.
     // It mostly just allows you to change your flying speed set to a value from the config and if it's enabled.
     // I need to restrict this to certain blocks or something, possibly make the player only
     // be able to fly if holding a flower with special NBT or something.
     @Unique
-    private final boolean flySpeedChanges = false;
+    private final boolean flySpeedChanges = true;
 
     @Shadow
     @Final
     private static Logger LOGGER;
     // TODO Make these able to be changed with a command, for now I am adding the values to a config for testing.
 
-    @Unique
-    private int flySpeedConfig = 1;
+    @Shadow
+    public abstract DataComponentMap components();
+
+    @Shadow
+    private DataComponentMap components;
 
     @Unique
     float defaultFlySpeed = 0.1f;
@@ -111,17 +120,51 @@ public class FlySpeedMixin {
         ItemStack itemStack = player.getItemInHand(usedHand);
         Item heldItem = itemStack.getItem();
 
+        // https://docs.neoforged.net/docs/datastorage/nbt/
+        CompoundTag tag = new CompoundTag();
+
+//        if(tag.contains("flying")) {
+
+//        }
+
         // This works!
         // TODO Figure out how to check if this has a specific NBT value, such as fly: enabled or something.
 //        Item newItem = Items.ACACIA_LOG;
         Item newItem = Items.POPPY;
 
-        if(heldItem == newItem) {
+//        if(heldItem == newItem) {
+
+        // Hmm, I need to figure out the switch statements for this.
+//        switch(PlayerUtil.getCurrentHeldItem(player, usedHand)) {
+//            case Items.POPPY:
+//                break;
+//        }
+
+        if(PlayerUtil.getCurrentHeldItem(player, usedHand) == Items.POPPY) {
+
+//            if(heldItem)
+
+//            this.components().
+//            this.components().get(Component.nbt(""));
+
             LOGGER.info("Item right clicked with special data");
             // This works now, I had to fix something in the function
             if (Config.COMMON.FAST_FLY_SPEED_TOGGLE.get()) {
                 setFlySpeed(player, Config.COMMON.FLY_SPEED.get());
             }
+
+            // Toggle flight with command block
+            // Well this somewhat works, I created a fun effect with it though.
+            // This won't give you flight, but if you hold right-click on the item, it'll
+            // allow you to keep going up like with a jetpack.
+        } else if (PlayerUtil.getCurrentHeldItem(player, usedHand) == Items.COMMAND_BLOCK) {
+            String flyingText = PlayerUtil.isPlayerFlying(player) ? "Disabled" : "Enabled";
+
+            if(Config.COMMON.FLY_TOGGLE.get()) {
+//                LOGGER.info("Flying has been {}.", flyingText);
+                PlayerUtil.setPlayerFlying(player, !PlayerUtil.isPlayerFlying(player));
+            }
+
         } else {
 
 //            LOGGER.info("Item ID clicked with: {}", heldItem.getName(itemStack));

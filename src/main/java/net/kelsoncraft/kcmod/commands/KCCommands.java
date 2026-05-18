@@ -56,10 +56,10 @@ public class KCCommands {
                         .then(Commands.literal("getxp").executes(MessageCommands::messagePlayerXp))
 
                         // Display a test toast message
-                        .then(Commands.literal("toast").executes(MessageCommands::messageToastTest))
+//                        .then(Commands.literal("toast").executes(MessageCommands::messageToastTest))
 
                         // Display a test popup message
-                        .then(Commands.literal("popup").executes(MessageCommands::messagePopupTest))
+//                        .then(Commands.literal("popup").executes(MessageCommands::messagePopupTest))
 
 //                        .then(Commands.literal("spawnmob")
 //                                .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
