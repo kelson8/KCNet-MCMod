@@ -40,7 +40,8 @@ jobs:
 
       # TODO Setup this to get the project jar version automatically.
       - name: Upload release asset
-        uses: actions/upload-release-asset@v2
+#        uses: actions/upload-release-asset@v2
+        uses: dream-encode/upload-release-asset-node16@v2
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: build/libs/kcnet_mod-0.0.1.jar
