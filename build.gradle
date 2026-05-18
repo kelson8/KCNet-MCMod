@@ -478,14 +478,14 @@ publishing {
         }
 
         // Github packages
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/kelson8/KCNet-MCMod")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
+//        maven {
+//            name = "GitHubPackages"
+//            url = uri("https://maven.pkg.github.com/kelson8/KCNet-MCMod")
+//            credentials {
+//                username = System.getenv("GITHUB_ACTOR")
+//                password = System.getenv("GITHUB_TOKEN")
+//            }
+//        }
     }
 }
 

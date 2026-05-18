@@ -26,25 +26,25 @@ jobs:
 
       # New for publishing releases
 
-      - name: Publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew publish
-
-      - name: Create release
-        uses: actions/create-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # TODO Setup this to get the project jar version automatically.
-      - name: Upload release asset
-#        uses: actions/upload-release-asset@v2
-        uses: dream-encode/upload-release-asset-node16@v2
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/libs/kcnet_mod-0.0.1.jar
-          asset_name: kcnet_mod-0.0.1.jar
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Publish
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: ./gradlew publish
+#
+#      - name: Create release
+#        uses: actions/create-release@v1
+#        with:
+#          tag_name: ${{ github.ref_name }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#
+#      # TODO Setup this to get the project jar version automatically.
+#      - name: Upload release asset
+##        uses: actions/upload-release-asset@v2
+#        uses: dream-encode/upload-release-asset-node16@v2
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          asset_path: build/libs/kcnet_mod-0.0.1.jar
+#          asset_name: kcnet_mod-0.0.1.jar
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
