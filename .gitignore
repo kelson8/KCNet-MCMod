@@ -20,7 +20,6 @@ src/main/resources/logback.xml
 .vscode
 
 # Misc
-src/main/java/net/kelsoncraft/kcmod/NewConfig.java
 src/main/java/net/kelsoncraft/kcmod/client/AutoLoad.java
 src/main/java/net/kelsoncraft/kcmod/test/ExplosiveArrowTest.java
 src/main/java/net/kelsoncraft/kcmod/commands/misc/EntitySelectorTestCommand.java

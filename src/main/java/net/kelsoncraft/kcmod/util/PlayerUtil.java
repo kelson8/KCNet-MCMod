@@ -1,12 +1,16 @@
 package net.kelsoncraft.kcmod.util;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import org.spongepowered.asm.mixin.Unique;
 
 import java.util.Optional;
@@ -115,10 +119,35 @@ public class PlayerUtil {
      * @param player The player to check.
      * @return If the player is flying.
      */
-    public static boolean isPlayerFlying(ServerPlayer player) {
+    public static boolean isPlayerFlying(Player player) {
         return player.getAbilities().flying;
+
     }
 
+    /**
+     * Set the players flying status.
+     * @param player The player to set flying for.
+     * @param flying If flying is enabled or not.
+     */
+    public static void setPlayerFlying(Player player, boolean flying) {
+        player.getAbilities().flying = flying;
+
+        // I could possible use these attributes once I figure it out.
+//        NeoForgeMod.CREATIVE_FLIGHT;
+
+    }
+
+
+    /**
+     * Get the current item the player is holding
+     * @param player The player to get the item from.
+     * @param usedHand The usedHand parameter from an Item Mixin.
+     * @return The current item the player is holding.
+     */
+    public static Item getCurrentHeldItem(Player player, InteractionHand usedHand) {
+        ItemStack itemStack = player.getItemInHand(usedHand);
+        return itemStack.getItem();
+    }
 
 
 }
