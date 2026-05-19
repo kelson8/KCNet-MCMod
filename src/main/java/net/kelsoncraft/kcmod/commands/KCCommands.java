@@ -3,16 +3,22 @@ package net.kelsoncraft.kcmod.commands; // New package for commands
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.kcmod.KCMod;
 import net.kelsoncraft.kcmod.commands.teleport.CustomTeleportCommand;
+import net.kelsoncraft.kcmod.commands.teleport.DimensionTeleportCommand;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.ResourceArgument;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
+
+import static net.minecraft.core.registries.Registries.DIMENSION_TYPE;
 
 // Import the main mod class to access static properties
 
@@ -47,6 +53,25 @@ public class KCCommands {
                                         .then(Commands.argument("y", DoubleArgumentType.doubleArg())
                                                 .then(Commands.argument("z", DoubleArgumentType.doubleArg())
                                                         .executes(CustomTeleportCommand::teleportCommand)
+                                                )
+                                        )
+                                )
+                        )
+
+                        // Dimensional teleport, tested working with mining dimension data pack.
+                        // I got the idea for the ResourceArgument from the SummonCommand.
+                        // TODO Try to figure out Luckperms or FTB Ranks for these permissions later.
+                        .then(Commands.literal("dimtp")
+                                .requires(s -> s.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                .then(Commands.argument("x", DoubleArgumentType.doubleArg())
+                                        .then(Commands.argument("y", DoubleArgumentType.doubleArg())
+                                                .then(Commands.argument("z", DoubleArgumentType.doubleArg())
+                                                        // TODO Fix custom dimensions with this command.
+//                                                                .then(Commands.argument("dimension", StringArgumentType.string()))
+//                                                                .then(Commands.argument("dimension", ResourceArgument.resource(event.getBuildContext(), DIMENSION_TYPE)))
+//                                                .then(Commands.argument("yaw", DoubleArgumentType.doubleArg())
+//                                                .then(Commands.argument("pitch", DoubleArgumentType.doubleArg())
+                                                        .executes(DimensionTeleportCommand::dimensionTeleportCommand)
                                                 )
                                         )
                                 )

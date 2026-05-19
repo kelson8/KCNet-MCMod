@@ -123,9 +123,9 @@ repositories {
     // https://maven.txni.dev/#/releases/toni/txnilib
     // This maven seems to be down, or the link is dead.
     // It keeps making my GitHub builds fail.
-    maven {
-        url "https://maven.txni.dev/releases"
-    }
+//    maven {
+//        url "https://maven.txni.dev/releases"
+//    }
 
     // https://github.com/Sinytra/ForgifiedFabricAPI
     maven {
@@ -389,6 +389,17 @@ dependencies {
     // I'm not sure how to make this one work.
     // I could possibly add options to Sodium.
 //    implementation("maven.modrinth:sodium-options-api:1.21.1-neoforge")
+
+    // Open loader, mostly for using data packs globally
+    // https://github.com/Darkhax-Minecraft/Open-Loader/tree/1.21.1
+
+    // NeoForge
+//    implementation "net.darkhax.openloader:openloader-neoforge-1.21.1:21.1.5"
+
+    // Common / MultiLoader / Vanilla
+//    compileOnly "net.darkhax.openloader:openloader-common-1.21.1:21.1.5"
+
+    //
 
 
     //----

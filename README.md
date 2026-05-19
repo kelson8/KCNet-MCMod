@@ -36,8 +36,7 @@ Commands:
 
 
 * `/kc getxp` - Show your current xp levels as a popup on screen.
-* `/kc toast` - Show a test toast on screen.
-* `/kc popup` - Show a test popup on screen.
+* `/kc dimtp [x, y, z]` - Teleport you to a dimension that is set in the config to those coordinates.
 
 ---
 
@@ -206,13 +205,20 @@ I have used the [Utilities.java](https://github.com/legobmw99/BetterThanMending/
 
 ---
 
-**Darkhax-Minecraft on GitHub:**
+**Darkhax-Minecraft on GitHub**
 
 I have used some utility code from the Dark Utilities mod.
 * https://github.com/Darkhax-Minecraft/Dark-Utilities
 
 Usages:
 * `InvTest.java` - Used some code from here [DarkUtilsCommon.java](https://github.com/Darkhax-Minecraft/Dark-Utilities/blob/1.20.4/common/src/main/java/net/darkhax/darkutilities/DarkUtilsCommon.java)
+
+---
+
+**ezTxmMC on GitHub for DimensionSpawn code**
+
+Usages:
+* `PlayerUtil.java` - Used teleportation code from this MIT licensed project [SpawnEvent.java](https://github.com/ezTxmMC/DimensionSpawn/blob/neoforge/1.21.1/src/main/java/de/eztxm/dimensionspawn/event/SpawnEvent.java)
 
 ---
 

@@ -95,6 +95,10 @@
   "config.kcnet_mod.misc.category": "Misc",
   "config.kcnet_mod.misc.tooltip": "Misc Options",
 
+
+  "config.kcnet_mod.misc.dimension_teleport_name": "Dimension teleport name",
+  "config.kcnet_mod.misc.dimension_teleport_name.tooltip": "The name of the dimension to teleport to with /kc dimtp",
+
   "config.kcnet_mod.misc.fly_speed": "Flying Speed",
   "config.kcnet_mod.misc.fly_speed.tooltip": "Change your flying speed.",
   "config.kcnet_mod.misc.fly_toggle": "Toggle Flying",

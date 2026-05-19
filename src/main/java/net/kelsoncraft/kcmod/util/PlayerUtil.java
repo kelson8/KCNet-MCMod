@@ -1,18 +1,32 @@
 package net.kelsoncraft.kcmod.util;
 
+import net.kelsoncraft.kcmod.Config;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import org.spongepowered.asm.mixin.Unique;
 
+import java.util.Collections;
+import java.util.Objects;
 import java.util.Optional;
 
 public class PlayerUtil {
@@ -148,6 +162,120 @@ public class PlayerUtil {
         ItemStack itemStack = player.getItemInHand(usedHand);
         return itemStack.getItem();
     }
+
+    /**
+     * Give a player an effect, TODO Fix this later.
+     * @param player The player to give an effect to.
+     * @param effect The effect to give to the player.
+     * @param seconds The seconds for the effect.
+     * @param amplifier The amplifier for the effect.
+     */
+    public static void givePlayerEffect(Player player, MobEffect effect, int seconds, int amplifier) {
+//        player.
+//        Holder<MobEffect> effectHolder;
+//        MobEffectInstance effectInstance = new MobEffectInstance(effectHolder, seconds, amplifier);
+    }
+
+
+    //-----
+    // Credit to ezTxmMC on GitHub for the below code, it is licensed under MIT and I have modified it a bit.
+    // I have removed the config options to this for now.
+    // https://github.com/ezTxmMC/DimensionSpawn/blob/neoforge/1.21.1/src/main/java/de/eztxm/dimensionspawn/event/SpawnEvent.java
+
+
+    /**
+     * Handle a dimensional teleport
+     * @param player The player to teleport.
+     * @param pos The position to set the player to.
+     * @param yaw The yaw for the location.
+     * @param pitch The pitch for the location.
+     * @param dimensionToTp The dimension namespace to teleport to, such as mining_dimension:mining_dimension, disabled argument.
+     */
+//    public void handleDimensionTeleport(Player player, Vec3 pos, float yaw, float pitch, String dimensionToTp) {
+    public void handleDimensionTeleport(Player player, Vec3 pos, float yaw, float pitch) {
+//    public void handleDimensionTeleport(Player player, Vec3 pos, float yaw, float pitch, String dimensionNamespace, String dimensionPath) {
+//        boolean useDimension = Config.useDimensionEntry.get();
+
+        String[] dimensionSplit = Config.COMMON.DIMENSION_TELEPORT_NAME.get().split(":");
+//        String[] dimensionSplit = dimensionToTp.split(":");
+
+            ResourceKey<Level> dimensionKey = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(dimensionSplit[0], dimensionSplit[1]));
+            Level level = player.level();
+            ServerLevel dimension = Objects.requireNonNull(level.getServer()).getLevel(dimensionKey);
+            if (dimension == null) {
+                MessageUtil.sendColorMessage(player, "Dimension " + dimensionSplit + " is invalid!", ChatColors.AQUA);
+                player.sendSystemMessage(Component.literal("[DimensionSpawn] The dimension " + dimensionKey + " does not exist in this instance."));
+                return;
+            }
+            DimensionTransition transition = dimensionTransition(player, new Vec3(pos.x, pos.y, pos.z), yaw, pitch, dimension, false, 0);
+            if (transition == null) {
+                return;
+            }
+            player.changeDimension(transition);
+
+            double x = pos.x;
+            double y = pos.y;
+            double z = pos.z;
+            player.teleportTo((ServerLevel) player.level(), x, y, z, Collections.emptySet(), yaw, pitch);
+//        }
+    }
+
+    /**
+     * Teleport the player to another dimesnion
+     * @param entity The player to teleport
+     * @param pos The position to set the player to.
+     * @param yaw The yaw for the location.
+     * @param pitch The pitch for the location.
+     * @param destWorld The world to tepeort to.
+     * @param safeSpawn If the spawn should be checked for hazards.
+     * @param safeSpawnRange The range of the safe spawn.
+     * @return
+     */
+    private DimensionTransition dimensionTransition(Entity entity, Vec3 pos, float yaw, float pitch, ServerLevel destWorld, boolean safeSpawn, int safeSpawnRange) {
+            if (safeSpawn) {
+                BlockPos blockPos = new BlockPos((int) pos.x, (int) pos.y, (int) pos.z);
+                BlockPos safeBlockPos = validPlayerSpawnLocation(destWorld, blockPos, safeSpawnRange);
+                if (safeBlockPos == null) {
+                    return new DimensionTransition(destWorld, entity, entity1 -> entity1.teleportTo(destWorld, pos.x, pos.y, pos.z, Collections.emptySet(), yaw, pitch));
+                }
+                entity.teleportTo(destWorld, safeBlockPos.getX(), safeBlockPos.getY(), safeBlockPos.getZ(), Collections.emptySet(), yaw, pitch);
+                return new DimensionTransition(destWorld, entity, entity1 -> entity1.teleportTo(destWorld, safeBlockPos.getX(), safeBlockPos.getY(), safeBlockPos.getZ(), Collections.emptySet(), yaw, pitch));
+            }
+            return new DimensionTransition(destWorld, entity, entity1 -> entity1.teleportTo(destWorld, pos.x, pos.y, pos.z, Collections.emptySet(), yaw, pitch));
+    }
+
+    /**
+     * Check for a safe spawn location.
+     * @param world The world to check for.
+     * @param position The coordinates for the location.
+     * @param maximumRange The range to check if it's safe.
+     * @return If the spawn location is safe.
+     */
+    private BlockPos validPlayerSpawnLocation(ServerLevel world, BlockPos position, int maximumRange) {
+        BlockPos.MutableBlockPos currentPos = new BlockPos.MutableBlockPos();
+        for (int range = 0; range < maximumRange; range++) {
+            int radiusSq = range * range;
+            int outerRadiusSq = (range + 1) * (range + 1);
+            for (int yOffset = -range; yOffset <= range; yOffset++) {
+                for (int xOffset = -range; xOffset <= range; xOffset++) {
+                    for (int zOffset = -range; zOffset <= range; zOffset++) {
+                        int distanceSq = xOffset * xOffset + yOffset * yOffset + zOffset * zOffset;
+                        if (distanceSq >= radiusSq && distanceSq < outerRadiusSq) {
+                            currentPos.set(position.getX() + xOffset, position.getY() + yOffset, position.getZ() + zOffset);
+                            if (world.getBlockState(currentPos.below()).canOcclude() &&
+                                    world.getBlockState(currentPos).isAir() &&
+                                    world.getBlockState(currentPos.above()).isAir()) {
+                                return currentPos;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    //-----
 
 
 }
