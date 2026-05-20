@@ -401,6 +401,11 @@ dependencies {
 
     //
 
+    //
+    //
+    compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}:api"
+    runtimeOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
+
 
     //----
     // This is the line that's pulling in Caxton, I disabled this and that fixed the runData gradle task.
@@ -413,8 +418,9 @@ dependencies {
 //    implementation "toni.txnilib:neoforge-${minecraft_version}:${txni_lib_version}"
 
     // Sinytra connector for fabric
+    // TODO Remove this if it's not needed.
     // https://github.com/Sinytra/ForgifiedFabricAPI
-    implementation "org.sinytra.forgified-fabric-api:forgified-fabric-api:${fabric_api_version}"
+//    implementation "org.sinytra.forgified-fabric-api:forgified-fabric-api:${fabric_api_version}"
 
     //---------
 

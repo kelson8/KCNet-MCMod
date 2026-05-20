@@ -1,0 +1,7 @@
+{
+  "name": "KCNet Mod",
+  "landing_text": "Welcome to the KCNet Mod",
+  "version": 1,
+  "creative_tab": "minecraft:tools_and_utilities",
+  "use_resource_pack": true
+}

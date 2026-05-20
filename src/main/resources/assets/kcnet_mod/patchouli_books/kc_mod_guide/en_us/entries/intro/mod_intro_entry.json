@@ -1,0 +1,15 @@
+{
+  "name": "Mod intro",
+  "icon": "minecraft:writable_book",
+  "category": "kcnet_mod:mod_intro",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "KCNet test mod information. I am mostly working on some small commands and misc changes for this mod.",
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Page #2"
+    }
+  ]
+}
