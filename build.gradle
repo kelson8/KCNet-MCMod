@@ -402,9 +402,17 @@ dependencies {
     //
 
     //
-    //
+    // Patchouli
     compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}:api"
     runtimeOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
+
+    // Titanium, has a lot of useful NBT libraries and other stuff
+    implementation project.dependencies.create("com.hrznstudio:titanium:${titanium_version}")
+
+    // JEI
+    compileOnly "mezz.jei:jei-1.21.1-common-api:$jei_version"
+    compileOnly "mezz.jei:jei-1.21.1-neoforge-api:$jei_version"
+    runtimeOnly "mezz.jei:jei-1.21.1-neoforge:$jei_version"
 
 
     //----
