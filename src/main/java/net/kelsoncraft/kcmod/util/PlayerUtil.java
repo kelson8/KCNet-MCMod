@@ -176,6 +176,14 @@ public class PlayerUtil {
 //        MobEffectInstance effectInstance = new MobEffectInstance(effectHolder, seconds, amplifier);
     }
 
+    /**
+     * Give the player an item, TODO Make this work with custom fireworks also.
+     * @param item
+     */
+    public static void giveItem(Player player, ItemStack item) {
+        player.addItem(item);
+    }
+
 
     //-----
     // Credit to ezTxmMC on GitHub for the below code, it is licensed under MIT and I have modified it a bit.

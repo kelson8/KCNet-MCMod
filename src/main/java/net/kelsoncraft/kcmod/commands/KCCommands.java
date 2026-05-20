@@ -8,23 +8,58 @@ import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.kcmod.KCMod;
 import net.kelsoncraft.kcmod.commands.teleport.CustomTeleportCommand;
 import net.kelsoncraft.kcmod.commands.teleport.DimensionTeleportCommand;
+import net.kelsoncraft.kcmod.util.PlayerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.ResourceArgument;
+import net.minecraft.commands.arguments.coordinates.Vec3Argument;
+import net.minecraft.commands.arguments.item.ItemArgument;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
+import java.util.Objects;
+
 import static net.minecraft.core.registries.Registries.DIMENSION_TYPE;
+import static net.minecraft.core.registries.Registries.ITEM;
 
 // Import the main mod class to access static properties
 
 // Created with help from Google Gemini, I couldn't figure this out.
 
 public class KCCommands {
+
+    /**
+     * Give Item command, TODO Move this elsewhere.
+     * @param context
+     * @return
+     */
+    private static int giveItemCommand(CommandContext<CommandSourceStack> context) {
+
+        ItemStack item = context.getArgument("item", ItemStack.class);
+        PlayerUtil.giveItem(Objects.requireNonNull(context.getSource().getPlayer()), item);
+
+        return Command.SINGLE_SUCCESS;
+    }
+
+    // I didn't know this could be used in the translations
+    // en-us.json:
+    // "commands.neoessentials.teleport.admin.teleported_player_coords": "Teleported {0} to coordinates ({1}, {2}, {3}).",
+    //
+
+    // Commands, can be used like this with a translation, example from NeoEssentials
+    /*
+        player.teleportTo(player.serverLevel(), x, y, z, player.getYRot(), player.getXRot());
+        ctx.getSource().sendSuccess(() -> MessageUtil.success("commands.neoessentials.teleport.admin.teleported_player_coords",
+          player.getName().getString(), String.valueOf((int) x), String.valueOf((int) y), String.valueOf((int) z)), true);
+
+     */
+
 
     /**
      * Event handler for registering commands.
@@ -49,13 +84,9 @@ public class KCCommands {
                         // Position command test, teleport the player to the specified coordinates.
                         .then(Commands.literal("pos") // Defines subcommand: /kc pos
                                 .requires(sourceStack -> sourceStack.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                                .then(Commands.argument("x", DoubleArgumentType.doubleArg())
-                                        .then(Commands.argument("y", DoubleArgumentType.doubleArg())
-                                                .then(Commands.argument("z", DoubleArgumentType.doubleArg())
-                                                        .executes(CustomTeleportCommand::teleportCommand)
-                                                )
+                                        .then(Commands.argument("coords", Vec3Argument.vec3())
+                                        .executes(CustomTeleportCommand::teleportCommand)
                                         )
-                                )
                         )
 
                         // Dimensional teleport, tested working with mining dimension data pack.
@@ -63,9 +94,7 @@ public class KCCommands {
                         // TODO Try to figure out Luckperms or FTB Ranks for these permissions later.
                         .then(Commands.literal("dimtp")
                                 .requires(s -> s.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                                .then(Commands.argument("x", DoubleArgumentType.doubleArg())
-                                        .then(Commands.argument("y", DoubleArgumentType.doubleArg())
-                                                .then(Commands.argument("z", DoubleArgumentType.doubleArg())
+                                        .then(Commands.argument("coords", Vec3Argument.vec3())
                                                         // TODO Fix custom dimensions with this command.
 //                                                                .then(Commands.argument("dimension", StringArgumentType.string()))
 //                                                                .then(Commands.argument("dimension", ResourceArgument.resource(event.getBuildContext(), DIMENSION_TYPE)))
@@ -74,8 +103,23 @@ public class KCCommands {
                                                         .executes(DimensionTeleportCommand::dimensionTeleportCommand)
                                                 )
                                         )
-                                )
+//                                )
+//                        )
+
+                        //
+                        // TODO Test
+                        //----
+
+                        .then(Commands.literal("give")
+                        .requires(s -> s.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                // TODO Fix this
+                                .then(Commands.argument("item", ResourceArgument.resource(event.getBuildContext(), ITEM)))
+//                                .then(Commands.argument("item", ))
+//                                        .executes(s -> PlayerUtil.giveItem(event.getBuildContext(),
+                                        .executes(KCCommands::giveItemCommand)
                         )
+
+                        //---
 
                         // Display player XP on screen.
                         .then(Commands.literal("getxp").executes(MessageCommands::messagePlayerXp))

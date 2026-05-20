@@ -9,6 +9,8 @@ import net.kelsoncraft.kcmod.util.PlayerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.ResourceArgument;
+import net.minecraft.commands.arguments.coordinates.Coordinates;
+import net.minecraft.commands.arguments.coordinates.Vec3Argument;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -23,10 +25,11 @@ public class DimensionTeleportCommand {
         PlayerUtil playerUtil = new PlayerUtil();
         Entity playerEntity = command.getSource().getEntity();
         if(playerEntity instanceof Player player) {
-//            command.getSource().getEntity().teleportTo();
-            double x = DoubleArgumentType.getDouble(command, "x");
-            double y = DoubleArgumentType.getDouble(command, "y");
-            double z = DoubleArgumentType.getDouble(command, "z");
+            // Some of this came from DirectTeleportCommands.java in NeoEssentials
+            // I didn't know I could do this like in Vanilla, now I can use ~, and -~ for positions, and it fills it in easier.
+            Coordinates coords = Vec3Argument.getCoordinates(command, "coords");
+            Vec3 pos = coords.getPosition(command.getSource());
+
 
 //            String dimensionToTp = StringArgumentType.getString(command, "dimension");
 
@@ -38,10 +41,8 @@ public class DimensionTeleportCommand {
 
 //            String[] dimensionToTp = {"mining_dimension", "mining_dimension"};
 
-//            playerUtil.handleDimensionTeleport(player, new Vec3(x, y, z), yaw, pitch, dimensionToTp);
-            playerUtil.handleDimensionTeleport(player, new Vec3(x, y, z), 0, 0);
+            playerUtil.handleDimensionTeleport(player, pos, 0, 0);
 //            command.getSource().sendSuccess(() -> Component.literal("Teleported to " + x + ", " + y + ", " + z).withStyle(ChatFormatting.GREEN), false);
-//            command.getSource().sendSuccess(() -> Component.literal("Teleported to {}{}{}").withStyle(ChatFormatting.GREEN), false);
         } else {
             // If the command was not executed by a player, send an error message
             command.getSource().sendFailure(Component.literal("This command can only be used by a player!").withStyle(ChatFormatting.RED));
@@ -51,5 +52,4 @@ public class DimensionTeleportCommand {
         return Command.SINGLE_SUCCESS;
     }
 
-//    handleDimensionTeleport
 }
