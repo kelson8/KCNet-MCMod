@@ -1,6 +1,7 @@
 package net.kelsoncraft.kcmod.util;
 
 import net.kelsoncraft.kcmod.Config;
+import net.kelsoncraft.kcmod.KCMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -28,6 +29,7 @@ import org.spongepowered.asm.mixin.Unique;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 public class PlayerUtil {
 
@@ -195,24 +197,19 @@ public class PlayerUtil {
      * Handle a dimensional teleport
      * @param player The player to teleport.
      * @param pos The position to set the player to.
+     * @param dimensionToTp The dimension namespace to teleport to, such as mining_dimension:mining_dimension, disabled argument.
      * @param yaw The yaw for the location.
      * @param pitch The pitch for the location.
-     * @param dimensionToTp The dimension namespace to teleport to, such as mining_dimension:mining_dimension, disabled argument.
      */
-//    public void handleDimensionTeleport(Player player, Vec3 pos, float yaw, float pitch, String dimensionToTp) {
-    public void handleDimensionTeleport(Player player, Vec3 pos, float yaw, float pitch) {
-//    public void handleDimensionTeleport(Player player, Vec3 pos, float yaw, float pitch, String dimensionNamespace, String dimensionPath) {
-//        boolean useDimension = Config.useDimensionEntry.get();
+    public void handleDimensionTeleport(Player player, Vec3 pos, ResourceKey<Level> dimensionToTp, float yaw, float pitch) {
 
-        String[] dimensionSplit = Config.COMMON.DIMENSION_TELEPORT_NAME.get().split(":");
-//        String[] dimensionSplit = dimensionToTp.split(":");
+            KCMod.LOGGER.info("Dimension key: {}", dimensionToTp.toString());
 
-            ResourceKey<Level> dimensionKey = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(dimensionSplit[0], dimensionSplit[1]));
             Level level = player.level();
-            ServerLevel dimension = Objects.requireNonNull(level.getServer()).getLevel(dimensionKey);
+            ServerLevel dimension = Objects.requireNonNull(level.getServer()).getLevel(dimensionToTp);
             if (dimension == null) {
-                MessageUtil.sendColorMessage(player, "Dimension " + dimensionSplit + " is invalid!", ChatColors.AQUA);
-                player.sendSystemMessage(Component.literal("[DimensionSpawn] The dimension " + dimensionKey + " does not exist in this instance."));
+                MessageUtil.sendColorMessage(player, "Dimension " + dimensionToTp.toString() + " is invalid!", ChatColors.AQUA);
+                player.sendSystemMessage(Component.literal("[DimensionSpawn] The dimension " + dimensionToTp.toString() + " does not exist in this instance."));
                 return;
             }
             DimensionTransition transition = dimensionTransition(player, new Vec3(pos.x, pos.y, pos.z), yaw, pitch, dimension, false, 0);

@@ -31,10 +31,6 @@ public class Config {
 
         // Misc options
 
-        // Teleport options
-        // Name of the dimension to teleport to for the /kc dimtp command
-        public final ModConfigSpec.ConfigValue<String> DIMENSION_TELEPORT_NAME;
-
         // Flying toggles
 //        public final ModConfigSpec.ConfigValue<Float> FLY_SPEED;
         public final ModConfigSpec.ConfigValue<Integer> FLY_SPEED;
@@ -103,11 +99,6 @@ public class Config {
             builder.comment(getTranslationKey("misc.tooltip"))
                     .translation(getTranslationKey("misc.category"))
                     .push("misc");
-
-            DIMENSION_TELEPORT_NAME = builder
-                    .comment(getTranslationKey("misc.dimension_teleport_name_tooltip"))
-                    .translation(getTranslationKey("misc.dimension_teleport_name"))
-                    .define("dimensionTeleportName", "");
 
             FLY_SPEED = builder
                     .comment(getTranslationKey("misc.fly_speed.tooltip"))

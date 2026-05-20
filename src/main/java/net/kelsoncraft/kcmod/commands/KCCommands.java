@@ -12,6 +12,7 @@ import net.kelsoncraft.kcmod.util.PlayerUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.DimensionArgument;
 import net.minecraft.commands.arguments.ResourceArgument;
 import net.minecraft.commands.arguments.coordinates.Vec3Argument;
 import net.minecraft.commands.arguments.item.ItemArgument;
@@ -95,16 +96,13 @@ public class KCCommands {
                         .then(Commands.literal("dimtp")
                                 .requires(s -> s.hasPermission(Commands.LEVEL_GAMEMASTERS))
                                         .then(Commands.argument("coords", Vec3Argument.vec3())
-                                                        // TODO Fix custom dimensions with this command.
-//                                                                .then(Commands.argument("dimension", StringArgumentType.string()))
-//                                                                .then(Commands.argument("dimension", ResourceArgument.resource(event.getBuildContext(), DIMENSION_TYPE)))
+                                                        .then(Commands.argument("dimension", DimensionArgument.dimension())
 //                                                .then(Commands.argument("yaw", DoubleArgumentType.doubleArg())
 //                                                .then(Commands.argument("pitch", DoubleArgumentType.doubleArg())
                                                         .executes(DimensionTeleportCommand::dimensionTeleportCommand)
                                                 )
                                         )
-//                                )
-//                        )
+                                    )
 
                         //
                         // TODO Test
