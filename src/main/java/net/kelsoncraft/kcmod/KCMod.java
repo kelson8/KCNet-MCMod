@@ -1,6 +1,6 @@
 package net.kelsoncraft.kcmod;
 
-import mcjty.lib.modules.Modules;
+//import mcjty.lib.modules.Modules;
 import net.kelsoncraft.kcmod.block.ModBlocks;
 import net.kelsoncraft.kcmod.commands.*;
 import net.kelsoncraft.kcmod.component.ModDataComponents;
