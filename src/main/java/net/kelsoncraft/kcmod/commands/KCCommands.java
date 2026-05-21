@@ -18,17 +18,24 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.DimensionArgument;
 import net.minecraft.commands.arguments.ResourceArgument;
+import net.minecraft.commands.arguments.coordinates.Coordinates;
 import net.minecraft.commands.arguments.coordinates.Vec3Argument;
 import net.minecraft.commands.arguments.item.ItemArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
@@ -42,6 +49,9 @@ import static net.minecraft.core.registries.Registries.ITEM;
 // Import the main mod class to access static properties
 
 public class KCCommands {
+
+
+
     // I need to try to setup Patchouli Data gen so it can generate the json files for Patchouli
     // I can use parts of this MIT licensed project for that.
     // https://github.com/KhanhPham05/PatchouliDataGen/blob/master/src/main/java/com/khanhpham/patchoulidatagen/examplecode/PatchouliGeneratorImpl.java
@@ -58,6 +68,27 @@ public class KCCommands {
           player.getName().getString(), String.valueOf((int) x), String.valueOf((int) y), String.valueOf((int) z)), true);
 
      */
+
+    // Another teleport test command.
+    // Mostly for testing with random teleports and other stuff.
+    // TODO Move this elsewhere
+    private static int teleportTestCommand(CommandContext<CommandSourceStack> command) throws CommandSyntaxException {
+        Entity playerEntity = command.getSource().getEntity();
+        if(playerEntity instanceof Player player) {
+            // I don't even think this argument is being used, quite sure this is being randomized on teleport anyways.
+            Coordinates coords = Vec3Argument.getCoordinates(command, "coords");
+            Vec3 pos = coords.getPosition(command.getSource());
+
+            PlayerUtil.teleportTest(player, pos);
+
+        } else {
+            // If the command was not executed by a player, send an error message
+            command.getSource().sendFailure(Component.literal("This command can only be used by a player!").withStyle(ChatFormatting.RED));
+            return -1; // Indicate command failure
+        }
+
+        return Command.SINGLE_SUCCESS;
+    }
 
 
     /**
@@ -101,6 +132,16 @@ public class KCCommands {
                                                 )
                                         )
                                     )
+
+
+                        // Test commands
+                        .then(Commands.literal("tptest")
+                                .requires(s -> s.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                .then(Commands.argument("coords", Vec3Argument.vec3())
+                                .executes(KCCommands::teleportTestCommand)
+                                )
+                        )
+                        //
 
                         //
                         // Give players items, like with /i from essentials.

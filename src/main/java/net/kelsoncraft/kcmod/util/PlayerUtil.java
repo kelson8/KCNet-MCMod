@@ -4,6 +4,7 @@ import com.hrznstudio.titanium.nbthandler.NBTManager;
 import net.kelsoncraft.kcmod.Config;
 import net.kelsoncraft.kcmod.KCMod;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +13,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,6 +24,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -261,6 +267,100 @@ public class PlayerUtil {
         player.getInventory().add(item);
     }
 
+    /**
+     * Basic function to get the players current dimension
+     * @param player The player to get the dimension for.
+     * @return The current dimension the player is in, such as 'minecraft:overworld'.
+     */
+    public static String getPlayerDimension(Player player) {
+        if (player instanceof ServerPlayer) {
+            return player.level().dimension().location().toString();
+        }
+
+        return "Can only be used on a player.";
+
+    }
+
+    /**
+     * Set the players dimension
+     * @param player The player to set the dimension for.
+     * @param dimension The dimension to teleport to, such as 'minecraft:overworld'.
+     */
+    public static void setPlayerDimension(Player player, String dimension) {
+    }
+
+
+    // Teleport test
+    // Well oops, this puts me on top of the mining dimension.
+    // Adapted from the FTB Essentials RTP teleport code, this needs modified.
+    // This somewhat works, but it doesn't always work in other dimensions.
+    // TODO Figure out how to use this.
+    private static final TagKey<Block> IGNORE_RTP_BLOCKS = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(KCMod.MOD_ID, "ignore_rtp"));
+    private static final int RTP_MAX_TRIES = 3;
+
+    public static void teleportTest(Player player, Vec3 pos) {
+
+        // Some random values for distances
+        int minDistance = 6; // 500
+        int maxDistance = 30;
+        Level level = player.level();
+        // Attempting to make this a safe teleport.
+        ServerLevel serverLevel = (ServerLevel) level;
+
+        // Make this fail in the mining dimension
+        if(getPlayerDimension(player).equals("mining_dimension:mining_dimension")) {
+            MessageUtil.sendColorMessage(player, "Error, this does not work in the mining dimension", ChatColors.RED);
+            return;
+        }
+
+        for (int attempt = 0; attempt < RTP_MAX_TRIES; attempt++) {
+
+            // TODO Try to figure out how this is working.
+            // This just randomizes the teleport for the RTP.
+            double dist = minDistance + serverLevel.random.nextDouble() * (maxDistance - minDistance);
+            double angle = serverLevel.random.nextDouble() * Math.PI * 2D;
+
+            int x = Mth.floor(Math.cos(angle) * dist);
+            int y = 256;
+            int z = Mth.floor(Math.sin(angle) * dist);
+            BlockPos currentPos = new BlockPos(x, y, z);
+
+            BlockPos heightMapPos = new BlockPos(currentPos);
+
+            serverLevel.getChunkAt(heightMapPos);
+            BlockPos hmPos = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, heightMapPos);
+
+            // TODO Make this fail on the mining dimension for now.
+            if (hmPos.getY() > 0) {
+                BlockPos goodPos = null;
+                if (hmPos.getY() < ((ServerLevel) level).getLogicalHeight()) {
+                    goodPos = hmPos;
+                } else {
+                    // broken heightmap (nether, other mod dimensions)
+                    for (BlockPos newPos : BlockPos.spiralAround(new BlockPos(hmPos.getX(), level.getSeaLevel(), hmPos.getZ()), 16, Direction.EAST, Direction.SOUTH)) {
+                        BlockState bs = level.getBlockState(newPos);
+                        if (bs.blocksMotion() && !bs.is(IGNORE_RTP_BLOCKS) && level.isEmptyBlock(newPos.above(1))
+                                && level.isEmptyBlock(newPos.above(2)) && level.isEmptyBlock(newPos.above(3))) {
+                            goodPos = newPos.immutable();
+                            break;
+                        }
+                    }
+                }
+
+                // Teleport the player if the position is valid.
+                if (goodPos != null) {
+//                    LOGGER.info("Random pos: X: {} Y: {} Z: {}", goodPos.getX(), y, z);
+                    String randomPos = String.format(" @ [x %d, y %d, z %d]", goodPos.getX(), goodPos.getY(), goodPos.getZ());
+                    LOGGER.info("Random pos: {}", randomPos);
+//                    LOGGER.info("Current dimension: {}", level.dimension().location());
+                    getPlayerDimension(player);
+                    player.teleportTo(goodPos.getX(), goodPos.getY(), goodPos.getZ());
+                }
+            }
+        }
+
+        //
+    }
 
     //-----
     // Credit to ezTxmMC on GitHub for the below code, it is licensed under MIT and I have modified it a bit.
@@ -269,18 +369,20 @@ public class PlayerUtil {
 
 
     /**
-     * Handle a dimensional teleport
+     * Handle a dimensional teleport.
+     * TODO Make this try to avoid putting the player inside of a block, lava, and other hazards.
      * @param player The player to teleport.
      * @param pos The position to set the player to.
      * @param dimensionToTp The dimension namespace to teleport to, such as mining_dimension:mining_dimension, disabled argument.
      * @param yaw The yaw for the location.
      * @param pitch The pitch for the location.
      */
-    public void handleDimensionTeleport(Player player, Vec3 pos, ResourceKey<Level> dimensionToTp, float yaw, float pitch) {
+    public static void handleDimensionTeleport(Player player, Vec3 pos, ResourceKey<Level> dimensionToTp, float yaw, float pitch) {
 
-            LOGGER.info("Dimension key: {}", dimensionToTp.toString());
+//            LOGGER.info("Dimension key: {}", dimensionToTp.toString());
 
             Level level = player.level();
+
             ServerLevel dimension = Objects.requireNonNull(level.getServer()).getLevel(dimensionToTp);
             if (dimension == null) {
                 MessageUtil.sendColorMessage(player, "Dimension " + dimensionToTp.toString() + " is invalid!", ChatColors.AQUA);
@@ -301,8 +403,8 @@ public class PlayerUtil {
     }
 
     /**
-     * Teleport the player to another dimesnion
-     * @param entity The player to teleport
+     * Teleport the player to another dimension.
+     * @param entity The player to teleport.
      * @param pos The position to set the player to.
      * @param yaw The yaw for the location.
      * @param pitch The pitch for the location.
@@ -311,7 +413,7 @@ public class PlayerUtil {
      * @param safeSpawnRange The range of the safe spawn.
      * @return
      */
-    private DimensionTransition dimensionTransition(Entity entity, Vec3 pos, float yaw, float pitch, ServerLevel destWorld, boolean safeSpawn, int safeSpawnRange) {
+    private static DimensionTransition dimensionTransition(Entity entity, Vec3 pos, float yaw, float pitch, ServerLevel destWorld, boolean safeSpawn, int safeSpawnRange) {
             if (safeSpawn) {
                 BlockPos blockPos = new BlockPos((int) pos.x, (int) pos.y, (int) pos.z);
                 BlockPos safeBlockPos = validPlayerSpawnLocation(destWorld, blockPos, safeSpawnRange);
@@ -331,7 +433,7 @@ public class PlayerUtil {
      * @param maximumRange The range to check if it's safe.
      * @return If the spawn location is safe.
      */
-    private BlockPos validPlayerSpawnLocation(ServerLevel world, BlockPos position, int maximumRange) {
+    private static BlockPos validPlayerSpawnLocation(ServerLevel world, BlockPos position, int maximumRange) {
         BlockPos.MutableBlockPos currentPos = new BlockPos.MutableBlockPos();
         for (int range = 0; range < maximumRange; range++) {
             int radiusSq = range * range;

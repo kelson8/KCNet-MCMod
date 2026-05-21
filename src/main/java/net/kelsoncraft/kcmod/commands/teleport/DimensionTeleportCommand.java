@@ -30,7 +30,6 @@ import net.minecraft.world.phys.Vec3;
 public class DimensionTeleportCommand {
 
     public static int dimensionTeleportCommand(CommandContext<CommandSourceStack> command) throws CommandSyntaxException {
-        PlayerUtil playerUtil = new PlayerUtil();
         Entity playerEntity = command.getSource().getEntity();
         if(playerEntity instanceof Player player) {
             // Some of this came from DirectTeleportCommands.java in NeoEssentials
@@ -54,7 +53,7 @@ public class DimensionTeleportCommand {
 
 //            String[] dimensionToTp = {"mining_dimension", "mining_dimension"};
 
-            playerUtil.handleDimensionTeleport(player, pos, dimensionKey, 0, 0);
+            PlayerUtil.handleDimensionTeleport(player, pos, dimensionKey, 0, 0);
 //            command.getSource().sendSuccess(() -> Component.literal("Teleported to " + x + ", " + y + ", " + z).withStyle(ChatFormatting.GREEN), false);
         } else {
             // If the command was not executed by a player, send an error message
