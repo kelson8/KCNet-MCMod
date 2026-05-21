@@ -2,6 +2,7 @@ package net.kelsoncraft.kcmod.item;
 
 import net.kelsoncraft.kcmod.KCMod;
 import net.kelsoncraft.kcmod.item.custom.ChiselItem;
+import net.kelsoncraft.kcmod.item.custom.CustomPickaxeItem;
 import net.kelsoncraft.kcmod.item.custom.FuelItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
@@ -37,9 +38,9 @@ public class ModItems {
             () -> new SwordItem(ModToolTiers.BISMUTH, new Item.Properties()
                     .attributes(SwordItem.createAttributes(ModToolTiers.BISMUTH, 5.0F, -2.4f))));
 
-    public static final DeferredItem<PickaxeItem> BISMUTH_PICKAXE = ITEMS.register("bismuth_pickaxe",
-            () -> new PickaxeItem(ModToolTiers.BISMUTH, new Item.Properties()
-                    .attributes(PickaxeItem.createAttributes(ModToolTiers.BISMUTH, 1.0F, -2.8f))));
+        public static final DeferredItem<CustomPickaxeItem> BISMUTH_PICKAXE = ITEMS.register("bismuth_pickaxe",
+            () -> new CustomPickaxeItem(ModToolTiers.BISMUTH, false));
+
 
     public static final DeferredItem<ShovelItem> BISMUTH_SHOVEL = ITEMS.register("bismuth_shovel",
             () -> new ShovelItem(ModToolTiers.BISMUTH, new Item.Properties()

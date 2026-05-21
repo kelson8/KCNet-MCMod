@@ -159,6 +159,17 @@ repositories {
         url "https://modmaven.dev"
     }
 
+    // https://raw.githubusercontent.com/McJtyMods/MultiWorkspace/1.21_neo/gradletools.gradle
+    maven {
+        name "Mc Jty Lib"
+         url "https://maven.k-4u.nl" // McJtyLib, TOP
+    }
+
+    // https://github.com/BlakeBr0/Cucumber/tree/1.2!
+    maven {
+        url 'https://maven.blakesmods.com'
+    }
+
     // TODO Test this later
     // https://github.com/SilentChaos512/SilentLib/tree/1.21.x?tab=readme-ov-file
 
@@ -413,6 +424,14 @@ dependencies {
     compileOnly "mezz.jei:jei-1.21.1-common-api:$jei_version"
     compileOnly "mezz.jei:jei-1.21.1-neoforge-api:$jei_version"
     runtimeOnly "mezz.jei:jei-1.21.1-neoforge:$jei_version"
+
+    // Mc Jty Lib, mostly used with RFTools and has a lot of useful API features
+    // https://github.com/McJtyMods/McJtyLib/tree/1.21_neo
+    // TODO Possibly disable this later
+    implementation "com.github.mcjty:mcjtylib:${mcjtylib_version}"
+
+    // Cucumber lib
+    implementation "com.blakebr0.cucumber:Cucumber:${cucumberlib_version}"
 
 
     //----
