@@ -2,37 +2,40 @@ package net.kelsoncraft.kcmod.commands.misc;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.kelsoncraft.kcmod.util.PlayerUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.item.ItemArgument;
+import net.minecraft.commands.arguments.item.ItemInput;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import java.util.Objects;
+
 public class GiveTestCommand {
-
-
 
     // https://github.com/neoforged/NeoForge/issues/1630
 
-    public static int giveItemCommand(CommandContext<CommandSourceStack> context) {
-        CommandSourceStack source = context.getSource();
-        Entity playerEntity = source.getEntity();
+    /**
+     * Give Item command
+     * @param context
+     * @return
+     */
+    public static int giveItemCommand(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
 
-        if (source.getEntity() instanceof Player player) {
-//            player.openCommandBlock();
-//            CommandBlockEntity commandBlockEntity = new CommandBlockEntity();
-//            player.inventoryMenu
+//        ItemStack item = context.getArgument("item", ItemStack.class);
+        ItemInput item = ItemArgument.getItem(context, "item");
+        int itemAmount = IntegerArgumentType.getInteger(context, "amount");
 
+        ItemStack commandItem = item.createItemStack(1, false);
 
-            //---
-            // https://forums.minecraftforge.net/topic/151365-giving-a-player-an-item/
-            // This works for adding an item to the players inventory, now to figure out how to get the user input.
-            // Optionally, an inventory slot can also be specified before the item stack.
-            player.getInventory().add(new ItemStack(Items.ACACIA_LOG));
-            //---
-        }
+        PlayerUtil.giveItem(Objects.requireNonNull(context.getSource().getPlayer()), commandItem, itemAmount);
+
         return Command.SINGLE_SUCCESS;
     }
 

@@ -1,10 +1,12 @@
 package net.kelsoncraft.kcmod.util;
 
+import com.hrznstudio.titanium.nbthandler.NBTManager;
 import net.kelsoncraft.kcmod.Config;
 import net.kelsoncraft.kcmod.KCMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -30,6 +32,8 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Logger;
+
+import static net.kelsoncraft.kcmod.KCMod.LOGGER;
 
 public class PlayerUtil {
 
@@ -88,8 +92,50 @@ public class PlayerUtil {
     }
 
     /**
+     * Sets the players flying speed
+     * TODO Fix this to work in a command.
+     * @param player The player to set the fly speed for
+     * @param newFlySpeed An integer value from 1-10 for the flying speed.
+     */
+    @Unique
+
+    public static void setFlySpeed(Player player, int newFlySpeed) {
+        if(newFlySpeed < 1 || newFlySpeed > 10) {
+            MessageUtil.sendColorMessage(player, "Error: Speed must be between 1 and 10", ChatColors.RED);
+            return;
+        }
+
+        float flySpeed = switch (newFlySpeed) {
+            case 1 -> 0.1f;
+            case 2 -> 0.2f;
+            case 3 -> 0.3f;
+            case 4 -> 0.4f;
+            case 5 -> 0.5f;
+            case 6 -> 0.6f;
+            case 7 -> 0.7f;
+            case 8 -> 0.8f;
+            case 9 -> 0.9f;
+            case 10 -> 1.0f;
+            default -> 0.1f;
+        };
+
+        // Make sure the faster fly speed toggle is enabled
+        if (Config.COMMON.FAST_FLY_SPEED_TOGGLE.get()) {
+            player.getAbilities().setFlyingSpeed(flySpeed);
+            MessageUtil.sendColorMessage(player, "Flying speed set to " + newFlySpeed, ChatColors.AQUA);
+        }
+
+        // Fall back to default flying speed if this is invalid.
+//        if (!IsFlySpeedValid(Config.COMMON.FLY_SPEED.get())) {
+//            flySpeed = defaultFlySpeed;
+//            LOGGER.warn("FlySpeed {} is invalid!", flySpeed);
+//        }
+    }
+
+    /**
      * Sets the players speed, moved out of SpeedCommands.java.
      * I may remove the conversions from this later and switch to using an easier method.
+     * TODO Fix this to work, it displays a message but doesn't update the speeds.
      * @param player The player to set the speed for.
      * @param speedType The speed type from the SpeedType enum, such as SpeedType.WALK, SpeedType.FLY.
      * @param speed An integer value from 1-10 for the fly/walk speed.
@@ -99,20 +145,13 @@ public class PlayerUtil {
     public static void setSpeed(Player player, SpeedType speedType, float speed) {
         // I didn't realize this was as easy as this, I didn't need that entire switch statement
         // https://github.com/ZeroG-Network-PTY-LTD/NeoEssentials/blob/Released/src/main/java/com/zerog/neoessentials/util/commands/PlayerStateCommands.java#L280
+
+        if(speed < 1f || speed > 10f) {
+            MessageUtil.sendColorMessage(player, "Error: Speed must be between 1 and 10", ChatColors.RED);
+            return;
+        }
+
         float mcSpeed = Math.min(speed / 10f, 1.0f);
-//        float flySpeed = switch (speed) {
-//            case 1 -> 0.1f;
-//            case 2 -> 0.2f;
-//            case 3 -> 0.3f;
-//            case 4 -> 0.4f;
-//            case 5 -> 0.5f;
-//            case 6 -> 0.6f;
-//            case 7 -> 0.7f;
-//            case 8 -> 0.8f;
-//            case 9 -> 0.9f;
-//            case 10 -> 1.0f;
-//            default -> 0.1f;
-//        };
 
         switch (speedType) {
             case WALK:
@@ -120,7 +159,7 @@ public class PlayerUtil {
                 MessageUtil.sendColorMessage(player, "Walking speed set to " + speed, ChatColors.AQUA);
                 break;
             case FLY:
-                player.getAbilities().setFlyingSpeed(mcSpeed);
+                setFlySpeed(player, (int)mcSpeed);
                 MessageUtil.sendColorMessage(player, "Flying speed set to " + speed, ChatColors.AQUA);
                 break;
             default:
@@ -135,9 +174,9 @@ public class PlayerUtil {
      * @param player The player to check.
      * @return If the player is flying.
      */
-    public static boolean isPlayerFlying(Player player) {
-        return player.getAbilities().flying;
-
+//    public static boolean isPlayerFlying(Player player) {
+    public static boolean canPlayerFly(Player player) {
+        return player.getAbilities().mayfly;
     }
 
     /**
@@ -146,10 +185,23 @@ public class PlayerUtil {
      * @param flying If flying is enabled or not.
      */
     public static void setPlayerFlying(Player player, boolean flying) {
-        player.getAbilities().flying = flying;
-
-        // I could possible use these attributes once I figure it out.
+        // Well mayfly is deprecated but NeoEssentials is using it, I'm not sure how to replace it.
+        // I could possibly use these attributes once I figure it out.
 //        NeoForgeMod.CREATIVE_FLIGHT;
+        player.getAbilities().mayfly = flying;
+
+        // This message works, but it spams it where it is set to work on right click.
+        String flyingText = PlayerUtil.canPlayerFly(player) ? "Enabled" : "Disabled";
+        LOGGER.info("Flying has been {}.", flyingText);
+        MessageUtil.sendColorMessage(player, "Flying has been " + flyingText + ".", ChatColors.AQUA);
+
+        // Check if the player is flying first, if so attempt to put them on the ground.
+        // TODO Fix this.
+//        if(player.getAbilities().flying) {
+
+//        }
+
+
 
     }
 
@@ -163,6 +215,24 @@ public class PlayerUtil {
     public static Item getCurrentHeldItem(Player player, InteractionHand usedHand) {
         ItemStack itemStack = player.getItemInHand(usedHand);
         return itemStack.getItem();
+    }
+
+    // TODO Figure out the NBT data, I tried getting the Titanium library working.
+    public static void setNbtData(ItemStack item, String nbtItem) {
+//        item.set(NBTUtil.FLY_ITEM);
+
+//        var compound = NBTManager.getInstance().writeTileEntity(tile, new CompoundTag());
+
+//        boolean hasTag = item.hasTag();
+    }
+
+    public static boolean isNbtFlyingEnabled(ItemStack item, String nbtItem) {
+        if(item.has(NBTUtil.FLY_ITEM)) {
+            LOGGER.info("Item has the flying NBT data");
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -180,10 +250,15 @@ public class PlayerUtil {
 
     /**
      * Give the player an item, TODO Make this work with custom fireworks also.
-     * @param item
+     * @param item The item to give to the player.
+     * @param amount The amount of the item to give to the player.
      */
-    public static void giveItem(Player player, ItemStack item) {
-        player.addItem(item);
+    public static void giveItem(Player player, ItemStack item, int amount) {
+
+        //---
+        // https://forums.minecraftforge.net/topic/151365-giving-a-player-an-item/
+        // This works for adding an item to the players inventory.
+        player.getInventory().add(item);
     }
 
 
@@ -203,7 +278,7 @@ public class PlayerUtil {
      */
     public void handleDimensionTeleport(Player player, Vec3 pos, ResourceKey<Level> dimensionToTp, float yaw, float pitch) {
 
-            KCMod.LOGGER.info("Dimension key: {}", dimensionToTp.toString());
+            LOGGER.info("Dimension key: {}", dimensionToTp.toString());
 
             Level level = player.level();
             ServerLevel dimension = Objects.requireNonNull(level.getServer()).getLevel(dimensionToTp);

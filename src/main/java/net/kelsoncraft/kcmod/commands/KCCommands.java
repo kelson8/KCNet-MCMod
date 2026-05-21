@@ -3,9 +3,11 @@ package net.kelsoncraft.kcmod.commands; // New package for commands
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.kelsoncraft.kcmod.KCMod;
+import net.kelsoncraft.kcmod.commands.misc.GiveTestCommand;
 import net.kelsoncraft.kcmod.commands.teleport.CustomTeleportCommand;
 import net.kelsoncraft.kcmod.commands.teleport.DimensionTeleportCommand;
 import net.kelsoncraft.kcmod.util.PlayerUtil;
@@ -35,18 +37,6 @@ import static net.minecraft.core.registries.Registries.ITEM;
 
 public class KCCommands {
 
-    /**
-     * Give Item command, TODO Move this elsewhere.
-     * @param context
-     * @return
-     */
-    private static int giveItemCommand(CommandContext<CommandSourceStack> context) {
-
-        ItemStack item = context.getArgument("item", ItemStack.class);
-        PlayerUtil.giveItem(Objects.requireNonNull(context.getSource().getPlayer()), item);
-
-        return Command.SINGLE_SUCCESS;
-    }
 
     // I didn't know this could be used in the translations
     // en-us.json:
@@ -105,16 +95,16 @@ public class KCCommands {
                                     )
 
                         //
-                        // TODO Test
+                        // Give players items, like with /i from essentials.
                         //----
 
                         .then(Commands.literal("give")
                         .requires(s -> s.hasPermission(Commands.LEVEL_GAMEMASTERS))
-                                // TODO Fix this
-                                .then(Commands.argument("item", ResourceArgument.resource(event.getBuildContext(), ITEM)))
-//                                .then(Commands.argument("item", ))
-//                                        .executes(s -> PlayerUtil.giveItem(event.getBuildContext(),
-                                        .executes(KCCommands::giveItemCommand)
+                                        .then(Commands.argument("item", ItemArgument.item(event.getBuildContext()))
+                                        .then(Commands.argument("amount", IntegerArgumentType.integer())
+                                        .executes(GiveTestCommand::giveItemCommand)
+                                )
+                            )
                         )
 
                         //---

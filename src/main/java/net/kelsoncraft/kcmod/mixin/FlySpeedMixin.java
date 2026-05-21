@@ -1,10 +1,13 @@
 package net.kelsoncraft.kcmod.mixin;
 
 import net.kelsoncraft.kcmod.Config;
+import net.kelsoncraft.kcmod.KCMod;
 import net.kelsoncraft.kcmod.util.ChatColors;
 import net.kelsoncraft.kcmod.util.MessageUtil;
 import net.kelsoncraft.kcmod.util.PlayerUtil;
 import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,6 +20,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.GrassBlock;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,13 +30,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.function.Supplier;
+
+import static net.kelsoncraft.kcmod.util.PlayerUtil.setFlySpeed;
+
 // Activates flying speed changes in the config when right clicking with any block.
 // I will change this to a command later.
 // TODO Make this to where it can only be clicked one time every so often, instead of being spammed.
 
 @Mixin(Item.class)
 public abstract class FlySpeedMixin {
-
     // If this is toggled, then it'll enable this Mixin testing.
     // It mostly just allows you to change your flying speed set to a value from the config and if it's enabled.
     // I need to restrict this to certain blocks or something, possibly make the player only
@@ -72,40 +79,9 @@ public abstract class FlySpeedMixin {
         return false;
     }
 
-    /**
-     * Sets the players flying speed
-     * @param player The player to set the fly speed for
-     * @param newFlySpeed An integer value from 1-10 for the flying speed.
-     */
-    @Unique
 
-    private void setFlySpeed(Player player, int newFlySpeed) {
-        float flySpeed = switch (newFlySpeed) {
-            case 1 -> 0.1f;
-            case 2 -> 0.2f;
-            case 3 -> 0.3f;
-            case 4 -> 0.4f;
-            case 5 -> 0.5f;
-            case 6 -> 0.6f;
-            case 7 -> 0.7f;
-            case 8 -> 0.8f;
-            case 9 -> 0.9f;
-            case 10 -> 1.0f;
-            default -> 0.1f;
-        };
 
-        // Make sure the faster fly speed toggle is enabled
-        if (Config.COMMON.FAST_FLY_SPEED_TOGGLE.get()) {
-            player.getAbilities().setFlyingSpeed(flySpeed);
-            MessageUtil.sendColorMessage(player, "Flying speed set to " + newFlySpeed, ChatColors.AQUA);
-        }
 
-        // Fall back to default flying speed if this is invalid.
-//        if (!IsFlySpeedValid(Config.COMMON.FLY_SPEED.get())) {
-//            flySpeed = defaultFlySpeed;
-//            LOGGER.warn("FlySpeed {} is invalid!", flySpeed);
-//        }
-    }
 
     // Test for changing players fly speed
     @Inject(method = "use", at = @At("HEAD"))
@@ -147,7 +123,7 @@ public abstract class FlySpeedMixin {
 //            this.components().
 //            this.components().get(Component.nbt(""));
 
-            LOGGER.info("Item right clicked with special data");
+//            LOGGER.info("Item right clicked with special data");
             // This works now, I had to fix something in the function
             if (Config.COMMON.FAST_FLY_SPEED_TOGGLE.get()) {
                 setFlySpeed(player, Config.COMMON.FLY_SPEED.get());
@@ -158,17 +134,15 @@ public abstract class FlySpeedMixin {
             // This won't give you flight, but if you hold right-click on the item, it'll
             // allow you to keep going up like with a jetpack.
         } else if (PlayerUtil.getCurrentHeldItem(player, usedHand) == Items.COMMAND_BLOCK) {
-            String flyingText = PlayerUtil.isPlayerFlying(player) ? "Disabled" : "Enabled";
 
             if(Config.COMMON.FLY_TOGGLE.get()) {
-//                LOGGER.info("Flying has been {}.", flyingText);
-                PlayerUtil.setPlayerFlying(player, !PlayerUtil.isPlayerFlying(player));
+                PlayerUtil.setPlayerFlying(player, !PlayerUtil.canPlayerFly(player));
             }
 
-        } else {
+//        } else {
 
 //            LOGGER.info("Item ID clicked with: {}", heldItem.getName(itemStack));
-            LOGGER.info("Item right clicked with: {}", heldItem);
+//            LOGGER.info("Item right clicked with: {}", heldItem);
         }
 
 //        if(itemStack.is(item))
