@@ -1,9 +1,9 @@
 package net.kelsoncraft.kcmod.block.custom;
 
-import luckytntlib.block.LTNTBlock;
-import luckytntlib.entity.PrimedLTNT;
-import luckytntlib.registry.RegistryHelper;
-import luckytntlib.util.tnteffects.TNTXStrengthEffect;
+//import luckytntlib.block.LTNTBlock;
+//import luckytntlib.entity.PrimedLTNT;
+//import luckytntlib.registry.RegistryHelper;
+//import luckytntlib.util.tnteffects.TNTXStrengthEffect;
 import net.kelsoncraft.kcmod.KCMod;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
