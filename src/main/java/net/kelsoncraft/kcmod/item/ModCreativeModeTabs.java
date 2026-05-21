@@ -40,6 +40,13 @@ public class ModCreativeModeTabs {
                         // New
                         output.accept(ModItems.AMETHYST_INGOT);
 
+                        // Tools
+                        output.accept(ModItems.BISMUTH_SWORD);
+                        output.accept(ModItems.BISMUTH_PICKAXE);
+                        output.accept(ModItems.BISMUTH_SHOVEL);
+                        output.accept(ModItems.BISMUTH_AXE);
+                        output.accept(ModItems.BISMUTH_HOE);
+
                     }).build());
 
     // Food tabs
