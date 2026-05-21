@@ -41,17 +41,7 @@ import static net.minecraft.core.registries.Registries.ITEM;
 
 // Import the main mod class to access static properties
 
-// Created with help from Google Gemini, I couldn't figure this out.
-
 public class KCCommands {
-
-    // Files changed for new commit
-    // EntityUtil
-    // KCCommands
-
-    // Added:
-    // GiveEffectCommand
-
     // I need to try to setup Patchouli Data gen so it can generate the json files for Patchouli
     // I can use parts of this MIT licensed project for that.
     // https://github.com/KhanhPham05/PatchouliDataGen/blob/master/src/main/java/com/khanhpham/patchoulidatagen/examplecode/PatchouliGeneratorImpl.java

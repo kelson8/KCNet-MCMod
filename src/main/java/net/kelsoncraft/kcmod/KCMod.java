@@ -9,7 +9,7 @@ import net.kelsoncraft.kcmod.events.EventHandler;
 //import net.kelsoncraft.kcmod.events.TntHandler;
 import net.kelsoncraft.kcmod.item.ModCreativeModeTabs;
 import net.kelsoncraft.kcmod.item.ModItems;
-import net.kelsoncraft.kcmod.test.McJtyLibTest;
+//import net.kelsoncraft.kcmod.test.McJtyLibTest;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.neoforge.server.command.ConfigCommand;
