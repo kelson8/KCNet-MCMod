@@ -68,6 +68,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.BISMUTH_SHOVEL);
         handheldItem(ModItems.BISMUTH_AXE);
         handheldItem(ModItems.BISMUTH_HOE);
+
+        handheldItem(ModItems.BISMUTH_HAMMER);
     }
 
     // https://github.com/Tutorials-By-Kaupenjoe/NeoForge-Tutorial-1.21.X/blob/12-nonBlockBlocks/src/main/java/net/kaupenjoe/tutorialmod/datagen/ModItemModelProvider.java
