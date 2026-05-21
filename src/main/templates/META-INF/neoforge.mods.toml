@@ -86,6 +86,14 @@ config="${mod_id}.mixins.json"
     ordering="NONE"
     side="BOTH"
 
+
+[[dependencies.${mod_id}]]
+    modId="cucumber"
+    mandatory=true
+    versionRange="[${cucumberlib_version},)"
+    ordering="NONE"
+    side="BOTH"
+
 #[[dependencies.${mod_id}]]
 #    # New for Yet Another Config Lib
 #    modId = "yet_another_config_lib_v3"

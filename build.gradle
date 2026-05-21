@@ -110,7 +110,6 @@ group = mod_group_id
 repositories {
     // Add here additional repositories if required by some of the dependencies below.
 
-    // Bookshelf test
     maven {
         url = 'https://maven.blamejared.com'
     }
@@ -157,6 +156,11 @@ repositories {
     maven {
         name "ModMaven"
         url "https://modmaven.dev"
+    }
+
+    maven {
+        name "Engine Hub"
+        url "https://maven.enginehub.org/repo/"
     }
 
     // https://raw.githubusercontent.com/McJtyMods/MultiWorkspace/1.21_neo/gradletools.gradle
@@ -428,11 +432,18 @@ dependencies {
     // Mc Jty Lib, mostly used with RFTools and has a lot of useful API features
     // https://github.com/McJtyMods/McJtyLib/tree/1.21_neo
     // TODO Possibly disable this later
-    implementation "com.github.mcjty:mcjtylib:${mcjtylib_version}"
+//    implementation "com.github.mcjty:mcjtylib:${mcjtylib_version}"
 
     // Cucumber lib
     implementation "com.blakebr0.cucumber:Cucumber:${cucumberlib_version}"
 
+
+    // Craft Tweaker
+    implementation "com.blamejared.crafttweaker:CraftTweaker-neoforge-${crafttweaker_version}"
+
+    // Worldedit, this shouldn't be required for the mod I'll just add it for messing around with
+    // Well this was breaking the build.
+//    implementation "com.sk89q.worldedit:worldedit-neoforge-mc${worldedit_version}"
 
     //----
     // This is the line that's pulling in Caxton, I disabled this and that fixed the runData gradle task.
@@ -478,7 +489,7 @@ dependencies {
     // I found the Neo Forge version of this
     // https://github.com/SlimingHD/Neo-LuckyTNTLib
     //-----------
-    implementation "com.github.SlimingHD:Neo-LuckyTNTLib:1.21-21.0.78.2"
+//    implementation "com.github.SlimingHD:Neo-LuckyTNTLib:1.21-21.0.78.2"
 
 
 }
@@ -490,6 +501,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
             neo_version            : neo_version,
+            cucumberlib_version    : cucumberlib_version,
             loader_version_range   : loader_version_range,
             mod_id                 : mod_id,
             mod_name               : mod_name,
