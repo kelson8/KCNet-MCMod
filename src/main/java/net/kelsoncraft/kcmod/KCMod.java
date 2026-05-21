@@ -1,5 +1,6 @@
 package net.kelsoncraft.kcmod;
 
+import mcjty.lib.modules.Modules;
 import net.kelsoncraft.kcmod.block.ModBlocks;
 import net.kelsoncraft.kcmod.commands.*;
 import net.kelsoncraft.kcmod.component.ModDataComponents;
@@ -8,6 +9,7 @@ import net.kelsoncraft.kcmod.events.EventHandler;
 //import net.kelsoncraft.kcmod.events.TntHandler;
 import net.kelsoncraft.kcmod.item.ModCreativeModeTabs;
 import net.kelsoncraft.kcmod.item.ModItems;
+import net.kelsoncraft.kcmod.test.McJtyLibTest;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.neoforge.server.command.ConfigCommand;
@@ -46,6 +48,9 @@ public class KCMod {
     public static String MOD_NAME = "UNKNOWN";    // Default value
     public static String MOD_VERSION = "UNKNOWN"; // Default value
     public static String MOD_DESCRIPTION = "UNKNOWN"; // Default value
+
+    // For McJtyLib modules
+//    private final Modules modules = new Modules();
 
     // Hold an instance of the config instance
     public static NewConfig CONFIG;
@@ -151,11 +156,6 @@ public class KCMod {
         //---
 
         //---
-        // Register the item to a creative tab
-        //---
-        modEventBus.addListener(this::addCreative);
-
-        //---
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         //---
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
@@ -170,32 +170,21 @@ public class KCMod {
 //                .config();
     }
 
+    // This is not implemented, it was supposed to be a GUI container test.
+//    private void setupModules(IEventBus bus) {
+//        modules.register(new McJtyLibTest(bus));
+//    }
+
     private void commonSetup(FMLCommonSetupEvent event) {
         // Some common setup code
 //        LOGGER.info("HELLO FROM COMMON SETUP");
-    }
-
-    // TODO Move this into another file.
-    // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.BISMUTH);
-            event.accept(ModItems.RAW_BISMUTH);
-        }
-
-        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(ModBlocks.BISMUTH_BLOCK);
-            event.accept(ModBlocks.BISMUTH_ORE);
-        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
-//        LOGGER.info("HELLO from server starting");
 //        LOGGER.info(Messages.modName + " KelsonCraft mod server started, Mod Version: {}", NeoForgeTest.MOD_VERSION);
-//        NeoForgeTest.LOGGER.info("{} Server test started. Version: {}, Description: {}", NeoForgeTest.MOD_NAME, NeoForgeTest.MOD_VERSION, NeoForgeTest.MOD_DESCRIPTION);
-        KCMod.LOGGER.info("{} Server test started. Version: {}", KCMod.MOD_NAME, KCMod.MOD_VERSION);
+//        KCMod.LOGGER.info("{} Server test started. Version: {}", KCMod.MOD_NAME, KCMod.MOD_VERSION);
     }
 }

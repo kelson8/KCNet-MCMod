@@ -10,6 +10,9 @@ Version info (Running on NeoForge 1.21.1):
 why I decided to use that version.
 
 
+There is now custom Bismuth tools, and even a hammer in this mod mostly for testing.
+I need to add the Patchouli books to the datagen, I crash when trying to use it because it removes the book.json.
+
 ---
 
 

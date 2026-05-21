@@ -6,7 +6,9 @@ import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.kelsoncraft.kcmod.KCMod;
+import net.kelsoncraft.kcmod.commands.misc.GiveEffectCommand;
 import net.kelsoncraft.kcmod.commands.misc.GiveTestCommand;
 import net.kelsoncraft.kcmod.commands.teleport.CustomTeleportCommand;
 import net.kelsoncraft.kcmod.commands.teleport.DimensionTeleportCommand;
@@ -18,14 +20,20 @@ import net.minecraft.commands.arguments.DimensionArgument;
 import net.minecraft.commands.arguments.ResourceArgument;
 import net.minecraft.commands.arguments.coordinates.Vec3Argument;
 import net.minecraft.commands.arguments.item.ItemArgument;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
+import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.Objects;
 
 import static net.minecraft.core.registries.Registries.DIMENSION_TYPE;
@@ -37,6 +45,16 @@ import static net.minecraft.core.registries.Registries.ITEM;
 
 public class KCCommands {
 
+    // Files changed for new commit
+    // EntityUtil
+    // KCCommands
+
+    // Added:
+    // GiveEffectCommand
+
+    // I need to try to setup Patchouli Data gen so it can generate the json files for Patchouli
+    // I can use parts of this MIT licensed project for that.
+    // https://github.com/KhanhPham05/PatchouliDataGen/blob/master/src/main/java/com/khanhpham/patchoulidatagen/examplecode/PatchouliGeneratorImpl.java
 
     // I didn't know this could be used in the translations
     // en-us.json:
@@ -111,6 +129,17 @@ public class KCCommands {
 
                         // Display player XP on screen.
                         .then(Commands.literal("getxp").executes(MessageCommands::messagePlayerXp))
+
+                        // Give the player night vision
+                        .then(Commands.literal("nv")
+                                .requires(s -> s.hasPermission(Commands.LEVEL_GAMEMASTERS))
+                                .executes(GiveEffectCommand::giveNightvisionCommand))
+
+                         // Incomplete effect command
+//                        .then(Commands.literal("effect")
+//                                .requires(s -> s.hasPermission(Commands.LEVEL_GAMEMASTERS))
+//                                .then(Commands.argument("give", ResourceArgument.getMobEffect()))
+//                        )
 
                         // Display a test toast message
 //                        .then(Commands.literal("toast").executes(MessageCommands::messageToastTest))
