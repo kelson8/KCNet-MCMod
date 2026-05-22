@@ -39,7 +39,7 @@ Commands:
 
 
 * `/kc getxp` - Show your current xp levels as a popup on screen.
-* `/kc dimtp [x, y, z]` - Teleport you to a dimension that is set in the config to those coordinates.
+* `/kc dimtp [x, y, z] [dimension]` - Teleport you to a dimension specified, such as `minecraft:overworld`
 
 ---
 
@@ -59,7 +59,7 @@ you don't have to exit the game, or at least I didn't during my testing.
 
 **Other Commands**
 * Heal (Give yourself max health and food): `/heal`
-* Teleport to world spawn: `/spawn`
+* Teleport to world spawn (This always puts you back in the overworld): `/spawn`
 * Strike lightning where you are looking: `/lightning`, `/smite`
 
 * `/kc pos [x] [y] [z]` - Teleport you to the position specified.
@@ -177,11 +177,8 @@ NeoForged Discord: https://discord.neoforged.net/
 Libraries used:
 ==========
 
-These below are required for this mod to work, currently they are not in the neoforge.mods.toml so the game may crash without them.
-I need to fix that later.
-* [Immersive Messages API](https://modrinth.com/mod/immersive-messages-api)
-* [TxniLib](https://modrinth.com/mod/txnilib)
-* [Sinytra Connector](https://modrinth.com/mod/connector)
+These below are required for this mod to work.
+* [Cucumber](https://www.curseforge.com/minecraft/mc-mods/cucumber)
 
 ---
 
