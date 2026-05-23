@@ -1,11 +1,17 @@
 package net.kelsoncraft.kcmod.datagen;
 
+import com.blamejared.crafttweaker.api.CraftTweakerConstants;
+import com.blamejared.crafttweaker.api.ingredient.IIngredient;
+import com.blamejared.crafttweaker.api.item.IItemStack;
 import net.kelsoncraft.kcmod.KCMod;
 import net.kelsoncraft.kcmod.block.ModBlocks;
 import net.kelsoncraft.kcmod.item.ModItems;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
@@ -17,6 +23,14 @@ import java.util.concurrent.CompletableFuture;
 public class ModRecipeProvider extends RecipeProvider {
     public ModRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
+    }
+
+    enum ToolType {
+        SWORD,
+        PICKAXE,
+        SHOVEL,
+        AXE,
+        HOE
     }
 
 
@@ -41,6 +55,59 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("BBB")
                 .pattern("BBB")
                 .define('B', ModItems.BISMUTH.get())
+                .unlockedBy("has_bismuth", has(ModItems.BISMUTH)).save(recipeOutput);
+
+
+        //-----
+        // Tools
+        // TODO Consolidate these into a helper function, this would get messy with tools and armor recipes.
+        //-----
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BISMUTH_SWORD.get())
+                .pattern(" B ")
+                .pattern(" B ")
+                .pattern(" S ")
+                .define('B', ModItems.BISMUTH.get())
+                .define('S', Items.STICK)
+                .unlockedBy("has_bismuth", has(ModItems.BISMUTH)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BISMUTH_PICKAXE.get())
+                .pattern("BBB")
+                .pattern(" S ")
+                .pattern(" S ")
+                .define('B', ModItems.BISMUTH.get())
+                .define('S', Items.STICK)
+                .unlockedBy("has_bismuth", has(ModItems.BISMUTH)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BISMUTH_AXE.get())
+                .pattern("BB ")
+                .pattern("BS ")
+                .pattern(" S ")
+                .define('B', ModItems.BISMUTH.get())
+                .define('S', Items.STICK)
+                .unlockedBy("has_bismuth", has(ModItems.BISMUTH)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BISMUTH_SHOVEL.get())
+                .pattern(" B ")
+                .pattern(" S ")
+                .pattern(" S ")
+                .define('B', ModItems.BISMUTH.get())
+                .define('S', Items.STICK)
+                .unlockedBy("has_bismuth", has(ModItems.BISMUTH)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BISMUTH_HOE.get())
+                .pattern("BB ")
+                .pattern(" S ")
+                .pattern(" S ")
+                .define('B', ModItems.BISMUTH.get())
+                .define('S', Items.STICK)
+                .unlockedBy("has_bismuth", has(ModItems.BISMUTH)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.BISMUTH_HAMMER.get())
+                .pattern("BBB")
+                .pattern("BSB")
+                .pattern("BSB")
+                .define('B', ModItems.BISMUTH.get())
+                .define('S', Items.STICK)
                 .unlockedBy("has_bismuth", has(ModItems.BISMUTH)).save(recipeOutput);
 
 
@@ -125,9 +192,43 @@ public class ModRecipeProvider extends RecipeProvider {
 
 //        foodSmelting(recipeOutput, EXTRA_FOODS_COOKABLES, RecipeCategory.FOOD, ModItems.COOKED_SAUSAGE.get(), 0.25f, 100, "cooking");
 //        oreCooking(recipeOutput, RecipeSerializer.SMELTING_RECIPE, EXTRA_FOODS_COOKABLES, RecipeCategory.MISC, ModItems.RAW_PATTY.get(), 0.25f, 200, "", "");
-
-
     }
+
+
+//     TODO Figure these out and make new methods for this.
+//        private void createShapedRecipe(RecipeCategory category, ModItems item, String[] pattern) {
+//            ShapedRecipeBuilder.shaped(category, (ItemLike) item)
+//                    .pattern(pattern[0])
+//                    .pattern(pattern[1])
+//                    .pattern(pattern[2])
+//                    ;
+//        }
+
+//    private void createShapedRecipe(RecipeCategory category, NonNullList<Ingredient> inputs, ItemStack result) {
+//
+//        ShapedRecipeBuilder.shaped(category, (ItemLike) item)
+//
+//
+//                .pattern(pattern[0])
+//                .pattern(pattern[1])
+//                .pattern(pattern[2])
+//        ;
+//    }
+
+
+//    private void createShapelessRecipe(RecipeCategory category, ModItems item) {
+//        ShapelessRecipeBuilder.shapeless(category, item)
+//                .requires(item)
+//    }
+//
+//    private void createToolRecipe(RecipeCategory category, ModItems tool, ToolType type) {
+//        switch(type) {
+//            case SWORD:
+//
+//        }
+//    }
+
+
 
     // https://github.com/Tutorials-By-Kaupenjoe/NeoForge-Tutorial-1.21.X/blob/11-datagen/src/main/java/net/kaupenjoe/tutorialmod/datagen/ModRecipeProvider.java#L46-L65
     // Move the recipes out of the 'minecraft' folder in data and into the 'kcnet_mod' folder.

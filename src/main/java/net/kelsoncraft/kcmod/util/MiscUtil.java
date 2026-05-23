@@ -1,5 +1,8 @@
 package net.kelsoncraft.kcmod.util;
 
+import net.kelsoncraft.kcmod.KCMod;
+import net.minecraft.network.chat.Component;
+
 public class MiscUtil {
 
     // Misc utilities for anything Java related, these should work on any Java application.
@@ -14,6 +17,20 @@ public class MiscUtil {
 //    public void truncateNumbers(float numberToTruncate, int amount) {
     public double truncateNumbers(double numberToTruncate) {
         return (int) (numberToTruncate * 100) / 100.0;
+    }
+
+    //------
+    // Minecraft/NeoForge specific
+    //------
+
+    // Helper method to generate full translation keys
+    public static String getTranslationKeyConfig(String key) {
+        return "config." + KCMod.MOD_ID + "." + key;
+    }
+
+    public static Component getTranslationKey(String key) {
+//        return Component.translatable("config." + KCMod.MOD_ID + key);
+        return Component.translatable(KCMod.MOD_ID + "." + key);
     }
 
 }

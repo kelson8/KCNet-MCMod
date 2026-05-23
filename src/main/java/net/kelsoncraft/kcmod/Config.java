@@ -2,6 +2,8 @@ package net.kelsoncraft.kcmod;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+import static net.kelsoncraft.kcmod.util.MiscUtil.getTranslationKeyConfig;
+
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.
 // Demonstrates how to use Neo's config APIs
 public class Config {
@@ -41,8 +43,8 @@ public class Config {
         public final ModConfigSpec.ConfigValue<Integer> TNT_FUSE;
 
         public CommonConfig(ModConfigSpec.Builder builder) {
-            builder.comment(getTranslationKey("general.config.tooltip"))
-                    .translation(getTranslationKey("commands.category"))
+            builder.comment(getTranslationKeyConfig("general.config.tooltip"))
+                    .translation(getTranslationKeyConfig("commands.category"))
                     .push("commands"); // Create a category for commands
 
             //--------
@@ -50,23 +52,23 @@ public class Config {
             //--------
 
             ENABLE_CREATIVE_COMMAND = builder
-                    .comment(getTranslationKey("commands.toggle_creative_command.tooltip"))
-                    .translation(getTranslationKey("commands.toggle_creative_command"))
+                    .comment(getTranslationKeyConfig("commands.toggle_creative_command.tooltip"))
+                    .translation(getTranslationKeyConfig("commands.toggle_creative_command"))
                     .define("enableCreativeCommand", true);
 
             ENABLE_SURVIVAL_COMMAND = builder
-                    .comment(getTranslationKey("commands.toggle_creative_command.tooltip"))
-                    .translation(getTranslationKey("commands.toggle_survival_command"))
+                    .comment(getTranslationKeyConfig("commands.toggle_creative_command.tooltip"))
+                    .translation(getTranslationKeyConfig("commands.toggle_survival_command"))
                     .define("enableSurvivalCommand", true);
 
             ENABLE_ADVENTURE_COMMAND = builder
-                    .comment(getTranslationKey("commands.toggle_creative_command.tooltip"))
-                    .translation(getTranslationKey("commands.toggle_adventure_command"))
+                    .comment(getTranslationKeyConfig("commands.toggle_creative_command.tooltip"))
+                    .translation(getTranslationKeyConfig("commands.toggle_adventure_command"))
                     .define("enableAdventureCommand", true);
 
             ENABLE_SPECTATOR_COMMAND = builder
-                    .comment(getTranslationKey("commands.toggle_spectator_command.tooltip"))
-                    .translation(getTranslationKey("commands.toggle_spectator_command"))
+                    .comment(getTranslationKeyConfig("commands.toggle_spectator_command.tooltip"))
+                    .translation(getTranslationKeyConfig("commands.toggle_spectator_command"))
                     .define("enableSpectatorCommand", true);
 
             builder.pop(); // End the commands category
@@ -75,18 +77,18 @@ public class Config {
             // Auto load config
             //--------
 
-            builder.comment(getTranslationKey("auto_load_world.tooltip"))
-                    .translation(getTranslationKey("auto_load_world.category"))
+            builder.comment(getTranslationKeyConfig("auto_load_world.tooltip"))
+                    .translation(getTranslationKeyConfig("auto_load_world.category"))
                     .push("auto_load_world");
 
             ENABLE_AUTO_LOAD_WORLD = builder
-                    .comment(getTranslationKey("auto_load_world.toggle.tooltip"))
-                    .translation(getTranslationKey("auto_load_world.toggle"))
+                    .comment(getTranslationKeyConfig("auto_load_world.toggle.tooltip"))
+                    .translation(getTranslationKeyConfig("auto_load_world.toggle"))
                     .define("enableAutoLoadWorld", false); // Default to false, so it's off by default
 
             AUTO_LOAD_WORLD_NAME = builder
-                    .comment(getTranslationKey("auto_load_world.name.tooltip"))
-                    .translation(getTranslationKey("auto_load_world.name"))
+                    .comment(getTranslationKeyConfig("auto_load_world.name.tooltip"))
+                    .translation(getTranslationKeyConfig("auto_load_world.name"))
                     .define("autoLoadWorldName", ""); // Default to empty string
 
             builder.pop(); // End auto_load_world category
@@ -96,25 +98,25 @@ public class Config {
             //--------
 
             // Why is the misc.tooltip and other main category tooltips not working in here?
-            builder.comment(getTranslationKey("misc.tooltip"))
-                    .translation(getTranslationKey("misc.category"))
+            builder.comment(getTranslationKeyConfig("misc.tooltip"))
+                    .translation(getTranslationKeyConfig("misc.category"))
                     .push("misc");
 
             FLY_SPEED = builder
-                    .comment(getTranslationKey("misc.fly_speed.tooltip"))
-                    .translation(getTranslationKey("misc.fly_speed"))
+                    .comment(getTranslationKeyConfig("misc.fly_speed.tooltip"))
+                    .translation(getTranslationKeyConfig("misc.fly_speed"))
 //                    .define("flyingSpeed", 1.0f);
                     .define("flyingSpeed", 1);
 
             // Fly speed and speed toggle
             FAST_FLY_SPEED_TOGGLE = builder
-                    .comment(getTranslationKey("misc.toggle_fast_fly_speed.tooltip"))
-                    .translation(getTranslationKey("misc.toggle_fast_fly_speed"))
+                    .comment(getTranslationKeyConfig("misc.toggle_fast_fly_speed.tooltip"))
+                    .translation(getTranslationKeyConfig("misc.toggle_fast_fly_speed"))
                     .define("fastFlyingSpeed", false);
 
             FLY_TOGGLE = builder
-                    .comment(getTranslationKey("misc.fly_toggle.tooltip"))
-                    .translation(getTranslationKey("misc.fly_toggle"))
+                    .comment(getTranslationKeyConfig("misc.fly_toggle.tooltip"))
+                    .translation(getTranslationKeyConfig("misc.fly_toggle"))
 //                    .define("flyingSpeed", 1.0f);
                     .define("flyToggle", false);
 
@@ -122,24 +124,24 @@ public class Config {
 
             // Tnt auto explode
             TNT_AUTO_EXPLODE = builder
-                    .comment(getTranslationKey("misc.tnt_auto_explode.tooltip"))
-                    .translation(getTranslationKey("misc.tnt_auto_explode"))
+                    .comment(getTranslationKeyConfig("misc.tnt_auto_explode.tooltip"))
+                    .translation(getTranslationKeyConfig("misc.tnt_auto_explode"))
                     .worldRestart()
                     .define("tntAutoExplode", false);
 
             // TNT fuse timer
             TNT_FUSE = builder
-                    .comment(getTranslationKey("misc.tnt_fuse_timer.tooltip"))
-                    .translation(getTranslationKey("misc.tnt_fuse_timer"))
+                    .comment(getTranslationKeyConfig("misc.tnt_fuse_timer.tooltip"))
+                    .translation(getTranslationKeyConfig("misc.tnt_fuse_timer"))
                     .worldRestart()
                     .define("tntFuseTimer", 4);
 
             builder.pop();
         }
 
-        // Helper method to generate full translation keys
-        private static String getTranslationKey(String key) {
-            return "config." + KCMod.MOD_ID + "." + key;
-        }
+//        // Helper method to generate full translation keys
+//        private static String getTranslationKey(String key) {
+//            return "config." + KCMod.MOD_ID + "." + key;
+//        }
     }
 }
