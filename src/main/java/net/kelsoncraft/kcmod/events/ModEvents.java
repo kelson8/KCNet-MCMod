@@ -25,18 +25,25 @@ public class ModEvents {
         Player player = event.getPlayer();
         ItemStack mainHandItem = player.getMainHandItem();
 
-        if(mainHandItem.getItem() instanceof HammerItem hammer && player instanceof ServerPlayer serverPlayer) {
+        // Make sure the tool is the hammer, the player is a server player, and they are not in creative.
+        if(mainHandItem.getItem() instanceof HammerItem hammer &&
+                player instanceof ServerPlayer serverPlayer &&
+                !serverPlayer.gameMode.isCreative()) {
+
+            // Get the initial block position for the hammer.
             BlockPos initialBlockPos = event.getPos();
+            // If the harvested blocks are the initial block position, don't do anything.
             if(HARVESTED_BLOCKS.contains(initialBlockPos)) {
                 return;
             }
 
+            // Set the range, initial block position and the player.
             for(BlockPos pos : HammerItem.getBlocksToBeDestroyed(1, initialBlockPos, serverPlayer)) {
-//                if(pos == initialBlockPos || !hammer.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos))) {
                 if(pos.equals(initialBlockPos) || !hammer.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos))) {
                     continue;
                 }
 
+                // Add and remove the blocks, otherwise this could possibly cause a crash.
                 HARVESTED_BLOCKS.add(pos);
                 serverPlayer.gameMode.destroyBlock(pos);
                 HARVESTED_BLOCKS.remove(pos);
